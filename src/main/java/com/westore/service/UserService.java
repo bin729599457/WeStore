@@ -4,7 +4,7 @@ import com.westore.model.User;
 
 import java.util.List;
 
-public interface IUserService {
+public interface UserService {
 
     public List<User> findAllUser();
 

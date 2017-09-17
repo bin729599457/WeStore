@@ -1,10 +1,8 @@
 package com.westore.test;
 
 
-import com.westore.dao.IUserDAO;
 import com.westore.model.User;
-import com.westore.service.IUserService;
-import com.westore.service.UserServiceImpl;
+import com.westore.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import java.util.List;
 public class IUserDAOTest {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @Test
     public void testFindAll(){

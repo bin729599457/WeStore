@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 设置为IUserDao接口方法提供sql语句配置 -->
-<mapper namespace="com.westore.dao.IUserDAO">
+<mapper namespace="com.westore.dao.UserDAO">
 
     <select id="findAll" resultType="com.westore.model.User">
         SELECT * FROM user

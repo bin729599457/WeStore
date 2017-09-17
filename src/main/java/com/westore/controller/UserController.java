@@ -1,8 +1,7 @@
 package com.westore.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.westore.model.User;
-import com.westore.service.IUserService;
+import com.westore.service.UserService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.json.JsonArray;
 import java.util.List;
 
 
@@ -19,7 +17,7 @@ import java.util.List;
 public class UserController {
 
     @Resource
-    private IUserService userService;
+    private UserService userService;
 
     @RequestMapping(value="/getAllUser.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
     @ResponseBody
