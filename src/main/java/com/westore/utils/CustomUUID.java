@@ -61,8 +61,8 @@ public class CustomUUID {
         this.regionId = 0;
     }
 
-    public long generate() {
-        return this.nextId(false, 0);
+    public String generate() {
+        return Long.toString(this.nextId(false, 0));
     }
 
     /**

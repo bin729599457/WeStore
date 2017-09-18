@@ -2,8 +2,7 @@ package com.westore.utils;
 
 public class Test {
     public static void main(String[] args) {
-        long l=new CustomUUID(129).generate();
-        String str= Long.toString(l);
+        String str=new CustomUUID(129).generate();
         System.out.println(str);
     }
 }
