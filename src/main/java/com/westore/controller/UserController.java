@@ -7,10 +7,12 @@ import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -34,4 +36,26 @@ public class UserController {
         System.out.println(userListJSON.toString());
         return userListJSON.toString();
     }
+
+    @RequestMapping(value="/login.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
+    @ResponseBody
+    public String Login(@RequestParam Map<String,Object> params){
+        String trd_srssion = (String)params.get("trd_srssion");
+        JSONObject resultJSON = new JSONObject();
+        if(trd_srssion != null){
+        }
+        else{
+            String code = (String)params.get("code");
+            String res = userService.Login(code);
+            if(res.equals("success")){
+                resultJSON.put("status","success");
+            }
+            else{
+                resultJSON.put("status","error");
+            }
+        }
+        return resultJSON.toString();
+    }
+
+
 }

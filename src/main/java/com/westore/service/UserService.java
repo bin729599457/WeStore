@@ -8,4 +8,6 @@ public interface UserService {
 
     public List<User> findAllUser();
 
+    public String Login(String code);
+
 }
