@@ -4,11 +4,13 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.westore.dao.UserDAO;
 import com.westore.model.User;
 import com.westore.service.UserService;
+import com.westore.utils.CheckSumBuilder;
 import com.westore.utils.RequestUtils;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -31,7 +33,10 @@ public class UserServiceImpl implements UserService {
             return "error";
         }
         else {
-            return "success";
+            String openid = resultJSON.getString("openid");
+            String session_key = resultJSON.getString("session_key");
+            String trd_sessionid = CheckSumBuilder.getCheckSum(openid,session_key,String.valueOf((new Date().getTime()/1000L)));
+            return trd_sessionid;
         }
     }
 }

@@ -48,11 +48,11 @@ public class UserController {
         else{
             String code = (String)params.get("code");
             String res = userService.Login(code);
-            if(res.equals("success")){
-                resultJSON.put("status","success");
+            if(res.equals("error")){
+                resultJSON.put("status","error");
             }
             else{
-                resultJSON.put("status","error");
+                resultJSON.put("3rdsession_id",res);
             }
         }
         return resultJSON.toString();
