@@ -4,15 +4,23 @@
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.OrderDAO">
 
-    <select id="findAll" resultType="com.westore.model.T_B_Order">
+    <select id="findOrders" resultType="com.westore.model.T_B_Order">
         SELECT t.id,t.user_id,t.total_money,t.order_date,t.order_state FROM t_b_order t
-    </select>
+        WHERE 1=1
 
-    <select id="findById" parameterType="java.util.Map" resultType="com.westore.model.T_B_Order">
-        SELECT * FROM t_b_order t where 1=1
-        <if test= "id!=null and id!='' ">
-          AND t.id=#{id}
+        <if test ="order_date!=null  and order_date!=''">
+            AND t.order_date >=to_date(#{order_date},'yyyy-mm-dd')
         </if>
+        <if test ="order_date !=null  and order_date !=''">
+            AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
+        </if>
+        <if test="id!=null and id!=''">
+            AND t.id=#{id}
+        </if>
+        <if test="user_id!=null and user_id!=''">
+            AND t.user_id=#{user_id}
+        </if>
+
     </select>
 
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,25 +23,31 @@ public class OrderController {
     @Resource
     private OrderService orderService;
 
-    @RequestMapping(value="/getAllOrders.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
+    @RequestMapping(value="/getOrders.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
     @ResponseBody
-    public Map<String,Object> getAllOrders(){
+    public String getOrders(HttpServletRequest request){
 
-//        JSONArray ordersListJSON = new JSONArray();
-        Map<String,Object> paraMap=new HashMap<String, Object>();
-        List<T_B_Order> ordersList=orderService.findAllOrders();
-//        for(T_B_Order item:ordersList){
-//            JSONObject order = new JSONObject();
-//            order.put("id",item.getId());
-//            order.put("user_id",item.getUser_id());
-//            order.put("total_money",item.getTotal_money());
-//            order.put("order_date",item.getOrder_date());
-//            order.put("order_state",item.getOrder_state());
-//
-//            ordersListJSON.add(order);
-//        }
-        paraMap.put("ordersList",ordersList);
+        Map<String, Object> paraMap=new HashMap<String, Object>();
+        String id=request.getParameter("id") == null? "": request.getParameter("id");
+        String user_id=request.getParameter("user_id") == null? "": request.getParameter("user_id");
+        String order_date=request.getParameter("order_date") == null? "": request.getParameter("order_date");
+        paraMap.put("id",id);
+        paraMap.put("user_id",user_id);
+        paraMap.put("order_date",order_date);
 
-        return paraMap;
+        JSONArray ordersListJSON = new JSONArray();
+        List<T_B_Order> ordersList=orderService.findOrders(paraMap);
+        for(T_B_Order item:ordersList){
+            JSONObject order = new JSONObject();
+            order.put("id",item.getId());
+            order.put("user_id",item.getUser_id());
+            order.put("total_money",item.getTotal_money());
+            order.put("order_date",item.getOrder_date().toString());
+            order.put("order_state",item.getOrder_state());
+
+            ordersListJSON.add(order);
+        }
+
+        return ordersListJSON.toString();
     }
 }
