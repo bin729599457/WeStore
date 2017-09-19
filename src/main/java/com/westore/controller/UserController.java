@@ -16,6 +16,7 @@ import java.util.Map;
 
 
 @Controller
+@RequestMapping("/UserController")
 public class UserController {
 
     @Resource

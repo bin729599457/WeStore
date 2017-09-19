@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.OrderDAO">
+
+    <select id="findAll" resultType="com.westore.model.T_B_Order">
+        SELECT t.id,t.user_id,t.total_money,t.order_date,t.order_state FROM t_b_order t
+    </select>
+
+    <select id="findById" parameterType="java.util.Map" resultType="com.westore.model.T_B_Order">
+        SELECT * FROM t_b_order t where 1=1
+        <if test= "id!=null and id!='' ">
+          AND t.id=#{id}
+        </if>
+    </select>
+
+</mapper>

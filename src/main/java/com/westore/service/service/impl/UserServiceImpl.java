@@ -1,8 +1,9 @@
-package com.westore.service;
+package com.westore.service.service.impl;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.westore.dao.UserDAO;
 import com.westore.model.User;
+import com.westore.service.UserService;
 import com.westore.utils.RequestUtils;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Service;

@@ -2,9 +2,9 @@ package com.westore.model;
 
 public class T_B_Goods {
 
-    private int id;
+    private String id;
     private String goods_name;
-    private int goods_type_id;
+    private String goods_type_id;
     private String goods_descript;
     private String goods_price;
     private String goods_images_json;
@@ -12,11 +12,11 @@ public class T_B_Goods {
     public T_B_Goods() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -28,11 +28,11 @@ public class T_B_Goods {
         this.goods_name = goods_name;
     }
 
-    public int getGoods_type_id() {
+    public String getGoods_type_id() {
         return goods_type_id;
     }
 
-    public void setGoods_type_id(int goods_type_id) {
+    public void setGoods_type_id(String goods_type_id) {
         this.goods_type_id = goods_type_id;
     }
 
