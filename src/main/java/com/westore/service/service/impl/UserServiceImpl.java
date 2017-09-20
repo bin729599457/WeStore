@@ -7,11 +7,15 @@ import com.westore.service.UserService;
 import com.westore.utils.CheckSumBuilder;
 import com.westore.utils.RequestUtils;
 import net.sf.json.JSONObject;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -21,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDAO userDAO;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
     public List<User> findAllUser(){
             return this.userDAO.findAll();
@@ -36,6 +43,10 @@ public class UserServiceImpl implements UserService {
             String openid = resultJSON.getString("openid");
             String session_key = resultJSON.getString("session_key");
             String trd_sessionid = CheckSumBuilder.getCheckSum(openid,session_key,String.valueOf((new Date().getTime()/1000L)));
+            Map<String,String> map = new HashMap<String, String>();
+            map.put("openid",openid);
+            map.put("session_key",session_key);
+            redisTemplate.opsForHash().putAll(trd_sessionid,map);
             return trd_sessionid;
         }
     }
