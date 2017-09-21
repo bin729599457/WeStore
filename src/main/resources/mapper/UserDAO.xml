@@ -8,4 +8,28 @@
         SELECT * FROM user
     </select>
 
+
+    <select id="ifExist" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT user_id
+        FROM t_b_user
+        WHERE user_id = '${_parameter}'
+    </select>
+
+    <insert id="insertUser" parameterType="com.westore.model.T_B_User" >
+        INSERT INTO t_b_user(id,user_id,user_money)
+        VALUES (#{id},#{user_id},#{user_money})
+    </insert>
+
+    <update id="updateUser" parameterType="com.westore.model.T_B_User">
+        UPDATE t_b_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="user_img!=null">user_img=#{user_img},</if>
+            <if test="user_name!=null">user_name=#{user_name},</if>
+            <if test="user_phone!=0">user_phone=#{user_phone},</if>
+            <if test="user_password!=0">user_password=#{user_password},</if>
+            <if test="user_money!=0">user_money=#{user_money},</if>
+        </trim>
+        WHERE user_id=#{user_id}
+    </update>
+
 </mapper>

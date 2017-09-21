@@ -10,4 +10,6 @@ public interface UserService {
 
     public String Login(String code);
 
+    public String checkLogin(String trd_session);
+
 }

@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring-mybatis.xml"})
+@ContextConfiguration({"classpath:spring-redis.xml"})
 public class UrlTest {
 
     @Test
@@ -22,6 +22,11 @@ public class UrlTest {
         url_tmpl = url_tmpl.replace("JSCODE",code);
         System.out.print(url_tmpl);
         System.out.print(RequestUtils.httpRequest(url_tmpl));
+    }
+
+    @Test
+    public void testRedis(){
+
     }
 
 }

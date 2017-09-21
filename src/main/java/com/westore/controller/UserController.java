@@ -41,9 +41,10 @@ public class UserController {
     @RequestMapping(value="/login.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
     @ResponseBody
     public String Login(@RequestParam Map<String,Object> params){
-        String trd_srssion = (String)params.get("trd_srssion");
+        String trd_session = (String)params.get("trd_session");
         JSONObject resultJSON = new JSONObject();
-        if(trd_srssion != null){
+        if(trd_session != null){
+            resultJSON.put("status",userService.checkLogin(trd_session));
         }
         else{
             String code = (String)params.get("code");
@@ -52,7 +53,7 @@ public class UserController {
                 resultJSON.put("status","error");
             }
             else{
-                resultJSON.put("3rdsession_id",res);
+                resultJSON.put("trd_session",res);
             }
         }
         return resultJSON.toString();
