@@ -7,4 +7,7 @@ import java.util.List;
 public interface LocationService {
 
     public List<T_B_Location> findAllLocation();
+
+    public List<T_B_Location> findUserLocation(String trd_session);
+
 }

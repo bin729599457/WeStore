@@ -7,6 +7,7 @@ import com.westore.model.User;
 import com.westore.service.UserService;
 import com.westore.utils.CheckSumBuilder;
 import com.westore.utils.CustomUUID;
+import com.westore.utils.DesUtil;
 import com.westore.utils.RequestUtils;
 import net.sf.json.JSONObject;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -49,14 +50,14 @@ public class UserServiceImpl implements UserService {
             map.put("openid",openid);
             map.put("session_key",session_key);
             if(userDAO.ifExist(openid) == null){
-                System.out.print("new User");
-                userDAO.insertUser(new T_B_User(new CustomUUID(1).generate(),openid,null,null,0,0,0));
+                userDAO.insertUser(new T_B_User(new CustomUUID(1).generate(),openid,null,null,null,null,0));
             }
             redisTemplate.opsForHash().putAll(trd_sessionid,map);
             redisTemplate.expire(trd_sessionid,20, TimeUnit.DAYS);
             return trd_sessionid;
         }
     }
+
 
     public String checkLogin(String trd_session) {
 
@@ -68,4 +69,24 @@ public class UserServiceImpl implements UserService {
             return "Logined";
         }
     }
+
+    public String change(String trd_session,String method,String value) {
+        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
+            return "error";
+        }
+        else{
+            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
+            if(method.equals("phone")){
+                userDAO.updateUser(new T_B_User(null,openid,null,null,value,null,0));
+            }
+            else if (method.equals("password")){
+                userDAO.updateUser(new T_B_User(null,openid,null,null,null, DesUtil.encrypt(value),0));
+            }
+            return "success";
+        }
+
+    }
+
+
+
 }

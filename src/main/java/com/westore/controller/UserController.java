@@ -1,5 +1,6 @@
 package com.westore.controller;
 
+import com.westore.model.T_B_User;
 import com.westore.model.User;
 import com.westore.service.UserService;
 import net.sf.json.JSONArray;
@@ -22,21 +23,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @RequestMapping(value="/getAllUser.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
-    @ResponseBody
-    public String getAllUser(){
-        JSONArray userListJSON = new JSONArray();
-        List<User> userList = userService.findAllUser();
-        for(User u : userList){
-            JSONObject user = new JSONObject();
-            user.put("id",u.getId());
-            user.put("name",u.getName());
-            user.put("sex",u.getSex());
-            userListJSON.add(user);
-        }
-        System.out.println(userListJSON.toString());
-        return userListJSON.toString();
-    }
+
 
     @RequestMapping(value="/login.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
     @ResponseBody
@@ -58,6 +45,32 @@ public class UserController {
         }
         return resultJSON.toString();
     }
+
+    @RequestMapping(value="/change.do",produces="text/html;charset=UTF-8" ,method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public String changeUserMsg(@RequestParam Map<String,Object> params){
+        String trd_session = (String)params.get("trd_session");
+        String method = (String)params.get("method");
+        JSONObject resultJSON = new JSONObject();
+        if(trd_session == null||method == null) {
+            resultJSON.put("status", "noLogin or noMethod");
+        }
+        else {
+            if(method.equals("phone")){
+                String phone = (String)params.get("phone");
+                resultJSON.put("status",userService.change(trd_session,"phone",phone));
+            }
+
+            if(method.equals("password")){
+                String password = (String)params.get("password");
+                System.out.print(password);
+                resultJSON.put("status",userService.change(trd_session,"password",password));
+            }
+        }
+        return resultJSON.toString();
+    }
+
+
 
 
 }

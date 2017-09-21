@@ -5,14 +5,14 @@ public class T_B_User {
     private String user_id;
     private String user_img;
     private String user_name;
-    private int user_phone;
-    private int user_password;
+    private String user_phone;
+    private String user_password;
     private int user_money;
 
     public T_B_User() {
     }
 
-    public T_B_User(String id, String user_id, String user_img, String user_name, int user_phone, int user_password, int user_money) {
+    public T_B_User(String id, String user_id, String user_img, String user_name, String user_phone, String user_password, int user_money) {
         this.id = id;
         this.user_id = user_id;
         this.user_img = user_img;
@@ -55,19 +55,19 @@ public class T_B_User {
         this.user_name = user_name;
     }
 
-    public int getUser_phone() {
+    public String getUser_phone() {
         return user_phone;
     }
 
-    public void setUser_phone(int user_phone) {
+    public void setUser_phone(String user_phone) {
         this.user_phone = user_phone;
     }
 
-    public int getUser_password() {
+    public String getUser_password() {
         return user_password;
     }
 
-    public void setUser_password(int user_password) {
+    public void setUser_password(String user_password) {
         this.user_password = user_password;
     }
 

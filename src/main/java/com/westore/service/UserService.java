@@ -12,4 +12,7 @@ public interface UserService {
 
     public String checkLogin(String trd_session);
 
+    public String change(String trd_session,String method,String value);
+
+
 }
