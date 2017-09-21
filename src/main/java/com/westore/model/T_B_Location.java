@@ -1,5 +1,7 @@
 package com.westore.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class T_B_Location {
 
     private String id;

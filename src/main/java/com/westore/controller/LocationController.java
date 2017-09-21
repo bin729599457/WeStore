@@ -24,7 +24,7 @@ public class LocationController {
     @Resource
     private LocationService locationService;
 
-    @RequestMapping(value="/getUserLocation.do",produces="text/html;charset=UTF-8" ,method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value="/getUserLocation.do")
     @ResponseBody
     public Object getUserlocation(@RequestParam Map<String,Object> params){
         String trd_session = (String)params.get("trd_session");
@@ -34,6 +34,7 @@ public class LocationController {
             return resJSON.toString();
         }
         else{
+
            return new T_B_Location();
         }
 

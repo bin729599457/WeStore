@@ -8,10 +8,10 @@
         SELECT t.id,t.user_id,t.total_money,t.order_date,t.order_state FROM t_b_order t
         WHERE 1=1
 
-        <if test ="order_date!=null  and order_date!=''">
+        <if test="order_date!=null  and order_date!=''">
             AND t.order_date >=to_date(#{order_date},'yyyy-mm-dd')
         </if>
-        <if test ="order_date !=null  and order_date !=''">
+        <if test="order_date !=null  and order_date !=''">
             AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
         </if>
         <if test="id!=null and id!=''">
@@ -23,4 +23,26 @@
 
     </select>
 
+    <insert id="addOrder" parameterType="java.util.Map">
+        insert into t_b_order (id,user_id,total_money,order_date,order_state) values
+        (#{id},#{user_id},#{total_money},#{order_date},#{order_state})
+    </insert>
+
+    <delete id="deleteOrder" parameterType="java.util.Map">
+      DELETE FROM t_b_order WHERE id=#{id}
+    </delete>
+
+    <update id="updateOrder" parameterType="java.util.Map">
+      UPDATE t_b_order SET
+        <if test="user_id!=null and user_id!=''">
+            t.user_id=#{user_id}
+        </if>
+        <if test="total_money!=null and total_money!=''">
+            t.total_money=#{total_money}
+        </if>
+        <if test="order_state!=null and order_state!=''">
+            t.order_state=#{order_state}
+        </if>
+        WHERE id=#{id}
+    </update>
 </mapper>

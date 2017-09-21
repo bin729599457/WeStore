@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,21 +23,21 @@ public class OrderController {
 
     @Resource
     private OrderService orderService;
-
-    @RequestMapping(value="/getOrders.do",produces="text/html;charset=UTF-8" ,method = RequestMethod.GET)
+//produces="application/json" 功能处理方法将产生json格式数据
+    @RequestMapping(value="/getOrders.do",method = RequestMethod.POST)
     @ResponseBody
-    public String getOrders(HttpServletRequest request){
+    public JSONArray getOrders(HttpServletRequest request){
 
         Map<String, Object> paraMap=new HashMap<String, Object>();
         String id=request.getParameter("id") == null? "": request.getParameter("id");
         String user_id=request.getParameter("user_id") == null? "": request.getParameter("user_id");
         String order_date=request.getParameter("order_date") == null? "": request.getParameter("order_date");
-        paraMap.put("id",id);
+        paraMap.put("id","sda");
         paraMap.put("user_id",user_id);
         paraMap.put("order_date",order_date);
 
-        JSONArray ordersListJSON = new JSONArray();
         List<T_B_Order> ordersList=orderService.findOrders(paraMap);
+        JSONArray ordersListJSON = new JSONArray();
         for(T_B_Order item:ordersList){
             JSONObject order = new JSONObject();
             order.put("id",item.getId());
@@ -48,6 +49,6 @@ public class OrderController {
             ordersListJSON.add(order);
         }
 
-        return ordersListJSON.toString();
+        return ordersListJSON;
     }
 }
