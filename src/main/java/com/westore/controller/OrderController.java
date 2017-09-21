@@ -1,5 +1,6 @@
 package com.westore.controller;
 
+import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Order;
 import com.westore.service.OrderService;
 import net.sf.json.JSON;
@@ -24,31 +25,32 @@ public class OrderController {
     @Resource
     private OrderService orderService;
 //produces="application/json" 功能处理方法将产生json格式数据
-    @RequestMapping(value="/getOrders.do",method = RequestMethod.POST)
+    @RequestMapping(value="/getOrders.do",produces="application/json",method = RequestMethod.POST)
     @ResponseBody
-    public JSONArray getOrders(HttpServletRequest request){
+    public AjaxJSON getOrders(HttpServletRequest request){
+        AjaxJSON j=new AjaxJSON();
 
-        Map<String, Object> paraMap=new HashMap<String, Object>();
-        String id=request.getParameter("id") == null? "": request.getParameter("id");
-        String user_id=request.getParameter("user_id") == null? "": request.getParameter("user_id");
-        String order_date=request.getParameter("order_date") == null? "": request.getParameter("order_date");
-        paraMap.put("id","sda");
-        paraMap.put("user_id",user_id);
-        paraMap.put("order_date",order_date);
+        try {
 
-        List<T_B_Order> ordersList=orderService.findOrders(paraMap);
-        JSONArray ordersListJSON = new JSONArray();
-        for(T_B_Order item:ordersList){
-            JSONObject order = new JSONObject();
-            order.put("id",item.getId());
-            order.put("user_id",item.getUser_id());
-            order.put("total_money",item.getTotal_money());
-            order.put("order_date",item.getOrder_date().toString());
-            order.put("order_state",item.getOrder_state());
+            Map<String, Object> paraMap=new HashMap<String, Object>();
+            String id=request.getParameter("id") == null? "": request.getParameter("id");
+            String user_id=request.getParameter("user_id") == null? "": request.getParameter("user_id");
+            String order_date=request.getParameter("order_date") == null? "": request.getParameter("order_date");
 
-            ordersListJSON.add(order);
+            paraMap.put("id",id);
+            paraMap.put("user_id",user_id);
+            paraMap.put("order_date",order_date);
+            List<T_B_Order> ordersList=orderService.findOrders(paraMap);
+            j.setObj(ordersList);
+            j.setMsg("查询订单列表成功");
+
+        }catch (Exception e){
+            j.setMsg(""+e.getMessage());
+            j.setSuccess(false);
+            return j;
         }
 
-        return ordersListJSON;
+
+        return j;
     }
 }
