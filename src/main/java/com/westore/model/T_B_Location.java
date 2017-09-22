@@ -14,6 +14,15 @@ public class T_B_Location {
     public T_B_Location() {
     }
 
+    public T_B_Location(String id, String user_id, String user_name, String user_location, String user_phone, int is_default) {
+        this.id = id;
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.user_location = user_location;
+        this.user_phone = user_phone;
+        this.is_default = is_default;
+    }
+
     public String getId() {
         return id;
     }

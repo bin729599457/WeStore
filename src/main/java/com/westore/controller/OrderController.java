@@ -2,22 +2,17 @@ package com.westore.controller;
 
 import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Order;
-import com.westore.service.OrderService;
+import com.westore.service.*;
+import com.westore.service.service.impl.CommomServiceImpl;
 import com.westore.utils.CustomUUID;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/OrderController")
@@ -25,6 +20,8 @@ public class OrderController {
 
     @Resource
     private OrderService orderService;
+    @Resource
+    private CommomService commomService;
 
     @RequestMapping(value = "/getOrders.do")
     @ResponseBody
@@ -66,8 +63,20 @@ public class OrderController {
             String order_date = request.getParameter("order_date") == null ? "" : request.getParameter("order_date");
             String order_state = request.getParameter("order_state") == null ? "" : request.getParameter("order_state");
 
+/*            if(user_id==null&&user_id.equals("")){
+                j.setMsg("user_id为空");
+                j.setSuccess(false);
+                return j;
+            }*/
+
             Map<String, Object> paraMap = new HashMap<String, Object>();
             paraMap.put("id", CustomUUID.getFlowIdWorkerInstance().generate());
+            paraMap.put("total_money",total_money);
+            paraMap.put("order_date",order_date);
+            paraMap.put("order_state",order_state);
+
+            commomService.add(new T_B_Order("1311231", "131", 12, new Date(), 1));
+
 
         }catch (Exception e){
             j.setMsg(e.getMessage());

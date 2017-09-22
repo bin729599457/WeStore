@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
             map.put("openid",openid);
             map.put("session_key",session_key);
             if(userDAO.ifExist(openid) == null){
-                userDAO.insertUser(new T_B_User(new CustomUUID(1).generate(),openid,null,null,null,null,0));
+                userDAO.insertUser(new T_B_User(CustomUUID.getFlowIdWorkerInstance().generate(),openid,null,null,null,null,0));
             }
             redisTemplate.opsForHash().putAll(trd_sessionid,map);
             redisTemplate.expire(trd_sessionid,20, TimeUnit.DAYS);

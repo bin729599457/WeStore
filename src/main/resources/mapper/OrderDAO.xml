@@ -9,7 +9,7 @@
         WHERE 1=1
 
         <if test="order_date!=null  and order_date!=''">
-            AND t.order_date >=to_date(#{order_date},'yyyy-mm-dd')
+            AND t.order_date >=to_date(#{order_vdate},'yyyy-mm-dd')
         </if>
         <if test="order_date !=null  and order_date !=''">
             AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
@@ -45,4 +45,5 @@
         </if>
         WHERE id=#{id}
     </update>
+
 </mapper>
