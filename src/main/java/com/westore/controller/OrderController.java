@@ -3,6 +3,7 @@ package com.westore.controller;
 import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Order;
 import com.westore.service.OrderService;
+import com.westore.utils.CustomUUID;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -24,33 +25,54 @@ public class OrderController {
 
     @Resource
     private OrderService orderService;
-//produces="application/json" 功能处理方法将产生json格式数据
-    @RequestMapping(value="/getOrders.do",produces="application/json",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/getOrders.do")
     @ResponseBody
-    public AjaxJSON getOrders(HttpServletRequest request){
-        AjaxJSON j=new AjaxJSON();
+    public AjaxJSON getOrders(HttpServletRequest request) {
+        AjaxJSON j = new AjaxJSON();
 
         try {
 
-            Map<String, Object> paraMap=new HashMap<String, Object>();
-            String id=request.getParameter("id") == null? "": request.getParameter("id");
-            String user_id=request.getParameter("user_id") == null? "": request.getParameter("user_id");
-            String order_date=request.getParameter("order_date") == null? "": request.getParameter("order_date");
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+            String id = request.getParameter("id") == null ? "" : request.getParameter("id");
+            String user_id = request.getParameter("user_id") == null ? "" : request.getParameter("user_id");
+            String order_date = request.getParameter("order_date") == null ? "" : request.getParameter("order_date");
 
-            paraMap.put("id",id);
-            paraMap.put("user_id",user_id);
-            paraMap.put("order_date",order_date);
-            List<T_B_Order> ordersList=orderService.findOrders(paraMap);
+            paraMap.put("id", id);
+            paraMap.put("user_id", user_id);
+            paraMap.put("order_date", order_date);
+            List<T_B_Order> ordersList = orderService.findOrders(paraMap);
             j.setObj(ordersList);
             j.setMsg("查询订单列表成功");
 
-        }catch (Exception e){
-            j.setMsg(""+e.getMessage());
+        } catch (Exception e) {
+            j.setMsg("" + e.getMessage());
             j.setSuccess(false);
             return j;
         }
 
-
         return j;
     }
+
+    @RequestMapping(value = "/addOrder.do")
+    @ResponseBody
+    public AjaxJSON addOrder(HttpServletRequest request){
+        AjaxJSON j=new AjaxJSON();
+
+        try {
+
+            String user_id = request.getParameter("user_id") == null ? "" : request.getParameter("user_id");
+            String total_money = request.getParameter("total_money") == null ? "" : request.getParameter("total_money");
+            String order_date = request.getParameter("order_date") == null ? "" : request.getParameter("order_date");
+            String order_state = request.getParameter("order_state") == null ? "" : request.getParameter("order_state");
+
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+            paraMap.put("id", CustomUUID.getFlowIdWorkerInstance().generate());
+
+        }catch (Exception e){
+            j.setMsg(e.getMessage());
+        }
+        return j;
+    }
+
 }

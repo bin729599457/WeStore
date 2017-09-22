@@ -34,6 +34,8 @@ public class CustomUUID {
 
     private static long lastTimestamp = -1L;
 
+    private static CustomUUID flowCustomUUID = new CustomUUID(1L);
+
     private long sequence = 0L;
     private final long workerId;
     private final long regionId;
@@ -52,7 +54,7 @@ public class CustomUUID {
         this.regionId = regionId;
     }
 
-    public CustomUUID(long workerId) {
+    private CustomUUID(long workerId) {
         // 如果超出范围就抛出异常
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException("worker Id can't be greater than %d or less than 0");
@@ -122,5 +124,11 @@ public class CustomUUID {
     protected long timeGen() {
         return System.currentTimeMillis();
     }
+
+    //单例模式生成实例
+    public static CustomUUID getFlowIdWorkerInstance() {
+        return flowCustomUUID;
+    }
+
 }
 
