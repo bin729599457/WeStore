@@ -27,13 +27,14 @@ public class CommonUtils {
         System.out.println(sql);
 
         Map<String, Object> paraMap=new HashMap<String, Object>();
-        paraMap.put("sql",sql);
+        paraMap.put("sql",sql.toString());
+        System.out.println(paraMap);
 
     }
 
 
     public static void main(String[] args) {
-        new CommonUtils().getClassValueObj(new T_B_Order("1311231", "131", 12, new Date(), 1));
+        new CommonUtils().add(new T_B_Order("1311231", "131", 12, new Date(), 1));
 //        new CommonUtils().getClassVarName(new T_B_Order());
     }
 

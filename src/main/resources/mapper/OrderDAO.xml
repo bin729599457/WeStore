@@ -33,16 +33,19 @@
     </delete>
 
     <update id="updateOrder" parameterType="java.util.Map">
-      UPDATE t_b_order SET
-        <if test="user_id!=null and user_id!=''">
-            t.user_id=#{user_id}
-        </if>
-        <if test="total_money!=null and total_money!=''">
-            t.total_money=#{total_money}
-        </if>
-        <if test="order_state!=null and order_state!=''">
-            t.order_state=#{order_state}
-        </if>
+        UPDATE t_b_order
+        <trim prefix="set" suffixOverrides=",">
+            <if test="total_money!=null and total_money!=''">
+                total_money=#{total_money},
+            </if>
+            <if test="order_date!=null and order_date!=''">
+                order_date=#{order_date},
+            </if>
+            <if test="order_state!=null and order_state!=''">
+                order_state=#{order_state},
+            </if>
+        </trim>
+
         WHERE id=#{id}
     </update>
 

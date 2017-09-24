@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService {
@@ -14,15 +15,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsDAO goodsDAO;
 
-    public List<T_B_Goods> findAllGoods() {
-        return goodsDAO.findAll();
+    public List<T_B_Goods> findAllGoods(Map<String, Object> paraMap) {
+        return goodsDAO.findAll(paraMap);
     }
 
-    public List<T_B_Goods> findGoodsById() {
-        return goodsDAO.findById();
-    }
-
-    public List<T_B_Goods> findGoodsByName() {
-        return goodsDAO.findByName();
-    }
 }

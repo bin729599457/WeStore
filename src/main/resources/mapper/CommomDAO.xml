@@ -5,12 +5,12 @@
 <mapper namespace="com.westore.dao.CommonDAO">
 
     <insert id="addOrder" parameterType="java.util.Map">
-      INSERT INTO #{tb_name}(
+      <include refid="">
 
-      <if test="">
-
-      </if>
-      )
+      </include>
     </insert>
 
+    <sql id="">
+
+    </sql>
 </mapper>

@@ -20,4 +20,17 @@ public class OrderServiceImpl implements OrderService {
         return orderDAO.findOrders(paraMap);
     }
 
+    public void addOrder(Map<String, Object> paraMap) {
+
+        orderDAO.addOrder(paraMap);
+    }
+
+    public void delOrder(Map<String, Object> paraMap) {
+        orderDAO.deleteOrder(paraMap);
+    }
+
+    public void updateOrder(Map<String, Object> paraMap) {
+        orderDAO.updateOrder(paraMap);
+    }
+
 }

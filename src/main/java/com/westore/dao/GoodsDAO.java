@@ -5,16 +5,12 @@ import com.westore.model.T_B_Location;
 import com.westore.model.T_B_Order;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsDAO {
 
     //商品操作
-    public List<T_B_Goods> findAll();
-
-    public List<T_B_Goods> findByName();
-
-    public List<T_B_Goods> findById();
-
+    public List<T_B_Goods> findAll(Map<String, Object> paraMap);
 
 
 }
