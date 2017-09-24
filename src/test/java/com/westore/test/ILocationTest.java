@@ -9,6 +9,7 @@ import com.westore.model.T_B_Location;
 import com.westore.model.T_B_User;
 import com.westore.service.CommomService;
 import com.westore.service.LocationService;
+import com.westore.utils.CommonUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class ILocationTest {
     @Resource
     private CommomService commomService;
 
+    @Resource
+    private CommonDAO commonDAO;
+
     @Test
     public void findUserLocation(){
         PageHelper.startPage(0, 0);
@@ -51,7 +55,8 @@ public class ILocationTest {
         loc.setUser_phone("15019936488");
         loc.setUser_name("tom");
         loc.setIs_default(0);
-        commomService.add(loc);
+        String sql = CommonUtils.add(loc);
+        commonDAO.addOrder(sql);
     }
 
 

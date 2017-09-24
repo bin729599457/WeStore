@@ -1,11 +1,5 @@
 package com.westore.utils;
 
-import com.westore.dao.CommonDAO;
-import com.westore.model.T_B_Location;
-import com.westore.model.T_B_Order;
-import com.westore.model.T_B_User;
-
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,10 +7,8 @@ import java.util.Map;
 
 public class CommonUtils {
 
-    @Resource
-    private CommonDAO commonDAO;
 
-    public void add(Object object) {
+    public static String add(Object object) {
 
         String className = object.getClass().getSimpleName();
         StringBuilder sql = new StringBuilder("insert into ");
@@ -24,19 +16,11 @@ public class CommonUtils {
         sql.append("set ");
         String str= getClassValueObj(object).toString().replace("{","").replace("}","");
         sql.append(str);
-        System.out.println(sql);
+        return sql.toString();
 
-        Map<String, Object> paraMap=new HashMap<String, Object>();
-        paraMap.put("sql",sql.toString());
-        System.out.println(paraMap);
 
     }
 
-
-    public static void main(String[] args) {
-        new CommonUtils().add(new T_B_Order("1311231", "131", 12, new Date(), 1));
-//        new CommonUtils().getClassVarName(new T_B_Order());
-    }
 
 /*
     public String[] getClassVarName(Object object) {
@@ -58,7 +42,7 @@ public class CommonUtils {
     }
 */
 
-    public Map<String, Object> getClassValueObj(Object object) {
+    public static Map<String, Object> getClassValueObj(Object object) {
 
 
         Field[] fields = object.getClass().getDeclaredFields();
@@ -89,7 +73,7 @@ public class CommonUtils {
                 e.printStackTrace();
             }
         }
-        System.out.println(paraMap);
+        //System.out.println(paraMap);
         return paraMap;
     }
 }
