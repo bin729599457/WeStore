@@ -70,4 +70,16 @@ public class T_B_Location {
     public void setIs_default(int is_default) {
         this.is_default = is_default;
     }
+
+    @Override
+    public String toString() {
+        return "T_B_Location{" +
+                "id='" + id + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_location='" + user_location + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                ", is_default=" + is_default +
+                '}';
+    }
 }

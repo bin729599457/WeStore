@@ -28,14 +28,6 @@
 
 
 
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
-<!--    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJacksonHttpMessageConverter" />&lt;!&ndash; json转换器 &ndash;&gt;
-            </list>
-        </property>
-    </bean>-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
             <list>

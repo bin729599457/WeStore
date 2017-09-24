@@ -35,6 +35,7 @@
         <property name="typeAliasesPackage" value="com.westore.model"/>
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
     </bean>
 
     <!-- 配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->

@@ -1,5 +1,7 @@
 package com.westore.service.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.westore.dao.LocationDAO;
 import com.westore.model.T_B_Location;
 import com.westore.service.LocationService;
@@ -22,11 +24,16 @@ public class LocationSerciceImpl implements LocationService {
         return locationDAO.findAll();
     }
 
-    public List<T_B_Location> findUserLocation(String trd_session) {
+    public PageInfo<T_B_Location> findUserLocation(String trd_session,String pageNum,String pageSize) {
         if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
             return null;
         }
+        else{
+            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
+            PageHelper.startPage(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
+            PageInfo<T_B_Location> p_list = new PageInfo<T_B_Location>(locationDAO.findUserLocation(openid));
+            return p_list;
+        }
 
-        return null;
     }
 }

@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class AjaxJSON {
     private boolean success = true;
-    private String msg = "操作成功";
+    private String msg = "";
     private Object obj = null;
     private Long total = 0L;
     private Map<String, Object> attributes;

@@ -61,13 +61,8 @@ public class UserServiceImpl implements UserService {
 
     public String checkLogin(String trd_session) {
 
+        return redisTemplate.opsForHash().entries(trd_session).isEmpty()?"noLogin":"Logined";
 
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
-            return "noLogin";
-        }
-        else{
-            return "Logined";
-        }
     }
 
     public String change(String trd_session,String method,String value) {

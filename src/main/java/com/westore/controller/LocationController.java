@@ -2,6 +2,8 @@ package com.westore.controller;
 
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.github.pagehelper.PageInfo;
+import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Location;
 import com.westore.model.T_B_User;
 import com.westore.model.User;
@@ -24,20 +26,24 @@ public class LocationController {
     @Resource
     private LocationService locationService;
 
-    @RequestMapping(value="/getUserLocation.do")
+    @RequestMapping(value="/getUserLocation.do" ,produces="application/json" ,method = RequestMethod.GET)
     @ResponseBody
     public Object getUserlocation(@RequestParam Map<String,Object> params){
         String trd_session = (String)params.get("trd_session");
+        AjaxJSON res = new AjaxJSON();
         if(trd_session == null){
-            JSONObject resJSON = new JSONObject();
-            resJSON.put("status","noLogin");
-            return resJSON.toString();
+            res.setSuccess(false);
+            res.setMsg("no Login");
         }
         else{
-
-           return new T_B_Location();
+            String pageNum = (String)params.get("pageNum");
+            String pageSize = (String)params.get("pageSize");
+            PageInfo<T_B_Location> locations = locationService.findUserLocation(trd_session,pageNum,pageSize);
+            res.setSuccess((locations == null)?false:true);
+            res.setObj(locations);
+            res.setTotal((locations == null)?0:locations.getTotal());
         }
-
+        return res;
     }
 
 }
