@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface CommonDAO {
 
-    public void addOrder(Map<String, Object> paraMap);
+    public void addOrder(String sql);
 
 }

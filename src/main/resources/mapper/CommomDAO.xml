@@ -4,13 +4,8 @@
 <!-- 设置为CommomUtils接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.CommonDAO">
 
-    <insert id="addOrder" parameterType="java.util.Map">
-      <include refid="insert_sql">
-
-      </include>
+    <insert id="addOrder" parameterType="String" >
+        ${_parameter}
     </insert>
 
-    <sql id="insert_sql">
-
-    </sql>
 </mapper>
