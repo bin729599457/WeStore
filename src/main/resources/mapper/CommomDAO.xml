@@ -8,4 +8,8 @@
         ${_parameter}
     </insert>
 
+    <delete id="delete" parameterType="String" >
+        ${_parameter}
+    </delete>
+
 </mapper>
