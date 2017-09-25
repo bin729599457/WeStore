@@ -1,5 +1,6 @@
 package com.westore.service;
 
+import java.util.List;
 import java.util.Map;
 
 public interface CommomService {
@@ -8,5 +9,5 @@ public interface CommomService {
 
     public Map<String, Object> getClassValueObj(Object object);
 
-
+    public List<Object> get(Object object, String id);
     }

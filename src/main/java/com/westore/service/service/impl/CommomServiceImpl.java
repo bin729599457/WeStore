@@ -1,12 +1,14 @@
 package com.westore.service.service.impl;
 
 import com.westore.dao.CommonDAO;
+import com.westore.model.T_B_Goods_Type;
 import com.westore.service.CommomService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service("CommomService")
@@ -23,10 +25,6 @@ public class CommomServiceImpl implements CommomService {
         sql.append("set ");
         String str= getClassValueObj(object).toString().replace("{","").replace("}","");
         sql.append(str);
-        System.out.println(sql);
-
-        Map<String, Object> paraMap=new HashMap<String, Object>();
-        paraMap.put("sql",sql);
 
         commonDAO.add(sql.toString());
 
@@ -50,7 +48,7 @@ public class CommomServiceImpl implements CommomService {
 
                 }else if(fields[i].getGenericType().toString().equals(
                         "class java.util.Date")){
-                    paraMap.put(fields[i].getName(), "'now'");
+                    paraMap.put(fields[i].getName(), "'"+fields[i].get(object).toString()+"'");
 
                 }else {
                     paraMap.put(fields[i].getName(), fields[i].get(object));
@@ -63,8 +61,17 @@ public class CommomServiceImpl implements CommomService {
                 e.printStackTrace();
             }
         }
-        System.out.println(paraMap);
         return paraMap;
     }
+
+    public List<Object> get(Object object, String id) {
+
+        Map<String ,Object> paraMap=new HashMap<String, Object>();
+        paraMap.put("t_b_name",object.getClass().getSimpleName());
+        paraMap.put("id",id);
+        List<Object> classList=commonDAO.selectById(paraMap);
+
+        return classList;
+        }
 
 }

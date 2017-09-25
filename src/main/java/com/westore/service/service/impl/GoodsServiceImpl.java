@@ -15,8 +15,12 @@ public class GoodsServiceImpl implements GoodsService {
     @Resource
     private GoodsDAO goodsDAO;
 
-    public List<T_B_Goods> findAllGoods(Map<String, Object> paraMap) {
+    public List<T_B_Goods> selectGoods(Map<String, Object> paraMap) {
         return goodsDAO.findAll(paraMap);
+    }
+
+    public void updateGoods(Map<String, Object> paraMap) {
+        return ;
     }
 
 }

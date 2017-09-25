@@ -15,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.reflect.annotation.TypeAnnotation;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -55,8 +54,8 @@ public class ILocationTest {
         loc.setUser_phone("15019936488");
         loc.setUser_name("tom");
         loc.setIs_default(0);
-        String sql = CommonUtils.add(loc);
-        commonDAO.addOrder(sql);
+        String sql = CommonUtils.getCommomUtilsInstance().add(loc);
+        commonDAO.add(sql);
     }
 
 

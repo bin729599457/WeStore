@@ -4,7 +4,7 @@ public class T_B_Goods {
 
     private String id;
     private String goods_title;
-    private String goods_type_name;
+    private String goods_type_id;
     private String goods_descript;
     private String goods_price;
     private String goods_images;
@@ -62,19 +62,19 @@ public class T_B_Goods {
         this.goods_sales_nums = goods_sales_nums;
     }
 
-    public String getGoods_type_name() {
-        return goods_type_name;
-    }
-
-    public void setGoods_type_name(String goods_type_name) {
-        this.goods_type_name = goods_type_name;
-    }
-
     public String getGoods_images() {
         return goods_images;
     }
 
     public void setGoods_images(String goods_images) {
         this.goods_images = goods_images;
+    }
+
+    public String getGoods_type_id() {
+        return goods_type_id;
+    }
+
+    public void setGoods_type_id(String goods_type_id) {
+        this.goods_type_id = goods_type_id;
     }
 }

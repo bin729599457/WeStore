@@ -4,8 +4,9 @@
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.GoodsDAO">
 
-    <select id="findAll" resultType="com.westore.model.T_B_Goods">
-        SELECT t.id,t.user_id,t.total_money,t.order_date,t.order_state FROM t_b_order t
+    <select id="findAll" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
+        SELECT id,goods_title,goods_type_id,goods_descript,goods_price,goods_images,
+        goods_nums,goods_sales_nums FROM t_b_goods
         WHERE 1=1
 
         <if test="order_date!=null  and order_date!=''">
@@ -23,6 +24,33 @@
 
     </select>
 
+
+
+    <update id="updateOrder" parameterType="java.util.Map">
+        UPDATE t_b_goods
+        <trim prefix="set" suffixOverrides=",">
+            <if test="goods_title!=null and goods_title!=''">
+                goods_title=#{goods_title},
+            </if>
+            <if test="goods_type_id!=null and goods_type_id!=''">
+                goods_type_id=#{goods_type_id},
+            </if>
+            <if test="goods_descript!=null and goods_descript!=''">
+                goods_descript=#{goods_descript},
+            </if>
+            <if test="goods_price!=null and goods_price!=''">
+                goods_price=#{goods_price},
+            </if>
+            <if test="goods_images!=null and goods_images!=''">
+                goods_images=#{goods_images},
+            </if>
+            <if test="goods_nums!=null and goods_nums!=''">
+                goods_nums=#{goods_nums},
+            </if>
+        </trim>
+
+        WHERE id=#{id}
+    </update>
 
 
 </mapper>

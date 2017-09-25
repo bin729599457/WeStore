@@ -1,14 +1,21 @@
 package com.westore.utils;
 
+import com.westore.model.T_B_Goods_Type;
+import com.westore.service.CommomService;
+
 public class Test {
     public static void main(String[] args) {
-        String basestr = "123456";
+/*        String basestr = "123456";
         String str1 = DesUtil.encrypt(basestr);
 
         System.out.println("原始值: " + basestr);
         System.out.println("加密后: " + str1);
         System.out.println("解密后: " + DesUtil.decrypt(str1));
-        System.out.println("为空时 is : " + DesUtil.decrypt(DesUtil.encrypt("")));
+        System.out.println("为空时 is : " + DesUtil.decrypt(DesUtil.encrypt("")));*/
+
+
+
+
     }
 
 }

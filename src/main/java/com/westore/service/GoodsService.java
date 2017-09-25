@@ -7,8 +7,8 @@ import java.util.Map;
 
 public interface GoodsService {
 
-    public List<T_B_Goods> findAllGoods(Map<String, Object> paraMap);
+    public List<T_B_Goods> selectGoods(Map<String, Object> paraMap);
 
-
+    public void updateGoods(Map<String, Object> paraMap);
 
 }
