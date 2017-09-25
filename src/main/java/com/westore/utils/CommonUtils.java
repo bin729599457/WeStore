@@ -7,8 +7,12 @@ import java.util.Map;
 
 public class CommonUtils {
 
+    private static CommonUtils commonUtils = new CommonUtils();
 
-    public static String add(Object object) {
+    public CommonUtils() {
+    }
+
+    public String add(Object object) {
 
         String className = object.getClass().getSimpleName();
         StringBuilder sql = new StringBuilder("insert into ");
@@ -42,7 +46,7 @@ public class CommonUtils {
     }
 */
 
-    public static Map<String, Object> getClassValueObj(Object object) {
+    public Map<String, Object> getClassValueObj(Object object) {
 
 
         Field[] fields = object.getClass().getDeclaredFields();
@@ -60,7 +64,7 @@ public class CommonUtils {
 
                 }else if(fields[i].getGenericType().toString().equals(
                         "class java.util.Date")){
-                    paraMap.put(fields[i].getName(), "'now'");
+                    paraMap.put(fields[i].getName(), "'"+fields[i].get(object)+"'");
 
                 }else {
                     paraMap.put(fields[i].getName(), fields[i].get(object));
@@ -75,5 +79,9 @@ public class CommonUtils {
         }
         //System.out.println(paraMap);
         return paraMap;
+    }
+
+    public static CommonUtils getCommomUtilsInstance() {
+        return commonUtils;
     }
 }

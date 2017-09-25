@@ -3,11 +3,13 @@ package com.westore.model;
 public class T_B_Goods {
 
     private String id;
-    private String goods_name;
-    private String goods_type_id;
+    private String goods_title;
+    private String goods_type_name;
     private String goods_descript;
     private String goods_price;
-    private String goods_images_json;
+    private String goods_images;
+    private int goods_nums;
+    private int goods_sales_nums;
 
     public T_B_Goods() {
     }
@@ -18,22 +20,6 @@ public class T_B_Goods {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getGoods_name() {
-        return goods_name;
-    }
-
-    public void setGoods_name(String goods_name) {
-        this.goods_name = goods_name;
-    }
-
-    public String getGoods_type_id() {
-        return goods_type_id;
-    }
-
-    public void setGoods_type_id(String goods_type_id) {
-        this.goods_type_id = goods_type_id;
     }
 
     public String getGoods_descript() {
@@ -52,11 +38,43 @@ public class T_B_Goods {
         this.goods_price = goods_price;
     }
 
-    public String getGoods_images_json() {
-        return goods_images_json;
+    public String getGoods_title() {
+        return goods_title;
     }
 
-    public void setGoods_images_json(String goods_images_json) {
-        this.goods_images_json = goods_images_json;
+    public void setGoods_title(String goods_title) {
+        this.goods_title = goods_title;
+    }
+
+    public int getGoods_nums() {
+        return goods_nums;
+    }
+
+    public void setGoods_nums(int goods_nums) {
+        this.goods_nums = goods_nums;
+    }
+
+    public int getGoods_sales_nums() {
+        return goods_sales_nums;
+    }
+
+    public void setGoods_sales_nums(int goods_sales_nums) {
+        this.goods_sales_nums = goods_sales_nums;
+    }
+
+    public String getGoods_type_name() {
+        return goods_type_name;
+    }
+
+    public void setGoods_type_name(String goods_type_name) {
+        this.goods_type_name = goods_type_name;
+    }
+
+    public String getGoods_images() {
+        return goods_images;
+    }
+
+    public void setGoods_images(String goods_images) {
+        this.goods_images = goods_images;
     }
 }

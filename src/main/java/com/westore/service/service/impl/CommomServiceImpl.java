@@ -28,7 +28,7 @@ public class CommomServiceImpl implements CommomService {
         Map<String, Object> paraMap=new HashMap<String, Object>();
         paraMap.put("sql",sql);
 
-        commonDAO.addOrder(sql.toString());
+        commonDAO.add(sql.toString());
 
     }
 

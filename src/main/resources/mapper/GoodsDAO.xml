@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.GoodsDAO">
+
+    <select id="findAll" resultType="com.westore.model.T_B_Goods">
+        SELECT t.id,t.user_id,t.total_money,t.order_date,t.order_state FROM t_b_order t
+        WHERE 1=1
+
+        <if test="order_date!=null  and order_date!=''">
+            AND t.order_date >=to_date(#{order_vdate},'yyyy-mm-dd')
+        </if>
+        <if test="order_date !=null  and order_date !=''">
+            AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
+        </if>
+        <if test="id!=null and id!=''">
+            AND t.id=#{id}
+        </if>
+        <if test="user_id!=null and user_id!=''">
+            AND t.user_id=#{user_id}
+        </if>
+
+    </select>
+
+
+
+</mapper>
