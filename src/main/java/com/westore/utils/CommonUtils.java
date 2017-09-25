@@ -7,18 +7,27 @@ import java.util.Map;
 
 public class CommonUtils {
 
-    private static CommonUtils commonUtils = new CommonUtils();
 
-    public CommonUtils() {
-    }
-
-    public String add(Object object) {
+    public static String add(Object object) {
 
         String className = object.getClass().getSimpleName();
         StringBuilder sql = new StringBuilder("insert into ");
         sql.append(className+" ");
         sql.append("set ");
         String str= getClassValueObj(object).toString().replace("{","").replace("}","");
+        sql.append(str);
+        return sql.toString();
+
+
+    }
+
+    public static String delete(Object object) {
+
+        String className = object.getClass().getSimpleName();
+        StringBuilder sql = new StringBuilder("delete from ");
+        sql.append(className+" ");
+        sql.append("where id=");
+        String str= (String)getClassValueObj(object).get("id");
         sql.append(str);
         return sql.toString();
 
@@ -46,7 +55,7 @@ public class CommonUtils {
     }
 */
 
-    public Map<String, Object> getClassValueObj(Object object) {
+    public static Map<String, Object> getClassValueObj(Object object) {
 
 
         Field[] fields = object.getClass().getDeclaredFields();
@@ -64,7 +73,7 @@ public class CommonUtils {
 
                 }else if(fields[i].getGenericType().toString().equals(
                         "class java.util.Date")){
-                    paraMap.put(fields[i].getName(), "'"+fields[i].get(object)+"'");
+                    paraMap.put(fields[i].getName(), "'now'");
 
                 }else {
                     paraMap.put(fields[i].getName(), fields[i].get(object));
@@ -79,9 +88,5 @@ public class CommonUtils {
         }
         //System.out.println(paraMap);
         return paraMap;
-    }
-
-    public static CommonUtils getCommomUtilsInstance() {
-        return commonUtils;
     }
 }

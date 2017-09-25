@@ -7,6 +7,9 @@ public class T_B_Location {
     private String id;
     private String user_id;
     private String user_name;
+    private String user_province;
+    private String user_city;
+    private String user_area;
     private String user_location;
     private String user_phone;
     private int is_default;
@@ -14,10 +17,13 @@ public class T_B_Location {
     public T_B_Location() {
     }
 
-    public T_B_Location(String id, String user_id, String user_name, String user_location, String user_phone, int is_default) {
+    public T_B_Location(String id, String user_id, String user_name, String user_province, String user_city, String user_area, String user_location, String user_phone, int is_default) {
         this.id = id;
         this.user_id = user_id;
         this.user_name = user_name;
+        this.user_province = user_province;
+        this.user_city = user_city;
+        this.user_area = user_area;
         this.user_location = user_location;
         this.user_phone = user_phone;
         this.is_default = is_default;
@@ -45,6 +51,30 @@ public class T_B_Location {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
+    }
+
+    public String getUser_province() {
+        return user_province;
+    }
+
+    public void setUser_province(String user_province) {
+        this.user_province = user_province;
+    }
+
+    public String getUser_city() {
+        return user_city;
+    }
+
+    public void setUser_city(String user_city) {
+        this.user_city = user_city;
+    }
+
+    public String getUser_area() {
+        return user_area;
+    }
+
+    public void setUser_area(String user_area) {
+        this.user_area = user_area;
     }
 
     public String getUser_location() {
@@ -77,6 +107,9 @@ public class T_B_Location {
                 "id='" + id + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", user_name='" + user_name + '\'' +
+                ", user_province='" + user_province + '\'' +
+                ", user_city='" + user_city + '\'' +
+                ", user_area='" + user_area + '\'' +
                 ", user_location='" + user_location + '\'' +
                 ", user_phone='" + user_phone + '\'' +
                 ", is_default=" + is_default +

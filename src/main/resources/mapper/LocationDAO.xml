@@ -5,9 +5,30 @@
 <mapper namespace="com.westore.dao.LocationDAO">
 
     <select id="findUserLocation" parameterType="java.lang.String" resultType="com.westore.model.T_B_Location">
-       SELECT user_name,user_location,user_phone,is_default
+       SELECT id,user_name,user_province,user_city,user_area,user_location,user_phone,is_default
        FROM t_b_location
        where user_id = '${_parameter}'
     </select>
+
+
+    <update id="setUndefault" parameterType="java.lang.String" >
+        UPDATE t_b_location
+        SET is_default = 0
+        WHERE user_id = '${_parameter}'
+        AND is_default =1
+    </update>
+
+    <update id="updateUserLocation" parameterType="com.westore.model.T_B_Location">
+        UPDATE t_b_location
+        SET
+        <if test="user_name!=null">user_name=#{user_name},</if>
+        <if test="user_province!=null">user_province=#{user_province},</if>
+        <if test="user_city!=null">user_city=#{user_city},</if>
+        <if test="user_area!=null">user_area=#{user_area},</if>
+        <if test="user_location!=null">user_location=#{user_location},</if>
+        <if test="user_phone!=null">user_phone=#{user_phone},</if>
+         is_default=#{is_default}
+        WHERE id=#{id}
+    </update>
 
 </mapper>

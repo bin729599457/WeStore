@@ -12,4 +12,8 @@
         SELECT * FROM #{t_b_name} WHERE id=#{id}
     </select>
 
+    <delete id="delete" parameterType="String" >
+        ${_parameter}
+    </delete>
+
 </mapper>
