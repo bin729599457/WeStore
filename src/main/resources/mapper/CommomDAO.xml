@@ -4,15 +4,15 @@
 <!-- 设置为CommomUtils接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.CommonDAO">
 
-    <insert id="add" parameterType="String" >
+    <insert id="add" parameterType="String">
         ${_parameter}
     </insert>
 
-        <select id="selectById" parameterType="java.util.Map" resultType="java.util.Objects">
+    <select id="selectById" parameterType="java.util.Map" resultType="java.util.Objects">
         SELECT * FROM #{t_b_name} WHERE id=#{id}
     </select>
 
-    <delete id="delete" parameterType="String" >
+    <delete id="delete" parameterType="String">
         ${_parameter}
     </delete>
 

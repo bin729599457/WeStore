@@ -9,7 +9,7 @@ public interface CommonDAO {
 
     public List<Object> selectById(Map<String ,Object> paraMap);
 
-    public void delete(String sql);
+    public void delete(String  sql);
 
 
 }
