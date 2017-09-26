@@ -74,7 +74,7 @@ public class LocationSerciceImpl implements LocationService {
             return "success";
         }
     }
-
+//
     public String updateLocation(String trd_session,T_B_Location location){
         String openid = redisService.getOpenid(trd_session);
         if(openid == null){
