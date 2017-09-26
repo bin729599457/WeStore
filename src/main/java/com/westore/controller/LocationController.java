@@ -35,18 +35,12 @@ public class LocationController {
     public Object getUserlocation(@RequestParam Map<String,Object> params){
         String trd_session = (String)params.get("trd_session");
         AjaxJSON res = new AjaxJSON();
-        if(trd_session == null){
-            res.setSuccess(false);
-            res.setMsg("no Login");
-        }
-        else{
-            String pageNum = (String)params.get("pageNum");
-            String pageSize = (String)params.get("pageSize");
-            PageInfo<T_B_Location> locations = locationService.findUserLocation(trd_session,pageNum,pageSize);
-            res.setSuccess((locations == null)?false:true);
-            res.setObj(locations);
-            res.setTotal((locations == null)?0:locations.getTotal());
-        }
+        String pageNum = (String)params.get("pageNum");
+        String pageSize = (String)params.get("pageSize");
+        PageInfo<T_B_Location> locations = locationService.findUserLocation(trd_session,pageNum,pageSize);
+        res.setSuccess((locations == null)?false:true);
+        res.setObj(locations);
+        res.setTotal((locations == null)?0:locations.getTotal());
         return res;
     }
 
@@ -56,16 +50,10 @@ public class LocationController {
     public Object insertLocation(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON address){
         String trd_session = (String)params.get("trd_session");
         AjaxJSON res = new AjaxJSON();
-        if(trd_session == null){
-            res.setSuccess(false);
-            res.setMsg("no Login");
-        }
-        else{
-            T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
-            loc.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-            String result = locationService.insertLocation(trd_session,loc);
-            res.setSuccess((result == "error")?false:true);
-        }
+        T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
+        loc.setId(CustomUUID.getFlowIdWorkerInstance().generate());
+        String result = locationService.insertLocation(trd_session,loc);
+        res.setSuccess((result == "error")?false:true);
         return res;
     }
 
@@ -75,15 +63,9 @@ public class LocationController {
     public Object deleteLocation(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON address){
         String trd_session = (String)params.get("trd_session");
         AjaxJSON res = new AjaxJSON();
-        if(trd_session == null){
-            res.setSuccess(false);
-            res.setMsg("no Login");
-        }
-        else{
-            T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
-            String result = locationService.deleteLocation(trd_session,loc);
-            res.setSuccess((result == "error")?false:true);
-        }
+        T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
+        String result = locationService.deleteLocation(trd_session,loc);
+        res.setSuccess((result == "error")?false:true);
         return res;
     }
 
@@ -93,15 +75,9 @@ public class LocationController {
     public Object updateLocation(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON address){
         String trd_session = (String)params.get("trd_session");
         AjaxJSON res = new AjaxJSON();
-        if(trd_session == null){
-            res.setSuccess(false);
-            res.setMsg("no Login");
-        }
-        else{
-            T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
-            String result = locationService.updateLocation(trd_session,loc);
-            res.setSuccess((result == "error")?false:true);
-        }
+        T_B_Location loc = (T_B_Location) JSONObject.toBean(JSONObject.fromObject(address.getObj()), T_B_Location.class);
+        String result = locationService.updateLocation(trd_session,loc);
+        res.setSuccess((result == "error")?false:true);
         return res;
     }
 

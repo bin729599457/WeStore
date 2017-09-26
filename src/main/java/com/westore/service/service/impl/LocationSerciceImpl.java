@@ -6,6 +6,7 @@ import com.westore.dao.CommonDAO;
 import com.westore.dao.LocationDAO;
 import com.westore.model.T_B_Location;
 import com.westore.service.LocationService;
+import com.westore.service.RedisService;
 import com.westore.utils.CommonUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class LocationSerciceImpl implements LocationService {
     private LocationDAO locationDAO;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private RedisService redisService;
 
     @Resource
     private CommonDAO commonDAO;
@@ -30,24 +31,26 @@ public class LocationSerciceImpl implements LocationService {
     }
 
     public PageInfo<T_B_Location> findUserLocation(String trd_session,String pageNum,String pageSize) {
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
+
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
             return null;
         }
-        else{
-            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
+        else {
             PageHelper.startPage(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
             PageInfo<T_B_Location> p_list = new PageInfo<T_B_Location>(locationDAO.findUserLocation(openid));
             return p_list;
-        }
 
+        }
     }
 
     public String insertLocation(String trd_session,T_B_Location location){
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
+
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
             return "error";
         }
         else{
-            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
             location.setUser_id(openid);
             if(location.getIs_default() == 1) {
                 locationDAO.setUndefault(openid);
@@ -60,11 +63,11 @@ public class LocationSerciceImpl implements LocationService {
 
 
     public String deleteLocation(String trd_session,T_B_Location location){
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
             return "error";
         }
         else{
-            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
             location.setUser_id(openid);
             String sql = CommonUtils.delete(location);
             commonDAO.delete(sql);
@@ -73,11 +76,11 @@ public class LocationSerciceImpl implements LocationService {
     }
 
     public String updateLocation(String trd_session,T_B_Location location){
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
             return "error";
         }
         else{
-            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
             location.setUser_id(openid);
             if(location.getIs_default() == 1) {
                 locationDAO.setUndefault(openid);
