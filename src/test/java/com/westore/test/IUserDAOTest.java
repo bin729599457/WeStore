@@ -1,6 +1,9 @@
 package com.westore.test;
 
 
+import com.westore.dao.CartDAO;
+import com.westore.model.T_B_Cart;
+import com.westore.model.T_B_Location;
 import com.westore.model.User;
 import com.westore.service.UserService;
 import org.junit.Test;
@@ -18,11 +21,23 @@ public class IUserDAOTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CartDAO cartDAO;
+
     @Test
     public void testFindAll(){
         List<User> userList = userService.findAllUser();
         for(User u:userList){
             System.out.print(u);
+        }
+    }
+
+
+    @Test
+    public void testFindCart(){
+        List<T_B_Cart> ca = cartDAO.findUserCart("oNuDy0JpnJfpfZiIy1pBlyjcpYak");
+        for(T_B_Cart tc:ca){
+            System.out.print(tc);
         }
     }
 

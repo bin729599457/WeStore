@@ -81,6 +81,20 @@ public class T_B_Goods {
         this.goods_type_id = goods_type_id;
     }
 
+    @Override
+    public String toString() {
+        return "T_B_Goods{" +
+                "id='" + id + '\'' +
+                ", goods_title='" + goods_title + '\'' +
+                ", goods_type_id='" + goods_type_id + '\'' +
+                ", goods_descript='" + goods_descript + '\'' +
+                ", goods_price='" + goods_price + '\'' +
+                ", goods_images='" + goods_images + '\'' +
+                ", goods_nums=" + goods_nums +
+                ", goods_sales_nums=" + goods_sales_nums +
+                '}';
+    }
+
     public float getGoods_point() {
         return goods_point;
     }
