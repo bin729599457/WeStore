@@ -24,7 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
          goodsDAO.updateGoods(paraMap);
     }
 
-    public float countGoodsCommentPoint(String goods_id) {
+/*    public float countGoodsCommentPoint(String goods_id) {
 
         Map<String, Object> paraMap =new HashMap<String, Object>();
         paraMap.put("goods_id",goods_id);
@@ -35,10 +35,10 @@ public class GoodsServiceImpl implements GoodsService {
          count+=i;
         }
         return count/commontList.size();
-    }
+    }*/
 
-    public void softGoods(Map<String, Object> paraMap) {
-        goodsDAO.softGoods(paraMap);
+    public List<T_B_Goods> softGoods(Map<String, Object> paraMap) {
+        return goodsDAO.softGoods(paraMap);
     }
 
 }

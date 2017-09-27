@@ -7,6 +7,7 @@ import com.westore.service.CommomService;
 import com.westore.service.GoodsService;
 import com.westore.utils.CustomUUID;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(origins = "http://xxx",maxAge = 3600)
 @Controller
 @RequestMapping("/GoodsController")
 public class GoodsController {
@@ -42,9 +44,9 @@ public class GoodsController {
             String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
             String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
 
-            paraMap.put("goods_title", goods_title);
+            paraMap.put("goods_title", '%'+goods_title+'%');
             paraMap.put("goods_type_id", goods_type_id);
-            paraMap.put("goods_descript", goods_descript);
+            paraMap.put("goods_descript", '%'+goods_descript+'%');
             paraMap.put("goods_price_low", goods_price_low);
             paraMap.put("goods_price_high", goods_price_high);
             paraMap.put("goodsNum_is_exist", goodsNum_is_exist);
@@ -53,6 +55,7 @@ public class GoodsController {
             List<T_B_Goods> goodsList = goodsService.selectGoods(paraMap);
 
             j.setObj(goodsList);
+            j.setTotal((long)goodsList.size());
             j.setMsg("查询订单列表成功");
 
         } catch (Exception e) {
@@ -107,6 +110,31 @@ public class GoodsController {
         return j;
     }
 
+    @RequestMapping(value = "/delGoods.do")
+    @ResponseBody
+    public AjaxJSON delGoods(HttpServletRequest request) {
+        AjaxJSON j = new AjaxJSON();
+
+        try {
+
+            String goods_id = request.getParameter("goods_id") == null ? "" : request.getParameter("goods_id");
+            T_B_Goods t_b_goods=new T_B_Goods();
+            t_b_goods.setId(goods_id);
+
+            String sql=commomService.delete(t_b_goods);
+
+            j.setObj(sql);
+            j.setMsg("删除商品成功");
+
+        } catch (Exception e) {
+            j.setMsg("删除商品失败 " + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
     @RequestMapping(value = "/UpdateGoods.do")
     @ResponseBody
     public AjaxJSON UpdateGoods(HttpServletRequest request) {
@@ -139,7 +167,7 @@ public class GoodsController {
             paraMap.put("goods_price",goods_price);
             paraMap.put("goods_images",goods_images);
             paraMap.put("goods_nums",goods_nums);
-            paraMap.put("goods_point",goodsService.countGoodsCommentPoint(goods_id));
+            paraMap.put("goods_point",goods_point);
             paraMap.put("goods_author",goods_author);
             paraMap.put("goods_publisher",goods_publisher);
 
@@ -176,18 +204,30 @@ public class GoodsController {
             //排序条件只可以提供一个
             if(goods_price!=null&&!goods_price.equals("")){
                 goods_sales_nums="";goods_point="";
+                List<T_B_Goods> goodsList=goodsService.softGoods(paraMap);
+                j.setObj(goodsList);
+                j.setMsg("商品排序成功");
+                j.setTotal((long)goodsList.size());
+                return j;
             }
             if(goods_sales_nums!=null&&!goods_sales_nums.equals("")){
                 goods_price="";goods_point="";
+                List<T_B_Goods> goodsList=goodsService.softGoods(paraMap);
+                j.setObj(goodsList);
+                j.setTotal((long)goodsList.size());
+                j.setMsg("商品排序成功");
+                return j;
             }
             if(goods_point!=null&&!goods_point.equals("")){
                 goods_price="";goods_sales_nums="";
+                List<T_B_Goods> goodsList=goodsService.softGoods(paraMap);
+                j.setObj(goodsList);
+                j.setTotal((long)goodsList.size());
+                j.setMsg("商品排序成功");
+                return j;
             }
 
-            goodsService.updateGoods(paraMap);
 
-            j.setObj(paraMap);
-            j.setMsg("商品排序成功");
 
         } catch (Exception e) {
             j.setMsg("商品排序失败 " + e.getMessage());

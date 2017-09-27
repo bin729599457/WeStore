@@ -11,7 +11,7 @@ public interface GoodsService {
 
     public void updateGoods(Map<String, Object> paraMap);
 
-    public float countGoodsCommentPoint(String goods_id);
+//    public float countGoodsCommentPoint(String goods_id);
 
-    public void softGoods(Map<String, Object> paraMap);
+    public List<T_B_Goods> softGoods(Map<String, Object> paraMap);
 }

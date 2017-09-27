@@ -74,4 +74,17 @@ public class CommomServiceImpl implements CommomService {
         return classList;
         }
 
+    public String delete(Object object) {
+
+        String className = object.getClass().getSimpleName();
+        StringBuilder sql = new StringBuilder("delete from ");
+        sql.append(className+" ");
+        sql.append("where id=");
+        String str= (String)getClassValueObj(object).get("id");
+        sql.append(str);
+        commonDAO.delete(sql.toString());
+        return sql.toString();
+
+    }
+
 }

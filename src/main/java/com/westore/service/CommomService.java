@@ -10,4 +10,7 @@ public interface CommomService {
     public Map<String, Object> getClassValueObj(Object object);
 
     public List<Object> get(Object object, String id);
+
+    public  String delete(Object object) ;
+
     }
