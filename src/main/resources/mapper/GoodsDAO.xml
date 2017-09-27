@@ -99,7 +99,10 @@
         <if test="goods_sales_nums='desc'">
             GROUP BY goods_sales_nums DESC
         </if>
-        <if test="goods_point!=null and goods_point!=''">
+        <if test="goods_point='asc">
+            GROUP BY goods_point ASC
+        </if>
+        <if test="goods_point='asc">
             GROUP BY goods_point DESC
         </if>
 

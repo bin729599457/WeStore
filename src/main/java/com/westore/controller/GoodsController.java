@@ -6,10 +6,9 @@ import com.westore.model.T_B_Goods_Type;
 import com.westore.service.CommomService;
 import com.westore.service.GoodsService;
 import com.westore.utils.CustomUUID;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://xxx",maxAge = 3600)
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Controller
 @RequestMapping("/GoodsController")
 public class GoodsController {
@@ -69,32 +68,15 @@ public class GoodsController {
 
     @RequestMapping(value = "/addGoods.do")
     @ResponseBody
-    public AjaxJSON addGoods(HttpServletRequest request) {
+    public AjaxJSON addGoods(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
 
-            String goods_title = request.getParameter("goods_title") == null ? "" : request.getParameter("goods_title");
-            String goods_type_id = request.getParameter("goods_type_id") == null ? "" : request.getParameter("goods_type_id");
-            String goods_descript = request.getParameter("goods_descript") == null ? "" : request.getParameter("goods_descript");
-            String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
-            String goods_images = request.getParameter("goods_images") == null ? "" : request.getParameter("goods_images");
-            String goods_nums = request.getParameter("goods_nums") == null ? "" : request.getParameter("goods_nums");
-            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
-            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
-
-            T_B_Goods t_b_goods=new T_B_Goods();
+            T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
             t_b_goods.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-            t_b_goods.setGoods_title(goods_title);
-            t_b_goods.setGoods_type_id(goods_type_id);
-            t_b_goods.setGoods_descript(goods_descript);
-            t_b_goods.setGoods_price(goods_price);
-            t_b_goods.setGoods_images(goods_images);
-            t_b_goods.setGoods_nums(Integer.parseInt(goods_nums));
             t_b_goods.setGoods_sales_nums(0);
             t_b_goods.setGoods_point(0);
-            t_b_goods.setGoods_author(goods_author);
-            t_b_goods.setGoods_publisher(goods_publisher);
 
             commomService.add(t_b_goods);
 
