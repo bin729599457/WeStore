@@ -13,4 +13,8 @@ public interface GoodsDAO {
     public List<T_B_Goods> findAll(Map<String, Object> paraMap);
 
     public void updateGoods(Map<String, Object> paraMap);
+
+    public List<Integer> selectGoodsPoint(Map<String, Object> paraMap);
+
+    public void softGoods(Map<String, Object> paraMap);
 }

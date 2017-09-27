@@ -39,7 +39,7 @@
 
 
 
-    <update id="updateOrder" parameterType="java.util.Map">
+    <update id="updateGoods" parameterType="java.util.Map">
         UPDATE t_b_goods
         <trim prefix="set" suffixOverrides=",">
             <if test="goods_title!=null and goods_title!=''">
@@ -74,5 +74,28 @@
         WHERE id=#{id}
     </update>
 
+    <select id="selectGoodsPoint" parameterType="java.util.Map" resultType="int">
+      SELECT c.comment_point FROM `t_b_comment` c,t_b_goods g,t_b_user u
+      WHERE c.goods_id =g.id AND c.user_id=u.id
+      <if test="goods_id!=null and goods_id!=''">
+          c.goods_id=#{goods_id}
+      </if>
+    </select>
 
+    <select id="softGoods" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
+        SELECT t.id as goods_id,t.goods_title as goods_title,t.goods_type_id,t.goods_descript,t.goods_price,t.goods_images,
+        t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name FROM t_b_goods t,
+        t_b_goods_type tp WHERE t.goods_type_id=tp.id
+
+        <if test="goods_price!=null and goods_price!=''">
+            GROUP BY goods_price
+        </if>
+        <if test="goods_sales_nums!=null and goods_sales_nums!=''">
+            GROUP BY goods_sales_nums
+        </if>
+        <if test="goods_point!=null and goods_point!=''">
+            GROUP BY goods_point
+        </if>
+
+    </select>
 </mapper>

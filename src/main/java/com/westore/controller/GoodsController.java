@@ -139,7 +139,7 @@ public class GoodsController {
             paraMap.put("goods_price",goods_price);
             paraMap.put("goods_images",goods_images);
             paraMap.put("goods_nums",goods_nums);
-            paraMap.put("goods_point",goods_point);
+            paraMap.put("goods_point",goodsService.countGoodsCommentPoint(goods_id));
             paraMap.put("goods_author",goods_author);
             paraMap.put("goods_publisher",goods_publisher);
 
@@ -150,6 +150,47 @@ public class GoodsController {
 
         } catch (Exception e) {
             j.setMsg("更新商品失败 " + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
+    @RequestMapping(value = "/softGoods.do")
+    @ResponseBody
+    public AjaxJSON softGoods(HttpServletRequest request) {
+        AjaxJSON j = new AjaxJSON();
+
+        try {
+
+            String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
+            String goods_sales_nums = request.getParameter("goods_sales_nums") == null ? "" : request.getParameter("goods_sales_nums");
+            String goods_point = request.getParameter("goods_point") == null ? "" : request.getParameter("goods_point");
+
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+            paraMap.put("goods_price",goods_price);
+            paraMap.put("goods_sales_nums",goods_sales_nums);
+            paraMap.put("goods_point",goods_point);
+
+            //排序条件只可以提供一个
+            if(goods_price!=null&&!goods_price.equals("")){
+                goods_sales_nums="";goods_point="";
+            }
+            if(goods_sales_nums!=null&&!goods_sales_nums.equals("")){
+                goods_price="";goods_point="";
+            }
+            if(goods_point!=null&&!goods_point.equals("")){
+                goods_price="";goods_sales_nums="";
+            }
+
+            goodsService.updateGoods(paraMap);
+
+            j.setObj(paraMap);
+            j.setMsg("商品排序成功");
+
+        } catch (Exception e) {
+            j.setMsg("商品排序失败 " + e.getMessage());
             j.setSuccess(false);
             return j;
         }
