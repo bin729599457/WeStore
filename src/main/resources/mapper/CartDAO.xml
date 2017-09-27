@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.CartDAO">
+
+
+
+    <resultMap type="com.westore.model.T_B_Cart" id="CartResultMap">
+        <id property="id" column="id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="num" column="num"/>
+        <association property="goods" column="goods_id" javaType="com.westore.model.T_B_Goods">
+            <id property="id" column="id"/>
+            <result property="goods_title" column="goods_title"/>
+            <result property="goods_images" column="goods_images"/>
+            <result property="goods_nums" column="goods_nums"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findUserCart" parameterType="java.lang.String" resultMap="CartResultMap">
+        SELECT *
+        FROM t_b_cart c , t_b_goods g
+        WHERE c.goods_id = g.id and c.user_id = '${_parameter}'
+    </select>
+
+
+
+
+
+
+</mapper>

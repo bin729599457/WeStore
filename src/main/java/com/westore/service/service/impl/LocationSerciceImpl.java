@@ -40,7 +40,6 @@ public class LocationSerciceImpl implements LocationService {
             PageHelper.startPage(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
             PageInfo<T_B_Location> p_list = new PageInfo<T_B_Location>(locationDAO.findUserLocation(openid));
             return p_list;
-
         }
     }
 
@@ -74,7 +73,7 @@ public class LocationSerciceImpl implements LocationService {
             return "success";
         }
     }
-//
+
     public String updateLocation(String trd_session,T_B_Location location){
         String openid = redisService.getOpenid(trd_session);
         if(openid == null){

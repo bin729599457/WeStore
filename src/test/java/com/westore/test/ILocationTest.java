@@ -59,7 +59,7 @@ public class ILocationTest {
 
     @Test
     public void testgetOpenid(){
-        System.out.println(redisService.getOpenid("1fbbabf684bc0ff3df822a67e04f9e0ef4259fff"));
+        System.out.println(redisService.getOpenid("ee2df57cf4e6b0c8e96e2f66109ba7ec9b783b11"));
     }
 
 
