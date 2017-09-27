@@ -52,10 +52,8 @@ public class UserController {
     public AjaxJSON changeUserMsg(@RequestParam Map<String,Object> params){
         String trd_session = (String)params.get("trd_session");
         String method = (String)params.get("method");
-        //JSONObject resultJSON = new JSONObject();
         AjaxJSON res = new AjaxJSON();
         if(trd_session == null||method == null) {
-            //resultJSON.put("status", "noLogin or noMethod");
             res.setSuccess(false);
             res.setMsg("no Login or no method");
         }
