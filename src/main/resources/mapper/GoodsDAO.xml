@@ -5,23 +5,36 @@
 <mapper namespace="com.westore.dao.GoodsDAO">
 
     <select id="findAll" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
-        SELECT id,goods_title,goods_type_id,goods_descript,goods_price,goods_images,
-        goods_nums,goods_sales_nums FROM t_b_goods
-        WHERE 1=1
+        SELECT t.id as goods_id,t.goods_title as goods_title,t.goods_type_id,t.goods_descript,t.goods_price,t.goods_images,
+        t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name FROM t_b_goods t,
+        t_b_goods_type tp WHERE t.goods_type_id=tp.id
 
-        <if test="order_date!=null  and order_date!=''">
-            AND t.order_date >=to_date(#{order_vdate},'yyyy-mm-dd')
+        <if test="goods_title!=null  and goods_title!=''">
+            AND t.goods_title=#{goods_title}
         </if>
-        <if test="order_date !=null  and order_date !=''">
-            AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
+        <if test="goods_type_id !=null  and goods_type_id !=''">
+            AND t.goods_type_id=#{goods_type_id}
         </if>
-        <if test="id!=null and id!=''">
-            AND t.id=#{id}
+        <if test="goods_descript!=null and goods_descript!=''">
+            AND t.goods_descript=#{goods_descript}
         </if>
-        <if test="user_id!=null and user_id!=''">
-            AND t.user_id=#{user_id}
+        <if test="goods_price_low!=null and goods_price_low!=''">
+            AND t.goods_price >= #{goods_price_low}
         </if>
-
+        <if test="goods_price_high!=null and goods_price_high!=''">
+            AND #{goods_price_high} >= t.goods_price
+        </if>
+        <if test="goodsNum_is_exist!=null and goodsNum_is_exist!=''">
+            AND t.goods_nums > 0
+        </if>
+        <if test="goods_author!=null and goods_author!=''">
+            AND t.goods_author =#{goods_author}
+        </if>
+        <if test="goods_publisher!=null and goods_publisher!=''">
+            AND t.goods_publisher =#{goods_publisher}
+        </if>
+/*优化功能增加字段 goods_Weights权重 作为默认排序依据*/
+        GROUP BY t.id
     </select>
 
 
@@ -43,6 +56,15 @@
             </if>
             <if test="goods_images!=null and goods_images!=''">
                 goods_images=#{goods_images},
+            </if>
+            <if test="goods_point!=null and goods_point!=''">
+                goods_point=#{goods_point},
+            </if>
+            <if test="goods_author!=null and goods_author!=''">
+                goods_author=#{goods_author},
+            </if>
+            <if test="goods_publisher!=null and goods_publisher!=''">
+                goods_publisher=#{goods_publisher},
             </if>
             <if test="goods_nums!=null and goods_nums!=''">
                 goods_nums=#{goods_nums},

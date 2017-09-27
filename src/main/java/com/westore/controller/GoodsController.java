@@ -36,20 +36,21 @@ public class GoodsController {
             String goods_title = request.getParameter("goods_title") == null ? "" : request.getParameter("goods_title");
             String goods_type_id = request.getParameter("goods_type_id") == null ? "" : request.getParameter("goods_type_id");
             String goods_descript = request.getParameter("goods_descript") == null ? "" : request.getParameter("goods_descript");
-            String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
+            String goods_price_low = request.getParameter("goods_price_low") == null ? "" : request.getParameter("goods_price_low");
+            String goods_price_high = request.getParameter("goods_price_high") == null ? "" : request.getParameter("goods_price_high");
+            String goodsNum_is_exist = request.getParameter("goodsNum_is_exist") == null ? "" : request.getParameter("goodsNum_is_exist");
+            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
+            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
 
             paraMap.put("goods_title", goods_title);
             paraMap.put("goods_type_id", goods_type_id);
             paraMap.put("goods_descript", goods_descript);
-            paraMap.put("goods_price", goods_price);
+            paraMap.put("goods_price_low", goods_price_low);
+            paraMap.put("goods_price_high", goods_price_high);
+            paraMap.put("goodsNum_is_exist", goodsNum_is_exist);
+            paraMap.put("goods_author", goods_author);
+            paraMap.put("goods_publisher", goods_publisher);
             List<T_B_Goods> goodsList = goodsService.selectGoods(paraMap);
-
-            if(goods_type_id!=null&&!goods_type_id.equals("")){
-                List<Object> t_b_goods_typeList =commomService.get(new T_B_Goods_Type(),goods_type_id);
-                T_B_Goods_Type t_b_goods_type=(T_B_Goods_Type)t_b_goods_typeList.get(0);
-                String type_name=t_b_goods_type.getGoods_type_name();
-            }
-
 
             j.setObj(goodsList);
             j.setMsg("查询订单列表成功");
@@ -76,6 +77,8 @@ public class GoodsController {
             String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
             String goods_images = request.getParameter("goods_images") == null ? "" : request.getParameter("goods_images");
             String goods_nums = request.getParameter("goods_nums") == null ? "" : request.getParameter("goods_nums");
+            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
+            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
 
             T_B_Goods t_b_goods=new T_B_Goods();
             t_b_goods.setId(CustomUUID.getFlowIdWorkerInstance().generate());
@@ -86,6 +89,9 @@ public class GoodsController {
             t_b_goods.setGoods_images(goods_images);
             t_b_goods.setGoods_nums(Integer.parseInt(goods_nums));
             t_b_goods.setGoods_sales_nums(0);
+            t_b_goods.setGoods_point(0);
+            t_b_goods.setGoods_author(goods_author);
+            t_b_goods.setGoods_publisher(goods_publisher);
 
             commomService.add(t_b_goods);
 
@@ -115,6 +121,9 @@ public class GoodsController {
             String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
             String goods_images = request.getParameter("goods_images") == null ? "" : request.getParameter("goods_images");
             String goods_nums = request.getParameter("goods_nums") == null ? "" : request.getParameter("goods_nums");
+            String goods_point = request.getParameter("goods_point") == null ? "" : request.getParameter("goods_point");
+            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
+            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
 
             if(goods_id==null&&goods_id.equals("")){
                 j.setSuccess(false);
@@ -130,6 +139,9 @@ public class GoodsController {
             paraMap.put("goods_price",goods_price);
             paraMap.put("goods_images",goods_images);
             paraMap.put("goods_nums",goods_nums);
+            paraMap.put("goods_point",goods_point);
+            paraMap.put("goods_author",goods_author);
+            paraMap.put("goods_publisher",goods_publisher);
 
             goodsService.updateGoods(paraMap);
 

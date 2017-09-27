@@ -10,6 +10,9 @@ public class T_B_Goods {
     private String goods_images;
     private int goods_nums;
     private int goods_sales_nums;
+    private float goods_point;
+    private String goods_author;
+    private String goods_publisher;
 
     public T_B_Goods() {
     }
@@ -76,5 +79,29 @@ public class T_B_Goods {
 
     public void setGoods_type_id(String goods_type_id) {
         this.goods_type_id = goods_type_id;
+    }
+
+    public float getGoods_point() {
+        return goods_point;
+    }
+
+    public void setGoods_point(float goods_point) {
+        this.goods_point = goods_point;
+    }
+
+    public String getGoods_author() {
+        return goods_author;
+    }
+
+    public void setGoods_author(String goods_author) {
+        this.goods_author = goods_author;
+    }
+
+    public String getGoods_publisher() {
+        return goods_publisher;
+    }
+
+    public void setGoods_publisher(String goods_publisher) {
+        this.goods_publisher = goods_publisher;
     }
 }
