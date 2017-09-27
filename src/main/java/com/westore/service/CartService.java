@@ -8,4 +8,6 @@ import com.westore.model.T_B_Location;
 public interface CartService {
 
     public PageInfo<T_B_Cart> findUserCart(String trd_session, String pageNum, String pageSize);
+
+    public String insertUserCart(String trd_session,T_B_Cart cart);
 }

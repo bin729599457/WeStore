@@ -3,13 +3,12 @@ package com.westore.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.westore.model.AjaxJSON;
+import com.westore.model.T_B_Cart;
 import com.westore.model.T_B_Location;
 import com.westore.service.CartService;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -28,10 +27,21 @@ public class CartController {
         AjaxJSON res = new AjaxJSON();
         String pageNum = (String)params.get("pageNum");
         String pageSize = (String)params.get("pageSize");
-        PageInfo<T_B_Location> carts = cartService.findUserCart(trd_session,pageNum,pageSize);
+        PageInfo<T_B_Cart> carts = cartService.findUserCart(trd_session,pageNum,pageSize);
         res.setSuccess((carts == null)?false:true);
         res.setObj(carts);
         res.setTotal((carts == null)?0:carts.getTotal());
+        return res;
+    }
+
+
+    @RequestMapping(value="/insertUserCart.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Object insertUserCart(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON ajax){
+        String trd_session = (String)params.get("trd_session");
+        AjaxJSON res = new AjaxJSON();
+        T_B_Cart cart = (T_B_Cart) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Cart.class);
+
         return res;
     }
 
