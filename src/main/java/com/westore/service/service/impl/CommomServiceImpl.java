@@ -64,12 +64,11 @@ public class CommomServiceImpl implements CommomService {
         return paraMap;
     }
 
-    public List<Object> get(Object object, String id) {
+    public List<Object> getAll(Object object) {
 
         Map<String ,Object> paraMap=new HashMap<String, Object>();
         paraMap.put("t_b_name",object.getClass().getSimpleName());
-        paraMap.put("id",id);
-        List<Object> classList=commonDAO.selectById(paraMap);
+        List<Object> classList=commonDAO.selectAll(paraMap);
 
         return classList;
         }

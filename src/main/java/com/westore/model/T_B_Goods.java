@@ -13,6 +13,7 @@ public class T_B_Goods {
     private float goods_point;
     private String goods_author;
     private String goods_publisher;
+    private String goods_second_type_id;
 
     public T_B_Goods() {
     }
@@ -117,5 +118,13 @@ public class T_B_Goods {
 
     public void setGoods_publisher(String goods_publisher) {
         this.goods_publisher = goods_publisher;
+    }
+
+    public String getGoods_second_type_id() {
+        return goods_second_type_id;
+    }
+
+    public void setGoods_second_type_id(String goods_second_type_id) {
+        this.goods_second_type_id = goods_second_type_id;
     }
 }

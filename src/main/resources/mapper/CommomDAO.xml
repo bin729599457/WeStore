@@ -8,8 +8,8 @@
         ${_parameter}
     </insert>
 
-    <select id="selectById" parameterType="java.util.Map" resultType="java.util.Objects">
-        SELECT * FROM #{t_b_name} WHERE id=#{id}
+    <select id="selectAll" parameterType="java.util.Map" resultType="java.util.Objects">
+        SELECT * FROM #{t_b_name}
     </select>
 
     <delete id="delete" parameterType="String">

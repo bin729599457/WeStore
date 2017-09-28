@@ -7,7 +7,7 @@ public interface CommonDAO {
 
     public void add(String sql);
 
-    public List<Object> selectById(Map<String ,Object> paraMap);
+    public List<Object> selectAll(Map<String ,Object> paraMap);
 
     public void delete(String  sql);
 

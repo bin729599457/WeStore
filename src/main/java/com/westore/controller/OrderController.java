@@ -46,7 +46,7 @@ public class OrderController {
             j.setMsg("查询订单列表成功");
 
         } catch (Exception e) {
-            j.setMsg("" + e.getMessage());
+            j.setMsg("查询订单列表失败" + e.getMessage());
             j.setSuccess(false);
             return j;
         }
