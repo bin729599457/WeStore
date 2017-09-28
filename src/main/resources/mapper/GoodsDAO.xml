@@ -24,9 +24,9 @@
         <if test="goods_price_high!=null and goods_price_high!=''">
             AND #{goods_price_high} >= t.goods_price
         </if>
-        <if test="goodsNum_is_exist!=null and goodsNum_is_exist!=''">
-            AND t.goods_nums > 0
-        </if>
+        <!--<if test="goodsNum_is_exist!=null and goodsNum_is_exist!=''">-->
+            <!--AND t.goods_nums > 0-->
+        <!--</if>-->
         <if test="goods_author!=null and goods_author!=''">
             AND t.goods_author =#{goods_author}
         </if>

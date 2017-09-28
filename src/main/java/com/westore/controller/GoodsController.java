@@ -28,29 +28,23 @@ public class GoodsController {
 
     @RequestMapping(value = "/selectGoods.do")
     @ResponseBody
-    public AjaxJSON selectGoods(HttpServletRequest request) {
+    public AjaxJSON selectGoods(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
-            String goods_title = request.getParameter("goods_title") == null ? "" : request.getParameter("goods_title");
-            String goods_type_id = request.getParameter("goods_type_id") == null ? "" : request.getParameter("goods_type_id");
-            String goods_descript = request.getParameter("goods_descript") == null ? "" : request.getParameter("goods_descript");
-            String goods_price_low = request.getParameter("goods_price_low") == null ? "" : request.getParameter("goods_price_low");
-            String goods_price_high = request.getParameter("goods_price_high") == null ? "" : request.getParameter("goods_price_high");
-            String goodsNum_is_exist = request.getParameter("goodsNum_is_exist") == null ? "" : request.getParameter("goodsNum_is_exist");
-            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
-            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
+            T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
+            String goods_price_low = (String)params.get("goods_price_low");
+            String goods_price_high = (String)params.get("goods_price_high");
 
-            paraMap.put("goods_title", '%'+goods_title+'%');
-            paraMap.put("goods_type_id", goods_type_id);
-            paraMap.put("goods_descript", '%'+goods_descript+'%');
+            paraMap.put("goods_title", '%'+t_b_goods.getGoods_title()+'%');
+            paraMap.put("goods_type_id", t_b_goods.getGoods_type_id());
+            paraMap.put("goods_descript", '%'+t_b_goods.getGoods_descript()+'%');
             paraMap.put("goods_price_low", goods_price_low);
             paraMap.put("goods_price_high", goods_price_high);
-            paraMap.put("goodsNum_is_exist", goodsNum_is_exist);
-            paraMap.put("goods_author", goods_author);
-            paraMap.put("goods_publisher", goods_publisher);
+            paraMap.put("goods_author", t_b_goods.getGoods_author());
+            paraMap.put("goods_publisher", t_b_goods.getGoods_publisher());
             List<T_B_Goods> goodsList = goodsService.selectGoods(paraMap);
 
             j.setObj(goodsList);
