@@ -3,8 +3,11 @@ package com.westore.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.westore.dao.CartDAO;
 import com.westore.dao.CommonDAO;
 import com.westore.dao.LocationDAO;
+import com.westore.model.T_B_Cart;
+import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Location;
 import com.westore.service.CommomService;
 import com.westore.service.LocationService;
@@ -39,6 +42,9 @@ public class ILocationTest {
     @Resource
     private CommonDAO commonDAO;
 
+    @Resource
+    private CartDAO cartDAO;
+
     @Test
     public void findUserLocation(){
         PageHelper.startPage(0, 0);
@@ -59,7 +65,7 @@ public class ILocationTest {
 
     @Test
     public void testgetOpenid(){
-        System.out.println(redisService.getOpenid("ee2df57cf4e6b0c8e96e2f66109ba7ec9b783b11"));
+       cartDAO.updateUserCart("oNuDy0FuszmkS6dHrk2ieWFfleMw","1824704943563473927",5);
     }
 
 

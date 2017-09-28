@@ -35,10 +35,7 @@ public class IUserDAOTest {
 
     @Test
     public void testFindCart(){
-        List<T_B_Cart> ca = cartDAO.findUserCart("oNuDy0JpnJfpfZiIy1pBlyjcpYak");
-        for(T_B_Cart tc:ca){
-            System.out.print(tc);
-        }
+        System.out.println(cartDAO.ifExist("oNuDy0FuszmkS6dHrk2ieWFfleMw","1824757527376561152"));
     }
 
 

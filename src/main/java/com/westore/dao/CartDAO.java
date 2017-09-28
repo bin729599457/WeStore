@@ -9,6 +9,10 @@ public interface CartDAO {
 
     public List<T_B_Cart> findUserCart(String user_id);
 
-    public String insertUserCart(String trd_session,T_B_Cart cart);
+    public String insertUserCart(String sql);
+
+    public T_B_Cart ifExist(String user_id,String goods_id);
+
+    public void updateUserCart(String user_id,String goods_id,int num);
 
 }

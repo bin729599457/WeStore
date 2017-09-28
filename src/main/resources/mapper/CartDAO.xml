@@ -19,11 +19,33 @@
     </resultMap>
 
 
+    <resultMap type="com.westore.model.T_B_Cart" id="SimpCartResultMap">
+        <id property="id" column="id"/>
+        <result property="num" column="num"/>
+    </resultMap>
+
+
+
     <select id="findUserCart" parameterType="java.lang.String" resultMap="CartResultMap">
         SELECT *
         FROM t_b_cart c , t_b_goods g
         WHERE c.goods_id = g.id and c.user_id = '${_parameter}'
     </select>
+
+    <select id="ifExist" resultMap="SimpCartResultMap">
+        SELECT id,num
+        FROM t_b_cart
+        WHERE user_id = #{0}
+        AND goods_id = #{1}
+    </select>
+
+
+    <update id="updateUserCart" >
+        UPDATE t_b_cart
+        SET num = num + #{2}
+        WHERE user_id = #{0}
+        AND goods_id = #{1}
+    </update>
 
 
 

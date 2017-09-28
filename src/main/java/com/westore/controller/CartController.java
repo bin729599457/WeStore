@@ -41,7 +41,29 @@ public class CartController {
         String trd_session = (String)params.get("trd_session");
         AjaxJSON res = new AjaxJSON();
         T_B_Cart cart = (T_B_Cart) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Cart.class);
+        int result = cartService.insertUserCart(trd_session,cart);
+        res.setSuccess(result==0?false:true);
+        res.setMsg(result==0?"error":"success");
+        System.out.println(result);
+        res.setTotal((long)result);
+        return res;
+    }
 
+
+    @RequestMapping(value="/deleteUserCart.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Object deleteUserCart(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON ajax){
+        String trd_session = (String)params.get("trd_session");
+        AjaxJSON res = new AjaxJSON();
+        T_B_Cart cart = (T_B_Cart) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Cart.class);
+        String result = cartService.deleteUserCart(trd_session,cart);
+        res.setSuccess(result==null?false:true);
+        res.setMsg(result==null?"error":result);
+       if(res!=null){
+           PageInfo<T_B_Cart> carts = cartService.findUserCart(trd_session,"1","10");
+           res.setObj(carts);
+           res.setTotal(carts.getTotal());
+       }
         return res;
     }
 
