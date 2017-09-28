@@ -76,6 +76,9 @@
             <if test="goods_nums!=null and goods_nums!=''">
                 goods_nums=#{goods_nums},
             </if>
+            <if test="goods_nums_change!=null and goods_nums_change!=''">
+                goods_nums=goods_nums-#{goods_nums},
+            </if>
         </trim>
 
         WHERE id=#{id}

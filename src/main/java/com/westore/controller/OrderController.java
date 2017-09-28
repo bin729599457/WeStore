@@ -25,6 +25,8 @@ public class OrderController {
     private OrderService orderService;
     @Resource
     private CommomService commomService;
+    @Resource
+    private GoodsService goodsService;
 
     @RequestMapping(value = "/getOrders.do")
     @ResponseBody
@@ -47,6 +49,42 @@ public class OrderController {
 
         } catch (Exception e) {
             j.setMsg("查询订单列表失败" + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
+    @RequestMapping(value = "/payOrders.do")
+    @ResponseBody
+    public AjaxJSON payOrders(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
+        AjaxJSON j = new AjaxJSON();
+
+        try {
+            String user_id= (String) params.get("user_id");
+            String total_money= (String) params.get("total_money");
+            //判断用户余额是否足够支付订单
+
+            //获得商品详情列表
+            List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
+
+            List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
+
+            for(int i=0;i<t_b_order_detail_list.size();i++){
+                Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
+                Map<String,Object> goodsDetail= (Map<String, Object>) map.get("t_b_order_detail");
+                Map<String,Object> paraMap=new HashMap<String,Object>();
+                paraMap.put("id",(String) goodsDetail.get("goods_id"));
+                paraMap.put("goods_nums_change",Integer.parseInt((String) goodsDetail.get("goods_num")));
+                goodsService.updateGoods(paraMap);
+            }
+
+            j.setObj(null);
+            j.setMsg("支付订单成功");
+
+        } catch (Exception e) {
+            j.setMsg("支付订单成功失败" + e.getMessage());
             j.setSuccess(false);
             return j;
         }
@@ -138,32 +176,29 @@ public class OrderController {
 
     @RequestMapping(value = "/updateOrder.do")
     @ResponseBody
-    public AjaxJSON updateOrder(HttpServletRequest request){
+    public AjaxJSON updateOrder(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj){
         AjaxJSON j=new AjaxJSON();
 
         try {
 
-            String order_id = request.getParameter("order_id");
-            String total_money = request.getParameter("total_money") == null ? "" : request.getParameter("total_money");
-            String order_date = request.getParameter("order_date") == null ? "" : request.getParameter("order_date");
-            String order_state = request.getParameter("order_state") == null ? "" : request.getParameter("order_state");
+            String order_id = (String) params.get("order_id");
+            String order_state = (String) params.get("order_state");
 
             if(order_id==null&&order_id.equals("")){
                 j.setSuccess(false);
-                j.setMsg("id为空");
+                j.setMsg("order_id为空");
                 return j;
             }
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
             paraMap.put("id", order_id);
-            paraMap.put("total_money",total_money);
-            paraMap.put("order_date",order_date);
             paraMap.put("order_state",order_state);
-
             orderService.updateOrder(paraMap);
+            j.setMsg("修改订单成功");
+
 
         }catch (Exception e){
-            j.setMsg(e.getMessage());
+            j.setMsg("修改订单失败"+e.getMessage());
         }
         return j;
     }

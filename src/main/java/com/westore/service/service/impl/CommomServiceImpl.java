@@ -66,9 +66,9 @@ public class CommomServiceImpl implements CommomService {
 
     public List<Object> getAll(Object object) {
 
-        Map<String ,Object> paraMap=new HashMap<String, Object>();
-        paraMap.put("t_b_name",object.getClass().getSimpleName());
-        List<Object> classList=commonDAO.selectAll(paraMap);
+        StringBuilder sql = new StringBuilder("select * from ");
+        sql.append(object.getClass().getSimpleName());
+        List<Object> classList=commonDAO.selectAll(sql.toString());
 
         return classList;
         }

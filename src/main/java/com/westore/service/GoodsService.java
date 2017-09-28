@@ -14,4 +14,5 @@ public interface GoodsService {
 //    public float countGoodsCommentPoint(String goods_id);
 
     public List<T_B_Goods> softGoods(Map<String, Object> paraMap);
+
 }

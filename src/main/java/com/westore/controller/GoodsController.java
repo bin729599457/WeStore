@@ -117,39 +117,30 @@ public class GoodsController {
 
     @RequestMapping(value = "/UpdateGoods.do")
     @ResponseBody
-    public AjaxJSON UpdateGoods(HttpServletRequest request) {
+    public AjaxJSON UpdateGoods(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
 
-            String goods_id = request.getParameter("goods_id") == null ? "" : request.getParameter("goods_id");
-            String goods_title = request.getParameter("goods_title") == null ? "" : request.getParameter("goods_title");
-            String goods_type_id = request.getParameter("goods_type_id") == null ? "" : request.getParameter("goods_type_id");
-            String goods_descript = request.getParameter("goods_descript") == null ? "" : request.getParameter("goods_descript");
-            String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
-            String goods_images = request.getParameter("goods_images") == null ? "" : request.getParameter("goods_images");
-            String goods_nums = request.getParameter("goods_nums") == null ? "" : request.getParameter("goods_nums");
-            String goods_point = request.getParameter("goods_point") == null ? "" : request.getParameter("goods_point");
-            String goods_author = request.getParameter("goods_author") == null ? "" : request.getParameter("goods_author");
-            String goods_publisher = request.getParameter("goods_publisher") == null ? "" : request.getParameter("goods_publisher");
+            T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
 
-            if(goods_id==null&&goods_id.equals("")){
+            if(t_b_goods.getId()==null&&t_b_goods.getId().equals("")){
                 j.setSuccess(false);
                 j.setMsg("goods_id为空");
                 return j;
             }
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
-            paraMap.put("id",goods_id);
-            paraMap.put("goods_title",goods_title);
-            paraMap.put("goods_type_id",goods_type_id);
-            paraMap.put("goods_descript",goods_descript);
-            paraMap.put("goods_price",goods_price);
-            paraMap.put("goods_images",goods_images);
-            paraMap.put("goods_nums",goods_nums);
-            paraMap.put("goods_point",goods_point);
-            paraMap.put("goods_author",goods_author);
-            paraMap.put("goods_publisher",goods_publisher);
+            paraMap.put("goods_title",t_b_goods.getGoods_title());
+            paraMap.put("goods_type_id",t_b_goods.getGoods_type_id());
+            paraMap.put("goods_second_type_id",t_b_goods.getGoods_second_type_id());
+            paraMap.put("goods_descript",t_b_goods.getGoods_descript());
+            paraMap.put("goods_price",t_b_goods.getGoods_price());
+            paraMap.put("goods_images",t_b_goods.getGoods_images());
+            paraMap.put("goods_nums",t_b_goods.getGoods_nums());
+            paraMap.put("goods_point",t_b_goods.getGoods_point());
+            paraMap.put("goods_author",t_b_goods.getGoods_author());
+            paraMap.put("goods_publisher",t_b_goods.getGoods_publisher());
 
             goodsService.updateGoods(paraMap);
 

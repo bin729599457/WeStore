@@ -35,12 +35,7 @@
     <update id="updateGoods" parameterType="java.util.Map">
         UPDATE t_b_goods
         <trim prefix="set" suffixOverrides=",">
-            <if test="total_money!=null and total_money!=''">
-                total_money=#{total_money},
-            </if>
-            <if test="order_date!=null and order_date!=''">
-                order_date=#{order_date},
-            </if>
+
             <if test="order_state!=null and order_state!=''">
                 order_state=#{order_state},
             </if>

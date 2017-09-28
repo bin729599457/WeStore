@@ -8,7 +8,7 @@
         ${_parameter}
     </insert>
 
-    <select id="selectAll" parameterType="java.util.Map" resultType="java.util.Objects">
+    <select id="selectAll" parameterType="String" resultType="java.util.Objects">
         SELECT * FROM #{t_b_name}
     </select>
 
