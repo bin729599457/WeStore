@@ -16,6 +16,9 @@
         <if test="goods_title!=null  and goods_title!=''">
             AND t.goods_title LIKE #{goods_title}
         </if>
+        <if test="id!=null  and id!=''">
+            AND t.id = #{id}
+        </if>
         <if test="goods_type_id !=null  and goods_type_id !=''">
             AND t.goods_type_id = #{goods_type_id}
         </if>
@@ -37,7 +40,7 @@
         <if test="goods_author!=null and goods_author!=''">
             AND t.goods_author =#{goods_author}
         </if>
-        <if test="goods_publisher!=null and goods_publisher!=''">x
+        <if test="goods_publisher!=null and goods_publisher!=''">
             AND t.goods_publisher =#{goods_publisher}
         </if>
 /*优化功能增加字段 goods_Weights权重 作为默认排序依据*/
@@ -97,7 +100,6 @@
         t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name
         FROM t_b_goods t,t_b_goods_type tp
         WHERE t.goods_type_id=tp.id
-
         <if test="goods_price!='asc'">
             GROUP BY goods_price ASC
         </if>

@@ -37,7 +37,10 @@ public class GoodsController {
             T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
             String goods_price_low = (String)params.get("goods_price_low");
             String goods_price_high = (String)params.get("goods_price_high");
-            if(t_b_goods.getGoods_descript()!=null) {
+            if(t_b_goods.getId()!=null) {
+                paraMap.put("id",t_b_goods.getId());
+            }
+            if(t_b_goods.getGoods_title()!=null) {
                 paraMap.put("goods_title", '%' + t_b_goods.getGoods_title() + '%');
             }
             if(t_b_goods.getGoods_descript()!=null) {
