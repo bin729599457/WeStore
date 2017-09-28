@@ -4,7 +4,6 @@ package com.westore.controller;
 import com.github.pagehelper.PageInfo;
 import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Cart;
-import com.westore.model.T_B_Location;
 import com.westore.service.CartService;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -29,7 +28,7 @@ public class CartController {
         String pageSize = (String)params.get("pageSize");
         PageInfo<T_B_Cart> carts = cartService.findUserCart(trd_session,pageNum,pageSize);
         res.setSuccess((carts == null)?false:true);
-        res.setObj(carts);
+        res.setObj(carts.getList());
         res.setTotal((carts == null)?0:carts.getTotal());
         return res;
     }
@@ -61,7 +60,7 @@ public class CartController {
         res.setMsg(result==null?"error":result);
        if(res!=null){
            PageInfo<T_B_Cart> carts = cartService.findUserCart(trd_session,"1","10");
-           res.setObj(carts);
+           res.setObj(carts.getList());
            res.setTotal(carts.getTotal());
        }
         return res;

@@ -7,13 +7,13 @@
     <select id="findAll" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
         SELECT t.id,t.goods_title,t.goods_type_id,t.goods_descript,t.goods_price,t.goods_images,
         t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name
-        FROM t_b_goods t,t_b_goods_type tp WHERE t.goods_type_id=tp.id
-
+        FROM t_b_goods t,t_b_goods_type tp
+        WHERE t.goods_type_id=tp.id
         <if test="goods_title!=null  and goods_title!=''">
             AND t.goods_title LIKE #{goods_title}
         </if>
         <if test="goods_type_id !=null  and goods_type_id !=''">
-            AND t.goods_type_id =#{goods_type_id}
+            AND t.goods_type_id = #{goods_type_id}
         </if>
         <if test="goods_descript!=null and goods_descript!=''">
             AND t.goods_descript LIKE #{goods_descript}
@@ -84,8 +84,9 @@
 
     <select id="softGoods" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
         SELECT t.id as goods_id,t.goods_title as goods_title,t.goods_type_id,t.goods_descript,t.goods_price,t.goods_images,
-        t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name FROM t_b_goods t,
-        t_b_goods_type tp WHERE t.goods_type_id=tp.id
+        t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name
+        FROM t_b_goods t,t_b_goods_type tp
+        WHERE t.goods_type_id=tp.id
 
         <if test="goods_price!='asc'">
             GROUP BY goods_price ASC

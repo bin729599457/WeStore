@@ -8,12 +8,15 @@
 
     <resultMap type="com.westore.model.T_B_Cart" id="CartResultMap">
         <id property="id" column="id"/>
-        <result property="user_id" column="user_id"/>
         <result property="num" column="num"/>
         <association property="goods" column="goods_id" javaType="com.westore.model.T_B_Goods">
             <id property="id" column="id"/>
             <result property="goods_title" column="goods_title"/>
             <result property="goods_images" column="goods_images"/>
+            <result property="goods_type_id" column="goods_type_id"/>
+            <result property="goods_price" column="goods_price"/>
+            <result property="goods_author" column="goods_author"/>
+            <result property="goods_publisher" column="goods_publisher"/>
             <result property="goods_nums" column="goods_nums"/>
         </association>
     </resultMap>
