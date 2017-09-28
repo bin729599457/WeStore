@@ -66,7 +66,7 @@ public class CommonUtils {
                 //获得目标类的接入权限
                 boolean isAccess = fields[i].isAccessible();
                 if (!isAccess) fields[i].setAccessible(true);
-
+                //System.out.println(fields[i].get(object).getClass());
                 //如果属性类型是字符串 加上' '
                 if(fields[i].getGenericType().toString().equals("class java.lang.String")){
                     paraMap.put(fields[i].getName(), "'"+fields[i].get(object)+"'");
@@ -74,8 +74,14 @@ public class CommonUtils {
                 }else if(fields[i].getGenericType().toString().equals(
                         "class java.util.Date")){
                     paraMap.put(fields[i].getName(), "'now'");
-
-                }else {
+                }else if(fields[i].getGenericType().toString().equals(
+                        "class com.westore.model.T_B_Goods")&&fields[i].get(object)!=null){
+                    Field id =fields[i].get(object).getClass().getDeclaredField("id");
+                    id.setAccessible(true);
+                    paraMap.put(fields[i].getName()+"_id", id.get(fields[i].get(object)));
+                    id.setAccessible(false);
+                }
+                else {
                     paraMap.put(fields[i].getName(), fields[i].get(object));
                 }
 
@@ -83,6 +89,8 @@ public class CommonUtils {
                 if (!isAccess) fields[i].setAccessible(false);
 
             } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }catch (NoSuchFieldException e) {
                 e.printStackTrace();
             }
         }

@@ -9,5 +9,7 @@ public interface CartService {
 
     public PageInfo<T_B_Cart> findUserCart(String trd_session, String pageNum, String pageSize);
 
-    public String insertUserCart(String trd_session,T_B_Cart cart);
+    public int insertUserCart(String trd_session,T_B_Cart cart);
+
+    public String deleteUserCart(String trd_session,T_B_Cart cart);
 }
