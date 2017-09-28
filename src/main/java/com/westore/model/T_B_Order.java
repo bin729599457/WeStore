@@ -7,13 +7,13 @@ public class T_B_Order {
     private String id;
     private String user_id;
     private float total_money;
-    private Date order_date;
+    private String order_date;
     private int order_state;
 
     public T_B_Order() {
     }
 
-    public T_B_Order(String id, String user_id, float total_money, Date order_date, int order_state) {
+    public T_B_Order(String id, String user_id, float total_money, String order_date, int order_state) {
         this.id = id;
         this.user_id = user_id;
         this.total_money = total_money;
@@ -45,11 +45,11 @@ public class T_B_Order {
         this.total_money = total_money;
     }
 
-    public Date getOrder_date() {
+    public String getOrder_date() {
         return order_date;
     }
 
-    public void setOrder_date(Date order_date) {
+    public void setOrder_date(String order_date) {
         this.order_date = order_date;
     }
 
