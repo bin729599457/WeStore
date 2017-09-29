@@ -112,7 +112,7 @@ public class OrderController {
             String user_id= (String) params.get("user_id");
             String total_money= (String) params.get("total_money");
 
-            if(user_id==null&&!user_id.equals("")){
+            if(user_id==null&&user_id.equals("")){
                 j.setMsg("user_id为空");
                 j.setSuccess(false);
                 return j;
@@ -126,7 +126,7 @@ public class OrderController {
             t_b_order.setOrder_date(ft.format(new Date()));
             t_b_order.setOrder_state(0);
             t_b_order.setTotal_money(Float.parseFloat(total_money));
-//            commomService.add(t_b_order);
+            commomService.add(t_b_order);
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
@@ -134,11 +134,10 @@ public class OrderController {
             List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
             for(int i=0;i<t_b_order_detail_list.size();i++){
                 Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
-                Map<String,Object> goodsDetail= (Map<String, Object>) map.get("t_b_order_detail");
                 T_B_Order_Detail t_b_order_detail=new T_B_Order_Detail();
                 t_b_order_detail.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-                t_b_order_detail.setGoods_id((String) goodsDetail.get("goods_id"));
-                t_b_order_detail.setGoods_num(Integer.parseInt((String) goodsDetail.get("goods_num")) );
+                t_b_order_detail.setGoods_id((String) map.get("goods_id"));
+                t_b_order_detail.setGoods_num(Integer.parseInt((String) map.get("goods_num")) );
                 t_b_order_detail.setOrder_id(t_b_order.getId());
                 commomService.add(t_b_order_detail);
                 t_b_order_detailList.add(t_b_order_detail);
@@ -152,7 +151,9 @@ public class OrderController {
             j.setMsg("订单及订单详情生成成功");
 
         }catch (Exception e){
-            j.setMsg(e.getMessage());
+            j.setSuccess(false);
+            j.setMsg("订单及订单详情生成失败"+e.getMessage());
+            return j;
         }
         return j;
 
