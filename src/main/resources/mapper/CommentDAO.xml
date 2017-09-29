@@ -21,7 +21,7 @@
 
 
     <select id="getBookCommentAvg" parameterType="java.lang.String" resultType="float">
-        SELECT avg(comment_point)
+        SELECT IFNULL(avg(comment_point),0)
         FROM t_b_comment
         where goods_id = '${_parameter}'
     </select>

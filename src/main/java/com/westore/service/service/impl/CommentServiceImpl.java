@@ -29,7 +29,8 @@ public class CommentServiceImpl implements CommentService{
         return commentDAO.getBookCommentNum(goods_id);
     }
 
-    public float getBookCommentAvg(String goods_id) {
-        return commentDAO.getBookCommentAvg(goods_id);
-    }
+//   此方法已经在数据库中使用trigger实现
+//    public float getBookCommentAvg(String goods_id) {
+//        return commentDAO.getBookCommentAvg(goods_id);
+//    }
 }
