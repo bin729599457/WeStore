@@ -1,5 +1,8 @@
 package com.westore.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class T_B_Comment {
@@ -9,6 +12,8 @@ public class T_B_Comment {
     private String user_id;
     private int comment_point;
     private String comment_info;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date comment_date;
 
     public T_B_Comment() {

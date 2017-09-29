@@ -2,15 +2,18 @@ package com.westore.test;
 
 
 import com.westore.dao.CartDAO;
+import com.westore.dao.CommentDAO;
 import com.westore.model.T_B_Cart;
 import com.westore.model.T_B_Location;
 import com.westore.model.User;
+import com.westore.service.CommentService;
 import com.westore.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import sun.plugin.dom.core.Comment;
 
 import java.util.List;
 
@@ -22,7 +25,13 @@ public class IUserDAOTest {
     private UserService userService;
 
     @Autowired
+    private CommentDAO commentDAO;
+
+    @Autowired
     private CartDAO cartDAO;
+
+    @Autowired
+    private CommentService commentService;
 
     @Test
     public void testFindAll(){
@@ -36,6 +45,11 @@ public class IUserDAOTest {
     @Test
     public void testFindCart(){
         System.out.println(cartDAO.ifExist("oNuDy0FuszmkS6dHrk2ieWFfleMw","1824757527376561152"));
+    }
+
+    @Test
+    public void testFindComment(){
+        System.out.println(commentDAO.getBookCommentAvg("1824704943563473927"));
     }
 
 

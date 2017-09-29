@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.CommentDAO">
+
+
+    <select id="getBookComment" parameterType="java.lang.String" resultType="com.westore.model.T_B_Comment">
+        SELECT t.id,t.goods_id,u.user_name AS user_id,t.comment_point,t.comment_info,t.comment_date
+        FROM t_b_comment t,t_b_user u
+        where goods_id = '${_parameter}'
+        AND u.user_id = t.user_id
+    </select>
+
+
+    <select id="getBookCommentNum" parameterType="java.lang.String" resultType="int">
+        SELECT count(*)
+        FROM t_b_comment
+        where goods_id = '${_parameter}'
+    </select>
+
+
+    <select id="getBookCommentAvg" parameterType="java.lang.String" resultType="float">
+        SELECT avg(comment_point)
+        FROM t_b_comment
+        where goods_id = '${_parameter}'
+    </select>
+
+</mapper>
