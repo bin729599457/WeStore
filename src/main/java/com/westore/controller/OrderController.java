@@ -214,4 +214,44 @@ public class OrderController {
         }
         return j;
     }
+
+    @RequestMapping(value = "/getSingleOrder.do")
+    @ResponseBody
+    public AjaxJSON getSingleOrder(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj){
+        AjaxJSON j=new AjaxJSON();
+
+        try {
+
+            String order_id = (String) params.get("order_id");
+
+            //获得商品详情列表
+            List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
+
+            if(order_id==null&&order_id.equals("")){
+                j.setSuccess(false);
+                j.setMsg("order_id为空");
+                return j;
+            }
+            List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
+            for(int i=0;i<t_b_order_detail_list.size();i++){
+                Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
+                T_B_Order_Detail t_b_order_detail=new T_B_Order_Detail();
+                t_b_order_detail.setId(CustomUUID.getFlowIdWorkerInstance().generate());
+                t_b_order_detail.setGoods_id((String) map.get("goods_id"));
+                t_b_order_detail.setGoods_num(Integer.parseInt((String) map.get("goods_num")) );
+                commomService.add(t_b_order_detail);
+                t_b_order_detailList.add(t_b_order_detail);
+            }
+
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+            paraMap.put("id", order_id);
+            orderService.updateOrder(paraMap);
+            j.setMsg("获取单个订单详情成功");
+
+
+        }catch (Exception e){
+            j.setMsg("获取单个订单详情成功失败"+e.getMessage());
+        }
+        return j;
+    }
 }
