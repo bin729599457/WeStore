@@ -9,8 +9,11 @@ public interface CommomService {
 
     public Map<String, Object> getClassValueObj(Object object);
 
-    public List<Object> getAll(Object object);
+    public List<Map<String, Object>> getAll(Object object);
 
     public  String delete(Object object) ;
 
-    }
+    public Object get(Object object,String id);
+
+
+}

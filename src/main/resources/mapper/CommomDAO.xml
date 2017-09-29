@@ -8,12 +8,15 @@
         ${_parameter}
     </insert>
 
-    <select id="selectAll" parameterType="String" resultType="java.util.Objects">
-        SELECT * FROM #{t_b_name}
+    <select id="selectAll" parameterType="String" resultType="java.util.Map">
+        ${_parameter}
     </select>
 
     <delete id="delete" parameterType="String">
         ${_parameter}
     </delete>
 
+    <select id="get" parameterType="String" resultType="java.util.Map">
+        ${_parameter}
+    </select>
 </mapper>

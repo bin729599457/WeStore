@@ -16,4 +16,5 @@ public interface UserDAO {
 
     public void updateUser(T_B_User user);
 
+    public float getUserMoney(String user_id);
 }

@@ -3,6 +3,7 @@ package com.westore.controller;
 import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Order;
 import com.westore.model.T_B_Order_Detail;
+import com.westore.model.T_B_User;
 import com.westore.service.*;
 import com.westore.service.service.impl.CommomServiceImpl;
 import com.westore.utils.CustomUUID;
@@ -27,6 +28,8 @@ public class OrderController {
     private CommomService commomService;
     @Resource
     private GoodsService goodsService;
+    @Resource
+    private UserService userService;
 
     @RequestMapping(value = "/getOrders.do")
     @ResponseBody
@@ -63,8 +66,15 @@ public class OrderController {
 
         try {
             String user_id= (String) params.get("user_id");
-            String total_money= (String) params.get("total_money");
+            float total_money= Float.parseFloat((String) params.get("total_money"));
+            Object o=commomService.get(new T_B_User(),user_id);
+
             //判断用户余额是否足够支付订单
+            if(total_money>userService.inqueryUserMoney(user_id)){
+                j.setSuccess(false);
+                j.setMsg("用户余额不足!");
+                return j;
+            }
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
@@ -102,11 +112,12 @@ public class OrderController {
             String user_id= (String) params.get("user_id");
             String total_money= (String) params.get("total_money");
 
-            if(user_id==null&&user_id.equals("")){
+            if(user_id==null&&!user_id.equals("")){
                 j.setMsg("user_id为空");
                 j.setSuccess(false);
                 return j;
             }
+
             SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
 
             T_B_Order t_b_order=new T_B_Order();
@@ -115,7 +126,7 @@ public class OrderController {
             t_b_order.setOrder_date(ft.format(new Date()));
             t_b_order.setOrder_state(0);
             t_b_order.setTotal_money(Float.parseFloat(total_money));
-            commomService.add(t_b_order);
+//            commomService.add(t_b_order);
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
@@ -140,11 +151,11 @@ public class OrderController {
             j.setObj(paraMap);
             j.setMsg("订单及订单详情生成成功");
 
-
         }catch (Exception e){
             j.setMsg(e.getMessage());
         }
         return j;
+
     }
 
 

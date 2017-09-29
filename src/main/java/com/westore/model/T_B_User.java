@@ -7,7 +7,7 @@ public class T_B_User {
     private String user_name;
     private String user_phone;
     private String user_password;
-    private int user_money;
+    private float user_money;
 
     public T_B_User() {
     }
@@ -71,11 +71,11 @@ public class T_B_User {
         this.user_password = user_password;
     }
 
-    public int getUser_money() {
+    public float getUser_money() {
         return user_money;
     }
 
-    public void setUser_money(int user_money) {
+    public void setUser_money(float user_money) {
         this.user_money = user_money;
     }
 

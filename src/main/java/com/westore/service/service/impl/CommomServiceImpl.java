@@ -21,9 +21,9 @@ public class CommomServiceImpl implements CommomService {
 
         String className = object.getClass().getSimpleName();
         StringBuilder sql = new StringBuilder("insert into ");
-        sql.append(className+" ");
+        sql.append(className + " ");
         sql.append("set ");
-        String str= getClassValueObj(object).toString().replace("{","").replace("}","");
+        String str = getClassValueObj(object).toString().replace("{", "").replace("}", "");
         sql.append(str);
 
         commonDAO.add(sql.toString());
@@ -43,14 +43,14 @@ public class CommomServiceImpl implements CommomService {
                 if (!isAccess) fields[i].setAccessible(true);
 
                 //如果属性类型是字符串 加上' '
-                if(fields[i].getGenericType().toString().equals("class java.lang.String")){
-                    paraMap.put(fields[i].getName(), "'"+fields[i].get(object)+"'");
+                if (fields[i].getGenericType().toString().equals("class java.lang.String")) {
+                    paraMap.put(fields[i].getName(), "'" + fields[i].get(object) + "'");
 
-                }else if(fields[i].getGenericType().toString().equals(
-                        "class java.util.Date")){
-                    paraMap.put(fields[i].getName(), "'"+fields[i].get(object).toString()+"'");
+                } else if (fields[i].getGenericType().toString().equals(
+                        "class java.util.Date")) {
+                    paraMap.put(fields[i].getName(), "'" + fields[i].get(object).toString() + "'");
 
-                }else {
+                } else {
                     paraMap.put(fields[i].getName(), fields[i].get(object));
                 }
 
@@ -64,26 +64,49 @@ public class CommomServiceImpl implements CommomService {
         return paraMap;
     }
 
-    public List<Object> getAll(Object object) {
+    public List<Map<String, Object>> getAll(Object object) {
 
-        StringBuilder sql = new StringBuilder("select * from ");
+        StringBuilder sql = new StringBuilder("select ");
+        Field[] fields = object.getClass().getDeclaredFields();
+        int count = 1;
+        for (Field field : fields) {
+            if (count < fields.length) {
+                sql.append(field.getName());
+                sql.append(",");
+                count ++;
+            } else {
+                sql.append(field.getName());
+            }
+        }
+        sql.append(" from ");
         sql.append(object.getClass().getSimpleName());
-        List<Object> classList=commonDAO.selectAll(sql.toString());
+        List<Map<String, Object>> classList = commonDAO.selectAll(sql.toString());
 
         return classList;
-        }
+    }
 
     public String delete(Object object) {
 
         String className = object.getClass().getSimpleName();
         StringBuilder sql = new StringBuilder("delete from ");
-        sql.append(className+" ");
+        sql.append(className + " ");
         sql.append("where id=");
-        String str= (String)getClassValueObj(object).get("id");
+        String str = (String) getClassValueObj(object).get("id");
         sql.append(str);
         commonDAO.delete(sql.toString());
         return sql.toString();
 
+    }
+
+    public Object get(Object object,String user_id) {
+
+        StringBuilder sql = new StringBuilder("select * from ");
+        sql.append(object.getClass().getSimpleName());
+        sql.append(" where user_id= ");
+        sql.append("'"+user_id+"'");
+        Object obj = commonDAO.get(sql.toString());
+
+        return obj;
     }
 
 }

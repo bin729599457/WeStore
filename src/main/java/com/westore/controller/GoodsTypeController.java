@@ -34,9 +34,10 @@ public class GoodsTypeController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-            List<Object> objList = commomService.getAll(new T_B_Goods_Type());
+            List<Map<String, Object>> objList = commomService.getAll(new T_B_Goods_Type());
             j.setObj(objList);
             j.setMsg("查询一级商品类型列表成功");
+            j.setTotal((long)objList.size());
 
         } catch (Exception e) {
             j.setMsg("查询一级商品类型列表失败" + e.getMessage());
@@ -53,9 +54,11 @@ public class GoodsTypeController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-            List<Object> objList = commomService.getAll(new T_B_Goods_Second_Type());
+            List<Map<String, Object>> objList = commomService.getAll(new T_B_Goods_Second_Type());
             j.setObj(objList);
-            j.setMsg("查询一级商品类型列表成功");
+            j.setMsg("查询二级商品类型列表成功");
+            j.setTotal((long)objList.size());
+
 
         } catch (Exception e) {
             j.setMsg("查询二级商品类型列表失败" + e.getMessage());

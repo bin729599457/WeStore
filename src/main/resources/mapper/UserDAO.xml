@@ -32,4 +32,10 @@
         WHERE user_id=#{user_id}
     </update>
 
+    <select id="getUserMoney" parameterType="java.lang.String" resultType="java.lang.Float">
+        SELECT user_money
+        FROM t_b_user
+        WHERE user_id = '${_parameter}'
+    </select>
+
 </mapper>

@@ -82,6 +82,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public float inqueryUserMoney(String user_id) {
+        return userDAO.getUserMoney(user_id);
+    }
 
 
 }

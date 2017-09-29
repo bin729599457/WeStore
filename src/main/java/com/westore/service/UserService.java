@@ -14,5 +14,5 @@ public interface UserService {
 
     public String change(String trd_session,String method,String value);
 
-
+    public float inqueryUserMoney(String user_id);
 }
