@@ -12,4 +12,6 @@ public interface CartService {
     public int insertUserCart(String trd_session,T_B_Cart cart);
 
     public String deleteUserCart(String trd_session,T_B_Cart cart);
+
+    public int getTotal(String trd_session);
 }

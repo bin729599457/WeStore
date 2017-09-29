@@ -71,4 +71,15 @@ public class CartServiceImpl implements CartService {
             return "success";
         }
     }
+
+    public int getTotal(String trd_session) {
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return 0;
+        }
+        else {
+            int result = cartDAO.getTotal(openid);
+            return result;
+        }
+    }
 }

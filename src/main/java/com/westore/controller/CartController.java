@@ -34,6 +34,18 @@ public class CartController {
     }
 
 
+    @RequestMapping(value="/getUserCartTotalNum.do" ,produces="application/json" ,method = RequestMethod.GET)
+    @ResponseBody
+    public Object getUserCartTotalNum(@RequestParam Map<String,Object> params){
+        String trd_session = (String)params.get("trd_session");
+        AjaxJSON res = new AjaxJSON();
+        int result = cartService.getTotal(trd_session);
+        res.setSuccess(true);
+        res.setTotal((long)result);
+        return res;
+    }
+
+
     @RequestMapping(value="/insertUserCart.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public Object insertUserCart(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON ajax){

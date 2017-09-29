@@ -9,6 +9,7 @@ import com.westore.dao.LocationDAO;
 import com.westore.model.T_B_Cart;
 import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Location;
+import com.westore.service.CartService;
 import com.westore.service.CommomService;
 import com.westore.service.LocationService;
 import com.westore.service.RedisService;
@@ -29,6 +30,9 @@ public class ILocationTest {
 
     @Autowired
     private LocationService locationService;
+
+    @Autowired
+    private CartService cartService;
 
     @Autowired
     private LocationDAO locationDAO;
@@ -65,7 +69,7 @@ public class ILocationTest {
 
     @Test
     public void testgetOpenid(){
-       cartDAO.updateUserCart("oNuDy0FuszmkS6dHrk2ieWFfleMw","1824704943563473927",5);
+        System.out.println(cartService.getTotal("1fbba684bc0ff3df822a67e04f9e0ef4259fff"));
     }
 
 

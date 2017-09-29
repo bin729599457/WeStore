@@ -42,6 +42,12 @@
         AND goods_id = #{1}
     </select>
 
+    <select id="getTotal" resultType="int">
+        select sum(num)
+        from t_b_cart
+        where user_id = '${_parameter}'
+    </select>
+
 
     <update id="updateUserCart" >
         UPDATE t_b_cart

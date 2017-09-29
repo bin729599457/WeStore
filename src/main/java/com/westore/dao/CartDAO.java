@@ -15,4 +15,6 @@ public interface CartDAO {
 
     public void updateUserCart(String user_id,String goods_id,int num);
 
+    public int getTotal(String user_id);
+
 }
