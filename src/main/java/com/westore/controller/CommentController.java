@@ -47,11 +47,9 @@ public class CommentController {
         AjaxJSON res = new AjaxJSON();
         T_B_Comment com = (T_B_Comment) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Comment.class);
         int commentNum = commentService.getBookCommentNum(com.getGoods_id());
-        float commentPointAvg = commentService.getBookCommentAvg(com.getGoods_id());
         res.setSuccess(true);
         JSONObject json = new JSONObject();
         json.put("commentNum",commentNum);
-        json.put("avgPoint",commentPointAvg);
         res.setObj(json);
         return res;
     }

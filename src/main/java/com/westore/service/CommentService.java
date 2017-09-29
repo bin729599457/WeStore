@@ -10,6 +10,6 @@ public interface CommentService {
 
     public int getBookCommentNum(String goods_id);
 
-    public float getBookCommentAvg(String goods_id);
+//    public float getBookCommentAvg(String goods_id);
 
 }

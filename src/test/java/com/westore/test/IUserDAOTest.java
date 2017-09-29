@@ -49,7 +49,7 @@ public class IUserDAOTest {
 
     @Test
     public void testFindComment(){
-        System.out.println(commentDAO.getBookCommentAvg("1824704943563473927"));
+        System.out.println();
     }
 
 
