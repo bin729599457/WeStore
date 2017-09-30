@@ -54,4 +54,18 @@ public class CommentController {
         return res;
     }
 
+
+    @RequestMapping(value="/insertBookComment.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Object insertBookComment(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
+        AjaxJSON res = new AjaxJSON();
+        T_B_Comment com = (T_B_Comment) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Comment.class);
+        int commentNum = commentService.getBookCommentNum(com.getGoods_id());
+        res.setSuccess(true);
+        JSONObject json = new JSONObject();
+        json.put("commentNum",commentNum);
+        res.setObj(json);
+        return res;
+    }
+
 }
