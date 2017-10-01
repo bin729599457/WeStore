@@ -12,4 +12,6 @@ public interface CommentService {
 
 //    public float getBookCommentAvg(String goods_id);
 
+    public int insertBookComment(String trd_session,T_B_Comment comment);
+
 }

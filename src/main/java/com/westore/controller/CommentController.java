@@ -16,6 +16,8 @@ import sun.plugin.dom.core.Comment;
 import javax.annotation.Resource;
 import java.util.Map;
 
+
+
 @Controller
 @RequestMapping("/CommentController")
 public class CommentController {
@@ -59,12 +61,11 @@ public class CommentController {
     @ResponseBody
     public Object insertBookComment(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
         AjaxJSON res = new AjaxJSON();
+        String trd_session = (String)params.get("trd_session");
         T_B_Comment com = (T_B_Comment) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Comment.class);
-        int commentNum = commentService.getBookCommentNum(com.getGoods_id());
-        res.setSuccess(true);
-        JSONObject json = new JSONObject();
-        json.put("commentNum",commentNum);
-        res.setObj(json);
+        int commentNum = commentService.insertBookComment(trd_session,com);
+        res.setSuccess(commentNum==0?false:true);
+        res.setTotal((long)commentNum);
         return res;
     }
 

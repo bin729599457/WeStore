@@ -7,6 +7,7 @@ import com.westore.dao.CartDAO;
 import com.westore.dao.CommonDAO;
 import com.westore.dao.LocationDAO;
 import com.westore.model.T_B_Cart;
+import com.westore.model.T_B_Comment;
 import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Location;
 import com.westore.service.CartService;
@@ -61,10 +62,14 @@ public class ILocationTest {
 
     @Test
     public void testCommonDAO(){
-        T_B_Location  loc = new T_B_Location();
-        loc.setId("1824430639907079169");
-        String sql = CommonUtils.delete(loc);
-        commonDAO.delete(sql);
+        T_B_Comment comment = new T_B_Comment();
+        comment.setId("12312");
+        comment.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
+        comment.setGoods_id("1824704943563473927");
+        comment.setComment_info("okokok");
+        comment.setComment_point(4);
+        String sql = CommonUtils.add(comment);
+        System.out.println(sql);
     }
 
     @Test

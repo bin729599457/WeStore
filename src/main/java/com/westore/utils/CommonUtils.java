@@ -1,6 +1,7 @@
 package com.westore.utils;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -73,7 +74,8 @@ public class CommonUtils {
 
                 }else if(fields[i].getGenericType().toString().equals(
                         "class java.util.Date")){
-                    paraMap.put(fields[i].getName(), "'now'");
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss");
+                    paraMap.put(fields[i].getName(), "'"+sdf.format(new Date().getTime())+"'");
                 }else if(fields[i].getGenericType().toString().equals(
                         "class com.westore.model.T_B_Goods")&&fields[i].get(object)!=null){
                     Field id =fields[i].get(object).getClass().getDeclaredField("id");

@@ -4,6 +4,7 @@ package com.westore.service.service.impl;
 import com.westore.dao.UserDAO;
 import com.westore.model.T_B_User;
 import com.westore.model.User;
+import com.westore.service.RedisService;
 import com.westore.service.UserService;
 import com.westore.utils.CheckSumBuilder;
 import com.westore.utils.CustomUUID;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDAO userDAO;
+
+    @Resource
+    private RedisService redisService;
 
     @Resource
     private RedisTemplate redisTemplate;
@@ -86,5 +90,14 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserMoney(user_id);
     }
 
-
+    public int getUserPassword(String trd_session) {
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return -1;
+        }
+        else {
+            String res = userDAO.getUserPassword(openid);
+            return (res == null?0:1);
+        }
+    }
 }

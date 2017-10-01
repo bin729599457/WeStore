@@ -3,7 +3,9 @@ package com.westore.utils;
 import java.security.MessageDigest;
 
 public class CheckSumBuilder {
-    // 计算并获取checkSum,Headers需求
+
+
+
     public static String getCheckSum(String openid, String session_key) {
         return encode("SHA", openid + session_key );
     }

@@ -7,7 +7,6 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.FileInputStream;
@@ -15,8 +14,10 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
+
+
+@CrossOrigin(origins = "*",maxAge = 3600)
 @Controller
 @RequestMapping("/ImageController")
 public class ImageController {

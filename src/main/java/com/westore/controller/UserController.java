@@ -73,6 +73,21 @@ public class UserController {
         return res;
     }
 
+    @RequestMapping(value="/getUserPassword.do",produces="application/json" ,method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public AjaxJSON getUserPassword(@RequestParam Map<String,Object> params){
+        String trd_session = (String)params.get("trd_session");
+        AjaxJSON res = new AjaxJSON();
+        int status = userService.getUserPassword(trd_session);
+        res.setSuccess(status==-1?false:true);
+        JSONObject json = new JSONObject();
+        json.put("status",status);
+        res.setObj(json);
+        res.setMsg("-1:用户验证失败,0:用户未设置密码,1:用户已经设置密码");
+        return res;
+    }
+
+
 
 
 
