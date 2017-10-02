@@ -11,6 +11,7 @@ import com.westore.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import sun.plugin.dom.core.Comment;
@@ -33,6 +34,10 @@ public class IUserDAOTest {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+
     @Test
     public void testFindAll(){
         List<User> userList = userService.findAllUser();
@@ -49,7 +54,8 @@ public class IUserDAOTest {
 
     @Test
     public void testFindComment(){
-        System.out.println();
+
+        System.out.println(userService.checkUserPassword("45f0453f45d3f1cdffd81260e1c5162be130e09c","123456"));
     }
 
 

@@ -30,7 +30,7 @@ public class CommentController {
 
     @RequestMapping(value="/getBookComment.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Object getUserlocation(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
+    public Object getBookComment(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
         AjaxJSON res = new AjaxJSON();
         String pageNum = (String)params.get("pageNum");
         String pageSize = (String)params.get("pageSize");

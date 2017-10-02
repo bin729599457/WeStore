@@ -88,6 +88,19 @@ public class UserController {
     }
 
 
+    @RequestMapping(value="/checkUserPassword.do",produces="application/json" ,method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public AjaxJSON checkUserPassword(@RequestParam Map<String,Object> params){
+        String trd_session = (String)params.get("trd_session");
+        String password = (String)params.get("password");
+        AjaxJSON res = new AjaxJSON();
+        boolean status = userService.checkUserPassword(trd_session,password);
+        res.setSuccess(status);
+        res.setMsg(status == true?"验证成功":"验证失败");
+        return res;
+    }
+
+
 
 
 
