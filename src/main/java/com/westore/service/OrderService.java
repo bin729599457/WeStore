@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface OrderService {
 
-    public List<T_B_Order> findOrders(Map<String, Object> paraMap);
+    public List<Map<String, Object>> findOrders(Map<String, Object> paraMap);
 
     public void addOrder(Map<String, Object> paraMap);
 

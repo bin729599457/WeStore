@@ -11,6 +11,6 @@ public interface CommonDAO {
 
     public void delete(String  sql);
 
-    public Object get(String sql);
+    public Map<String,Object> get(String sql);
 
 }

@@ -40,15 +40,23 @@ public class OrderController {
 
         try {
 
-            Map<String, Object> paraMap = new HashMap<String, Object>();
-            String id = (String) params.get("id");
+            //需要获得单个订单详情
+            String id = (String) params.get("order_id");
             String user_id= redisService.getOpenid((String) params.get("trd_session"));
             String order_date = (String) params.get("order_date");
+
+            if(user_id==null&&user_id.equals("")){
+                j.setSuccess(false);
+                j.setMsg("user_id为空");
+                return j;
+            }
+
+            Map<String, Object> paraMap = new HashMap<String, Object>();
 
             paraMap.put("id", id);
             paraMap.put("user_id", user_id);
             paraMap.put("order_date", order_date);
-            List<T_B_Order> ordersList = orderService.findOrders(paraMap);
+            List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
             j.setObj(ordersList);
             j.setMsg("查询订单列表成功");
 
@@ -67,9 +75,10 @@ public class OrderController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-            String user_id= redisService.getOpenid((String) params.get("trd_session"));
+//            String user_id= redisService.getOpenid((String) params.get("trd_session"));
+            String user_id= (String) params.get("trd_session");
             float total_money= Float.parseFloat((String) params.get("total_money"));
-            Object o=commomService.get(new T_B_User(),user_id);
+            Map<String,Object> o=commomService.get(new T_B_User(),user_id);
 
             //判断用户余额是否足够支付订单
             if(total_money>userService.inqueryUserMoney(user_id)){
@@ -128,7 +137,6 @@ public class OrderController {
             t_b_order.setOrder_date(ft.format(new Date()));
             t_b_order.setOrder_state(0);
             t_b_order.setTotal_money(Float.parseFloat(total_money));
-            commomService.add(t_b_order);
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
@@ -144,6 +152,7 @@ public class OrderController {
                 commomService.add(t_b_order_detail);
                 t_b_order_detailList.add(t_b_order_detail);
             }
+            commomService.add(t_b_order);
 
             Map<String,Object> paraMap=new HashMap<String,Object>();
             paraMap.put("t_b_order",t_b_order);

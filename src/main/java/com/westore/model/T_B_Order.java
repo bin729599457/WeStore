@@ -60,4 +60,5 @@ public class T_B_Order {
     public void setOrder_state(int order_state) {
         this.order_state = order_state;
     }
+
 }

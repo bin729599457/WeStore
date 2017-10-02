@@ -13,7 +13,7 @@ public interface CommomService {
 
     public  String delete(Object object) ;
 
-    public Object get(Object object,String id);
+    public Map<String,Object> get(Object object,String id);
 
 
 }

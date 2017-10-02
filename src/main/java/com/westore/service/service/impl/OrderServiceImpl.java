@@ -15,7 +15,7 @@ public class OrderServiceImpl implements OrderService {
     @Resource
     private OrderDAO orderDAO;
 
-    public List<T_B_Order> findOrders(Map<String, Object> paraMap) {
+    public List<Map<String, Object>> findOrders(Map<String, Object> paraMap) {
 
         return orderDAO.findOrders(paraMap);
     }

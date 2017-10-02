@@ -98,13 +98,13 @@ public class CommomServiceImpl implements CommomService {
 
     }
 
-    public Object get(Object object,String user_id) {
+    public Map<String,Object> get(Object object,String user_id) {
 
         StringBuilder sql = new StringBuilder("select * from ");
         sql.append(object.getClass().getSimpleName());
         sql.append(" where user_id= ");
         sql.append("'"+user_id+"'");
-        Object obj = commonDAO.get(sql.toString());
+        Map<String,Object> obj = commonDAO.get(sql.toString());
 
         return obj;
     }

@@ -8,7 +8,7 @@ import java.util.Map;
 public interface OrderDAO {
 
     //订单操作
-    public List<T_B_Order> findOrders(Map<String, Object> paraMap);
+    public List<Map<String, Object>> findOrders(Map<String, Object> paraMap);
 
     public void addOrder(Map<String, Object> paraMap);
 
