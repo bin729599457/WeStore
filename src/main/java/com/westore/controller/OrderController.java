@@ -79,10 +79,17 @@ public class OrderController {
             String user_id= redisService.getOpenid(trd_session);
             float total_money= Float.parseFloat((String) params.get("total_money"));
             String password= (String) params.get("password");
-            Map<String,Object> o=commomService.get(new T_B_User(),user_id);
+            Map<String,Object> orderMap=commomService.get(new T_B_User(),user_id);
+
+            //判断用户密码是否输入正确
+            if(userService.checkUserPassword(trd_session,password)){
+                j.setSuccess(false);
+                j.setMsg("用户密码输入不正确!");
+                return j;
+            }
 
             //判断用户余额是否足够支付订单
-            if(userService.checkUserPassword(trd_session,password)){
+            if(total_money>(Float)orderMap.get("user_money")){
                 j.setSuccess(false);
                 j.setMsg("用户余额不足!");
                 return j;
