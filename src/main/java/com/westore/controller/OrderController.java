@@ -30,18 +30,20 @@ public class OrderController {
     private GoodsService goodsService;
     @Resource
     private UserService userService;
+    @Resource
+    private RedisService redisService;
 
     @RequestMapping(value = "/getOrders.do")
     @ResponseBody
-    public AjaxJSON getOrders(HttpServletRequest request) {
+    public AjaxJSON getOrders(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
-            String id = request.getParameter("id") == null ? "" : request.getParameter("id");
-            String user_id = request.getParameter("user_id") == null ? "" : request.getParameter("user_id");
-            String order_date = request.getParameter("order_date") == null ? "" : request.getParameter("order_date");
+            String id = (String) params.get("id");
+            String user_id= redisService.getOpenid((String) params.get("trd_session"));
+            String order_date = (String) params.get("order_date");
 
             paraMap.put("id", id);
             paraMap.put("user_id", user_id);
@@ -65,7 +67,7 @@ public class OrderController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-            String user_id= (String) params.get("user_id");
+            String user_id= redisService.getOpenid((String) params.get("trd_session"));
             float total_money= Float.parseFloat((String) params.get("total_money"));
             Object o=commomService.get(new T_B_User(),user_id);
 
@@ -109,7 +111,7 @@ public class OrderController {
 
         try {
 
-            String user_id= (String) params.get("user_id");
+            String user_id= redisService.getOpenid((String) params.get("trd_session"));
             String total_money= (String) params.get("total_money");
 
             if(user_id==null&&user_id.equals("")){
