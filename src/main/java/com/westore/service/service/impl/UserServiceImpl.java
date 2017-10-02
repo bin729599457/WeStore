@@ -4,6 +4,7 @@ package com.westore.service.service.impl;
 import com.westore.dao.UserDAO;
 import com.westore.model.T_B_User;
 import com.westore.model.User;
+import com.westore.service.RedisService;
 import com.westore.service.UserService;
 import com.westore.utils.CheckSumBuilder;
 import com.westore.utils.CustomUUID;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserDAO userDAO;
+
+    @Resource
+    private RedisService redisService;
 
     @Resource
     private RedisTemplate redisTemplate;
@@ -66,11 +70,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public String change(String trd_session,String method,String value) {
-        if(redisTemplate.opsForHash().entries(trd_session).isEmpty()){
-            return "error";
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return null;
         }
         else{
-            String openid = (String)redisTemplate.opsForHash().get(trd_session,"openid");
             if(method.equals("phone")){
                 userDAO.updateUser(new T_B_User(null,openid,null,null,value,null,0));
             }
@@ -86,5 +90,34 @@ public class UserServiceImpl implements UserService {
         return userDAO.getUserMoney(user_id);
     }
 
+    public int getUserPassword(String trd_session) {
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return -1;
+        }
+        else {
+            String res = userDAO.getUserPassword(openid);
+            if(res!=null){
+                redisTemplate.opsForHash().put(trd_session, "password", res);
+            }
+            return (res == null?0:1);
+        }
+    }
 
+
+    public boolean checkUserPassword(String trd_session, String input_password) {
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return false;
+        }
+        else {
+            String user_password_Des = (String) redisTemplate.opsForHash().get(trd_session,"password");
+            if(user_password_Des==null){
+                user_password_Des = userDAO.getUserPassword(openid);
+            }
+            System.out.println(DesUtil.decrypt(user_password_Des));
+            return user_password_Des == null?false:DesUtil.decrypt(user_password_Des).equals(input_password);
+        }
+
+    }
 }

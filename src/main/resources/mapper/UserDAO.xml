@@ -38,4 +38,11 @@
         WHERE user_id = '${_parameter}'
     </select>
 
+
+    <select id="getUserPassword" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT user_password
+        FROM t_b_user
+        WHERE user_id = '${_parameter}'
+    </select>
+
 </mapper>
