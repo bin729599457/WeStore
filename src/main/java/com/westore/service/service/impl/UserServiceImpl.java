@@ -86,9 +86,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public float inqueryUserMoney(String user_id) {
-        return userDAO.getUserMoney(user_id);
-    }
+
 
     public int getUserPassword(String trd_session) {
         String openid = redisService.getOpenid(trd_session);

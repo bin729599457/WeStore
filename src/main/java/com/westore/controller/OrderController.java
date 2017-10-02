@@ -75,13 +75,14 @@ public class OrderController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-//            String user_id= redisService.getOpenid((String) params.get("trd_session"));
-            String user_id= (String) params.get("trd_session");
+            String trd_session= (String) params.get("trd_session");
+            String user_id= redisService.getOpenid(trd_session);
             float total_money= Float.parseFloat((String) params.get("total_money"));
+            String password= (String) params.get("password");
             Map<String,Object> o=commomService.get(new T_B_User(),user_id);
 
             //判断用户余额是否足够支付订单
-            if(total_money>userService.inqueryUserMoney(user_id)){
+            if(userService.checkUserPassword(trd_session,password)){
                 j.setSuccess(false);
                 j.setMsg("用户余额不足!");
                 return j;
@@ -100,6 +101,9 @@ public class OrderController {
                 paraMap.put("goods_nums_change",Integer.parseInt((String) goodsDetail.get("goods_num")));
                 goodsService.updateGoods(paraMap);
             }
+            //下单成功 扣除用户余额
+
+            //修改订单状态
 
             j.setObj(null);
             j.setMsg("支付订单成功");
