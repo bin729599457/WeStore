@@ -25,7 +25,6 @@ public class CommomServiceImpl implements CommomService {
         sql.append("set ");
         String str = getClassValueObj(object).toString().replace("{", "").replace("}", "");
         sql.append(str);
-
         commonDAO.add(sql.toString());
 
     }
