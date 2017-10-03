@@ -12,7 +12,7 @@ public class T_B_User {
     public T_B_User() {
     }
 
-    public T_B_User(String id, String user_id, String user_img, String user_name, String user_phone, String user_password, int user_money) {
+    public T_B_User(String id, String user_id, String user_img, String user_name, String user_phone, String user_password, float user_money) {
         this.id = id;
         this.user_id = user_id;
         this.user_img = user_img;

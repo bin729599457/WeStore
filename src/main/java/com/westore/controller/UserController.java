@@ -52,25 +52,32 @@ public class UserController {
     @RequestMapping(value="/change.do",produces="application/json" ,method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public AjaxJSON changeUserMsg(@RequestParam Map<String,Object> params){
-        String trd_session = (String)params.get("trd_session");
-        String method = (String)params.get("method");
         AjaxJSON res = new AjaxJSON();
-        if(trd_session == null||method == null) {
-            res.setSuccess(false);
-            res.setMsg("no Login or no method");
-        }
-        else {
-            if(method.equals("phone")){
-                String phone = (String)params.get("phone");
-                String result = userService.change(trd_session,"phone",phone);
-                res.setSuccess(result.equals("success")?true:false);
+        try {
+            String trd_session = (String)params.get("trd_session");
+            String method = (String)params.get("method");
+            if (method.equals("phone")) {
+                String phone = (String) params.get("phone");
+                String result = userService.change(trd_session, "phone", phone);
+                res.setSuccess(result.equals("success") ? true : false);
+            } else if (method.equals("password")) {
+                String password = (String) params.get("password");
+                String result = userService.change(trd_session, "password", password);
+                res.setSuccess(result.equals("success") ? true : false);
+            } else if (method.equals("money")) {
+                String password = (String) params.get("password");
+                String money = (String) params.get("money");
+                boolean status = userService.checkUserPassword(trd_session, password);
+                if (status == true) {
+                    userService.change(trd_session, "money", money);
+                }
+                res.setSuccess(status);
+                res.setMsg(status == true ? "充值成功" : "充值失败(密码错误或验证失败)");
             }
-            if(method.equals("password")){
-                String password = (String)params.get("password");
-                System.out.print(password);
-                String result =userService.change(trd_session,"password",password);
-                res.setSuccess(result.equals("success")?true:false);
-            }
+        } catch(Exception e){
+            res.setSuccess(false) ;
+            res.setMsg(e.getMessage());
+            return  res;
         }
         return res;
     }

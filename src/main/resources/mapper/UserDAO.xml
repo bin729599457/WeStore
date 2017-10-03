@@ -23,11 +23,11 @@
     <update id="updateUser" parameterType="com.westore.model.T_B_User">
         UPDATE t_b_user
         <trim prefix="set" suffixOverrides=",">
-            <if test="user_img!=null">user_img=#{user_img},</if>
-            <if test="user_name!=null">user_name=#{user_name},</if>
-            <if test="user_phone!=null">user_phone=#{user_phone},</if>
-            <if test="user_password!=null">user_password=#{user_password},</if>
-            <if test="user_money!=0">user_money=#{user_money},</if>
+            <if test="user_img!=null">user_img = #{user_img},</if>
+            <if test="user_name!=null">user_name = #{user_name},</if>
+            <if test="user_phone!=null">user_phone = #{user_phone},</if>
+            <if test="user_password!=null">user_password = #{user_password},</if>
+            <if test="user_money!=0">user_money = user_money + #{user_money},</if>
         </trim>
         WHERE user_id=#{user_id}
     </update>

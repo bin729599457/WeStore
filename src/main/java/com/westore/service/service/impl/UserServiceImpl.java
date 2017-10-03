@@ -80,6 +80,10 @@ public class UserServiceImpl implements UserService {
             }
             else if (method.equals("password")){
                 userDAO.updateUser(new T_B_User(null,openid,null,null,null, DesUtil.encrypt(value),0));
+                redisTemplate.opsForHash().put(trd_session, "password", DesUtil.encrypt(value));
+            }
+            else  if(method.equals("money")){
+                userDAO.updateUser(new T_B_User(null,openid,null,null,null, null,Float.parseFloat(value)));
             }
             return "success";
         }
@@ -113,7 +117,6 @@ public class UserServiceImpl implements UserService {
             if(user_password_Des==null){
                 user_password_Des = userDAO.getUserPassword(openid);
             }
-            System.out.println(DesUtil.decrypt(user_password_Des));
             return user_password_Des == null?false:DesUtil.decrypt(user_password_Des).equals(input_password);
         }
 
