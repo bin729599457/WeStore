@@ -79,11 +79,12 @@ public class ILocationTest {
         search_queue.add("goods1");
         search_queue.add("goods2");
         search_queue.add("goods3");
+        search_queue.add("goods4");
         System.out.println(search_queue.toString());
         QueueList q = new QueueList();
         q.setMax(3);
         q.setList(search_queue.toString());
-        q.append("goods4");
+        q.append("goods5");
         System.out.println(q.getList());
 
     }

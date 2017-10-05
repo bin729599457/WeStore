@@ -42,20 +42,18 @@ public class QueueList{
             list.add(item);
         }
         else{
-            List<String> temp= new ArrayList<String>();
-            int size = list.size();
-            temp.add(item);
-            if(list.size() >= max) {
-                for (int i = 1; i < max; i++) {
-                    temp.add(list.get(i-1));
-                }
+            if(list.size() < max){
+                list.add(item);
             }
-            else {
-                for (int i = 1; i < size+1; i++) {
-                    temp.add(list.get(i-1));
+            else{
+                List<String> temp= new ArrayList<String>();
+                int size = list.size();
+                for(int i = 0;i < max-1;i++){
+                    temp.add(list.get(size-max+i+1));
                 }
+                temp.add(item);
+                list = temp;
             }
-            list = temp;
         }
     }
 
