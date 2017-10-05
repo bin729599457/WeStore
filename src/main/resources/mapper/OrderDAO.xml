@@ -13,10 +13,10 @@
         AND td.goods_id=tg.id
 
         <if test="order_date!=null  and order_date!=''">
-            AND t.order_date >=to_date(#{order_vdate},'yyyy-mm-dd')
+            AND t.order_date >=to_date(#{order_start_date},'yyyy-mm-dd')
         </if>
         <if test="order_date !=null  and order_date !=''">
-            AND t.order_date &lt;=to_date(#{order_date},'yyyy-mm-dd')
+            AND t.order_date &lt;=to_date(#{order_over_date},'yyyy-mm-dd')
         </if>
         <if test="id!=null and id!=''">
             AND t.id=#{id}

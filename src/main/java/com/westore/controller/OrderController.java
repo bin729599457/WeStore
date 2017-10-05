@@ -43,7 +43,8 @@ public class OrderController {
             //需要获得单个订单详情
             String id = (String) params.get("order_id");
             String user_id= redisService.getOpenid((String) params.get("trd_session"));
-            String order_date = (String) params.get("order_date");
+            String order_start_date = (String) params.get("order_start_date");
+            String order_over_date = (String) params.get("order_over_date");
 
             if(user_id==null&&user_id.equals("")){
                 j.setSuccess(false);
@@ -55,7 +56,8 @@ public class OrderController {
 
             paraMap.put("id", id);
             paraMap.put("user_id", user_id);
-            paraMap.put("order_date", order_date);
+            paraMap.put("order_start_date", order_start_date);
+            paraMap.put("order_over_date", order_over_date);
             List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
             j.setObj(ordersList);
             j.setMsg("查询订单列表成功");
@@ -82,8 +84,6 @@ public class OrderController {
             String password= (String) params.get("password");
             //获得用户对象,封装在Map上
             Map<String,Object> userMap=commomService.get(new T_B_User(),user_id);
-            //获得订单对象，封装在Map上
-            Map<String,Object> orderMap=commomService.get(new T_B_Order(),order_id);
 
             //判断用户密码是否输入正确
             if(userService.checkUserPassword(trd_session,password)){
@@ -208,6 +208,8 @@ public class OrderController {
             paraMap.put("id", order_id);
 
             orderService.delOrder(paraMap);
+            j.setMsg("删除订单成功");
+
 
         }catch (Exception e){
             j.setMsg(e.getMessage());
