@@ -124,16 +124,17 @@ public class GoodsController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-
+            String goods_id = (String)params.get("goods_id");
             T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
 
-            if(t_b_goods.getId()==null&&t_b_goods.getId().equals("")){
+            if(goods_id==null&&goods_id.equals("")){
                 j.setSuccess(false);
                 j.setMsg("goods_id为空");
                 return j;
             }
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
+            paraMap.put("id",goods_id);
             paraMap.put("goods_title",t_b_goods.getGoods_title());
             paraMap.put("goods_type_id",t_b_goods.getGoods_type_id());
             paraMap.put("goods_second_type_id",t_b_goods.getGoods_second_type_id());
