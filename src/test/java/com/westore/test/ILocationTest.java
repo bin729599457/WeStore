@@ -6,10 +6,7 @@ import com.github.pagehelper.PageInfo;
 import com.westore.dao.CartDAO;
 import com.westore.dao.CommonDAO;
 import com.westore.dao.LocationDAO;
-import com.westore.model.T_B_Cart;
-import com.westore.model.T_B_Comment;
-import com.westore.model.T_B_Goods;
-import com.westore.model.T_B_Location;
+import com.westore.model.*;
 import com.westore.service.CartService;
 import com.westore.service.CommomService;
 import com.westore.service.LocationService;
@@ -23,7 +20,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:spring-mybatis.xml","classpath:spring-redis.xml"})
@@ -74,7 +74,18 @@ public class ILocationTest {
 
     @Test
     public void testgetOpenid(){
-        System.out.println(cartService.getTotal("1fbba684bc0ff3df822a67e04f9e0ef4259fff"));
+       // System.out.println(redisService.insertHistory("1fbbabf684bc0ff3df822a67e04f9e0ef4259fff","hello"));
+        List<String> search_queue = new ArrayList<String>();
+        search_queue.add("goods1");
+        search_queue.add("goods2");
+        search_queue.add("goods3");
+        System.out.println(search_queue.toString());
+        QueueList q = new QueueList();
+        q.setMax(3);
+        q.setList(search_queue.toString());
+        q.append("goods4");
+        System.out.println(q.getList());
+
     }
 
 
