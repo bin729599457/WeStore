@@ -76,11 +76,14 @@ public class OrderController {
 
         try {
             String trd_session= (String) params.get("trd_session");
+            String order_id= (String) params.get("order_id");
             String user_id= redisService.getOpenid(trd_session);
             float total_money= Float.parseFloat((String) params.get("total_money"));
             String password= (String) params.get("password");
             //获得用户对象,封装在Map上
-            Map<String,Object> orderMap=commomService.get(new T_B_User(),user_id);
+            Map<String,Object> userMap=commomService.get(new T_B_User(),user_id);
+            //获得订单对象，封装在Map上
+            Map<String,Object> orderMap=commomService.get(new T_B_Order(),order_id);
 
             //判断用户密码是否输入正确
             if(userService.checkUserPassword(trd_session,password)){
@@ -90,7 +93,7 @@ public class OrderController {
             }
 
             //判断用户余额是否足够支付订单
-            if(total_money>(Float)orderMap.get("user_money")){
+            if(total_money>(Float)userMap.get("user_money")){
                 j.setSuccess(false);
                 j.setMsg("用户余额不足!");
                 return j;
@@ -109,9 +112,14 @@ public class OrderController {
             }
             //下单成功 扣除用户余额
 
-            //修改订单状态
 
-            j.setObj(null);
+            //修改订单状态
+            Map<String,Object> updateOrderStatus =new HashMap<String, Object>();
+            updateOrderStatus.put("order_state",1);
+            updateOrderStatus.put("id",order_id);
+            orderService.updateOrder(updateOrderStatus);
+
+            j.setObj(t_b_order_detail_list);
             j.setMsg("支付订单成功");
 
         } catch (Exception e) {
@@ -236,43 +244,5 @@ public class OrderController {
         return j;
     }
 
-    @RequestMapping(value = "/getSingleOrder.do")
-    @ResponseBody
-    public AjaxJSON getSingleOrder(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj){
-        AjaxJSON j=new AjaxJSON();
 
-        try {
-
-            String order_id = (String) params.get("order_id");
-
-            //获得商品详情列表
-            List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
-
-            if(order_id==null&&order_id.equals("")){
-                j.setSuccess(false);
-                j.setMsg("order_id为空");
-                return j;
-            }
-            List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
-            for(int i=0;i<t_b_order_detail_list.size();i++){
-                Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
-                T_B_Order_Detail t_b_order_detail=new T_B_Order_Detail();
-                t_b_order_detail.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-                t_b_order_detail.setGoods_id((String) map.get("goods_id"));
-                t_b_order_detail.setGoods_num(Integer.parseInt((String) map.get("goods_num")) );
-                commomService.add(t_b_order_detail);
-                t_b_order_detailList.add(t_b_order_detail);
-            }
-
-            Map<String, Object> paraMap = new HashMap<String, Object>();
-            paraMap.put("id", order_id);
-            orderService.updateOrder(paraMap);
-            j.setMsg("获取单个订单详情成功");
-
-
-        }catch (Exception e){
-            j.setMsg("获取单个订单详情成功失败"+e.getMessage());
-        }
-        return j;
-    }
 }
