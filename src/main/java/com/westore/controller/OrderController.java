@@ -111,7 +111,7 @@ public class OrderController {
                 goodsService.updateGoods(paraMap);
             }
             //下单成功 扣除用户余额
-
+            userService.change(trd_session,"money","-"+(String) params.get("total_money"));
 
             //修改订单状态
             Map<String,Object> updateOrderStatus =new HashMap<String, Object>();

@@ -89,6 +89,10 @@ public class ILocationTest {
 
     }
 
+    @Test
+    public void testFloat(){
+        System.out.println(Float.parseFloat("-123"));
+    }
 
 
 }
