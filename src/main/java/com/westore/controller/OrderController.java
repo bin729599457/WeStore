@@ -79,6 +79,7 @@ public class OrderController {
             String user_id= redisService.getOpenid(trd_session);
             float total_money= Float.parseFloat((String) params.get("total_money"));
             String password= (String) params.get("password");
+            //获得用户对象,封装在Map上
             Map<String,Object> orderMap=commomService.get(new T_B_User(),user_id);
 
             //判断用户密码是否输入正确
@@ -97,8 +98,6 @@ public class OrderController {
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
-
-            List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
 
             for(int i=0;i<t_b_order_detail_list.size();i++){
                 Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
