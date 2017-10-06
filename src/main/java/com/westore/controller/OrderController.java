@@ -1,9 +1,6 @@
 package com.westore.controller;
 
-import com.westore.model.AjaxJSON;
-import com.westore.model.T_B_Order;
-import com.westore.model.T_B_Order_Detail;
-import com.westore.model.T_B_User;
+import com.westore.model.*;
 import com.westore.service.*;
 import com.westore.service.service.impl.CommomServiceImpl;
 import com.westore.utils.CustomUUID;
@@ -85,7 +82,7 @@ public class OrderController {
             //获得用户对象,封装在Map上
             Map<String,Object> userMap=commomService.get(new T_B_User(),user_id);
 
-            //判断用户密码是否输入正确
+/*            //判断用户密码是否输入正确
             if(userService.checkUserPassword(trd_session,password)){
                 j.setSuccess(false);
                 j.setMsg("用户密码输入不正确!");
@@ -97,7 +94,7 @@ public class OrderController {
                 j.setSuccess(false);
                 j.setMsg("用户余额不足!");
                 return j;
-            }
+            }*/
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
@@ -147,6 +144,12 @@ public class OrderController {
                 return j;
             }
 
+            if(total_money==null&&total_money.equals("")){
+                j.setMsg("订单金额为空");
+                j.setSuccess(false);
+                return j;
+            }
+
             SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
 
             T_B_Order t_b_order=new T_B_Order();
@@ -156,8 +159,10 @@ public class OrderController {
             t_b_order.setOrder_state(0);
             t_b_order.setTotal_money(Float.parseFloat(total_money));
 
+
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
+
 
             List<T_B_Order_Detail> t_b_order_detailList=new ArrayList<T_B_Order_Detail>();
             for(int i=0;i<t_b_order_detail_list.size();i++){
