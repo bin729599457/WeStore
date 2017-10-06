@@ -28,11 +28,13 @@ public class QueueList{
     }
 
     public void setList(String arrayString) {
-        arrayString = arrayString.replace("[","").replace("]","").replace(" ","");
-        String[] array = arrayString.split(",");
-        int length = array.length;
-        for(int i = 0;i < length;i++){
-            list.add(array[i]);
+        if(arrayString != null) {
+            arrayString = arrayString.replace("[", "").replace("]", "").replace(" ", "");
+            String[] array = arrayString.split(",");
+            int length = array.length;
+            for (int i = 0; i < length; i++) {
+                list.add(array[i]);
+            }
         }
     }
 

@@ -74,18 +74,18 @@ public class ILocationTest {
 
     @Test
     public void testgetOpenid(){
-       // System.out.println(redisService.insertHistory("1fbbabf684bc0ff3df822a67e04f9e0ef4259fff","hello"));
-        List<String> search_queue = new ArrayList<String>();
-        search_queue.add("goods1");
-        search_queue.add("goods2");
-        search_queue.add("goods3");
-        search_queue.add("goods4");
-        System.out.println(search_queue.toString());
-        QueueList q = new QueueList();
-        q.setMax(3);
-        q.setList(search_queue.toString());
-        q.append("goods5");
-        System.out.println(q.getList());
+       System.out.println(redisService.insertHistory("1fbbabf684bc0ff3df822a67e04f9e0ef4259fff","牛肉河粉"));
+//        List<String> search_queue = new ArrayList<String>();
+//        search_queue.add("goods1");
+//        search_queue.add("goods2");
+//        search_queue.add("goods3");
+//        search_queue.add("goods4");
+//        System.out.println(search_queue.toString());
+//        QueueList q = new QueueList();
+//        q.setMax(3);
+//        q.setList(search_queue.toString());
+//        q.append("goods5");
+//        System.out.println(q.getList());
 
     }
 
