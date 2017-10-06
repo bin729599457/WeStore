@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
             if(res!=null){
                 redisTemplate.opsForHash().put(trd_session, "password", res);
             }
-            return (res == null?0:1);
+            return (res == null || res.equals("")?0:1);
         }
     }
 

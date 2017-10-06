@@ -30,6 +30,7 @@ public class SearchHistoryController {
             q.setList(search);
             aj.setObj(q.getList());
             aj.setSuccess(true);
+            aj.setMsg("查询搜索记录成功");
         }catch (Exception e){
             aj.setSuccess(false);
             aj.setMsg(e.getMessage());
