@@ -5,6 +5,7 @@ import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Goods_Type;
 import com.westore.service.CommomService;
 import com.westore.service.GoodsService;
+import com.westore.service.RedisService;
 import com.westore.utils.CustomUUID;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,10 @@ public class GoodsController {
     @Resource
     private CommomService commomService;
 
+    @Resource
+    private RedisService redisService;
+
+
     @RequestMapping(value = "/selectGoods.do")
     @ResponseBody
     public AjaxJSON selectGoods(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
@@ -42,6 +47,10 @@ public class GoodsController {
             }
             if(t_b_goods.getGoods_title()!=null) {
                 paraMap.put("goods_title", '%' + t_b_goods.getGoods_title() + '%');
+                String trd_session = (String)params.get("trd_session");
+                if(trd_session != null && !t_b_goods.getGoods_title().equals("")){
+                    redisService.insertHistory(trd_session,t_b_goods.getGoods_title());
+                }
             }
             if(t_b_goods.getGoods_descript()!=null) {
                 paraMap.put("goods_descript", '%' + t_b_goods.getGoods_descript() + '%');
