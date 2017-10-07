@@ -26,8 +26,8 @@ public class LocationSerciceImpl implements LocationService {
     @Resource
     private CommonDAO commonDAO;
 
-    public List<T_B_Location> findAllLocation() {
-        return locationDAO.findAll();
+    public List<T_B_Location> findLocationById(String id) {
+        return locationDAO.findById(id);
     }
 
     public PageInfo<T_B_Location> findUserLocation(String trd_session,String pageNum,String pageSize) {

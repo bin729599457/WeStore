@@ -4,6 +4,12 @@
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.LocationDAO">
 
+    <select id="findById" parameterType="java.lang.String" resultType="com.westore.model.T_B_Location">
+        SELECT id,user_province,user_city,user_area,user_location,user_phone,is_default
+        FROM t_b_location
+        where id = '${_parameter}'
+    </select>
+
     <select id="findUserLocation" parameterType="java.lang.String" resultType="com.westore.model.T_B_Location">
        SELECT id,user_name,user_province,user_city,user_area,user_location,user_phone,is_default
        FROM t_b_location
