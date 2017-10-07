@@ -27,7 +27,9 @@ public class SearchHistoryController {
         try {
             String search = redisService.getSearch(trd_session);
             QueueList q = new QueueList();
-            q.setList(search);
+            if(!search.equals("")) {
+                q.setList(search);
+            }
             aj.setObj(q.getList());
             aj.setSuccess(true);
             aj.setMsg("查询搜索记录成功");
