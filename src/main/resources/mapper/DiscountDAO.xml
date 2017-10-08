@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.westore.dao.DiscountDAO">
+
+
+    <select id="ifExist"  parameterType="com.westore.model.T_B_Discount" resultType="int">
+        SELECT count(*)
+        FROM t_b_discount
+        WHERE user_id = #{user_id}
+        AND discount_type = #{discount_type}
+    </select>
+
+
+
+</mapper>

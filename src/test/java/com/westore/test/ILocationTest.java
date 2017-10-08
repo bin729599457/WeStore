@@ -3,10 +3,7 @@ package com.westore.test;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.westore.dao.CartDAO;
-import com.westore.dao.CommonDAO;
-import com.westore.dao.DiscountTypeDAO;
-import com.westore.dao.LocationDAO;
+import com.westore.dao.*;
 import com.westore.model.*;
 import com.westore.service.*;
 import com.westore.service.service.impl.DiscountTypeServiceImpl;
@@ -55,6 +52,9 @@ public class ILocationTest {
 
     @Resource
     private DiscountTypeService discountTypeService;
+
+    @Resource
+    private DiscountDAO discountDAO;
 
     @Test
     public void findUserLocation(){
@@ -109,5 +109,9 @@ public class ILocationTest {
         System.out.println(discountTypeService.getAllDiscountType("1","2"));
     }
 
-
+    @Test
+    public void testDis(){
+        T_B_Discount t = new T_B_Discount("oNuDy0FuszmkS6dHrk2ieWFfleMw","1");
+        System.out.println(discountDAO.ifExist(t));
+    }
 }

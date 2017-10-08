@@ -7,6 +7,11 @@ public class T_B_Discount {
     private String discount_type;
     private int is_used;
 
+    public T_B_Discount(String user_id, String discount_type) {
+        this.user_id = user_id;
+        this.discount_type = discount_type;
+    }
+
     public T_B_Discount(String id, String user_id, String discount_type, int is_used) {
         this.id = id;
         this.user_id = user_id;
