@@ -6,7 +6,8 @@
 
     <select id="findOrders" parameterType="java.util.Map" resultType="java.util.Map">
 
-        SELECT t.id as order_id,t.user_id as user_id,t.total_money,t.order_date,t.order_state,td.goods_num,tg.goods_title,tg.goods_price
+        SELECT t.id as order_id,t.user_id as user_id,t.total_money,t.order_date,t.order_state,
+        td.goods_num,tg.goods_title,tg.goods_price,
         FROM t_b_order t,t_b_order_detail td,t_b_goods tg
         WHERE 1=1
         AND t.id=td.order_id

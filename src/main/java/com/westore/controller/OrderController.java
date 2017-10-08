@@ -82,7 +82,7 @@ public class OrderController {
             //获得用户对象,封装在Map上
             Map<String,Object> userMap=commomService.get(new T_B_User(),user_id);
 
-/*            //判断用户密码是否输入正确
+            //判断用户密码是否输入正确
             if(userService.checkUserPassword(trd_session,password)){
                 j.setSuccess(false);
                 j.setMsg("用户密码输入不正确!");
@@ -94,7 +94,7 @@ public class OrderController {
                 j.setSuccess(false);
                 j.setMsg("用户余额不足!");
                 return j;
-            }*/
+            }
 
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
