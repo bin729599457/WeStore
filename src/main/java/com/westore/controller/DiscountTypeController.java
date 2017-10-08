@@ -21,9 +21,9 @@ public class DiscountTypeController {
     @Resource
     private DiscountTypeService discountTypeService;
 
-    @RequestMapping(value="/getDiscountType.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value="/getDiscountType.do" ,produces="application/json" ,method =RequestMethod.GET)
     @ResponseBody
-    public Object getDiscountType(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON ajax){
+    public Object getDiscountType(@RequestParam Map<String,Object> params){
         AjaxJSON aj = new AjaxJSON();
         try{
             String pageNum = (String)params.get("pageNum");
