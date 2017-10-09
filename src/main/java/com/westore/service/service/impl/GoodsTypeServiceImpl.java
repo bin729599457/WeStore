@@ -37,6 +37,9 @@ public class GoodsTypeServiceImpl implements GoodsTypeService{
 }
 
     public String updateTypes(T_B_Goods_Type t){
+        if (t.getId().equals("0")){
+            return "该类别不可更改";
+        }
         int count = goodsTypeDAO.ifExist(t);
         if (count == 0){
             goodsTypeDAO.updateTypes(t);
@@ -48,8 +51,10 @@ public class GoodsTypeServiceImpl implements GoodsTypeService{
     public String deleteTypes(T_B_Goods_Type[] ts) {
         if(ts.length!=0) {
             for (T_B_Goods_Type t:ts) {
-                String sql = CommonUtils.delete(t);
-                commonDAO.delete(sql);
+                if(!t.getId().equals("0")) {
+                    String sql = CommonUtils.delete(t);
+                    commonDAO.delete(sql);
+                }
             }
             return "success";
         }

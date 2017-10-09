@@ -7,6 +7,7 @@
     <select id="getAllTypes" resultType="com.westore.model.T_B_Goods_Type">
         SELECT *
         FROM t_b_goods_type
+        ORDER BY id DESC ;
     </select>
 
     <select id="ifExist" parameterType="com.westore.model.T_B_Goods_Type" resultType="int">
