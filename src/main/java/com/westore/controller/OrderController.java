@@ -98,12 +98,72 @@ public class OrderController {
         return j;
     }
 
-    @RequestMapping(value = "/payOrders.do")
+    @RequestMapping(value = "/getAllOrders.do")
     @ResponseBody
-    public AjaxJSON payOrders(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
+    public AjaxJSON getAllOrders(@RequestParam Map<String,Object> params) {
         AjaxJSON j = new AjaxJSON();
 
         try {
+
+            String id = (String) params.get("order_id");
+            String user_id= redisService.getOpenid((String) params.get("trd_session"));
+            String order_start_date = (String) params.get("order_start_date");
+            String order_over_date = (String) params.get("order_over_date");
+
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+
+            paraMap.put("id", id);
+            paraMap.put("user_id", user_id);
+            paraMap.put("order_start_date", order_start_date);
+            paraMap.put("order_over_date", order_over_date);
+
+            List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+            List<Map<String, Object>> ordersDetailList = new ArrayList<Map<String, Object>>();
+            Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
+            for(Map<String, Object> order:ordersList){
+                orderDetaileMap.put("orderMessage",order);
+                Map<String, Object> detailMap=new HashMap<String, Object>();
+                detailMap.put("order_id",(String) order.get("order_id"));
+                List<Map<String, Object>> goodsDetailList=orderService.getOrdersDetail(detailMap);
+                for(Map<String, Object> goodsMap:goodsDetailList){
+                    String str=(String) goodsMap.get("goods_images");
+                    String[] imagesList= str.split(",");
+                    StringBuilder stringBuilder=new StringBuilder();
+                    for(int i=0;i<imagesList.length;i++){
+
+                        if(i==imagesList.length-1){
+                            stringBuilder.append(IMAGE_HOME_URL+imagesList[i]);
+
+                        }else{
+                            stringBuilder.append(IMAGE_HOME_URL+imagesList[i]+",");
+
+                        }
+                    }
+                    goodsMap.put("goods_images",stringBuilder.toString());
+                }
+                orderDetaileMap.put("goodsDetail",goodsDetailList);
+                ordersDetailList.add(orderDetaileMap);
+            }
+            j.setObj(ordersDetailList);
+            j.setMsg("查询订单列表成功");
+            j.setTotal((long)ordersDetailList.size());
+
+        } catch (Exception e) {
+            j.setMsg("查询订单列表失败" + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
+    @RequestMapping(value = "/payOrders.do")
+    @ResponseBody
+    public AjaxJSON payOrders(@RequestParam Map<String,Object> params) {
+        AjaxJSON j = new AjaxJSON();
+
+        try {
+
             String trd_session= (String) params.get("trd_session");
             String order_id= (String) params.get("order_id");
             String user_id= redisService.getOpenid(trd_session);
@@ -127,16 +187,16 @@ public class OrderController {
             }
 
             //获得商品详情列表
-            List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
-
-            for(int i=0;i<t_b_order_detail_list.size();i++){
+            Map<String, Object> paraMap = new HashMap<String, Object>();
+            paraMap.put("order_id",order_id);
+            List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+/*
                 Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
                 Map<String,Object> goodsDetail= (Map<String, Object>) map.get("t_b_order_detail");
                 Map<String,Object> paraMap=new HashMap<String,Object>();
                 paraMap.put("id",(String) goodsDetail.get("goods_id"));
                 paraMap.put("goods_nums_change",Integer.parseInt((String) goodsDetail.get("goods_num")));
-                goodsService.updateGoods(paraMap);
-            }
+                goodsService.updateGoods(paraMap);*/
             //下单成功 扣除用户余额
             userService.change(trd_session,"money","-"+(String) params.get("total_money"));
 
@@ -146,7 +206,7 @@ public class OrderController {
             updateOrderStatus.put("id",order_id);
             orderService.updateOrder(updateOrderStatus);
 
-            j.setObj(t_b_order_detail_list);
+            j.setObj(null);
             j.setMsg("支付订单成功");
 
         } catch (Exception e) {

@@ -59,4 +59,12 @@
 
     </select>
 
+    <select id="getGoodsDetail" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT goods_id,goods_num
+        FROM t_b_order_detail
+        WHERE order_id=#{order_id}
+
+    </select>
+
 </mapper>
