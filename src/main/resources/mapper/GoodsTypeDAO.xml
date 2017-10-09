@@ -16,4 +16,10 @@
     </select>
 
 
+    <select id="updateTypes" parameterType="com.westore.model.T_B_Goods_Type">
+        UPDATE t_b_goods_type
+        SET goods_type_name = #{goods_type_name}
+        WHERE id = #{id}
+    </select>
+
 </mapper>

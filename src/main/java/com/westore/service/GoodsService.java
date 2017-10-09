@@ -15,4 +15,6 @@ public interface GoodsService {
 
     public List<T_B_Goods> softGoods(Map<String, Object> paraMap);
 
+
+
 }

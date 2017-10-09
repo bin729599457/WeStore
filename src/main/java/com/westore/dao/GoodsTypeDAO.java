@@ -10,4 +10,6 @@ public interface GoodsTypeDAO {
 
     public int ifExist(T_B_Goods_Type t);
 
+    public void updateTypes(T_B_Goods_Type t);
+
 }

@@ -43,13 +43,13 @@ public class QueueList{
         if(list.size() == 0){
             list.add(item);
         }
-        else{
-            if(list.size() < max){
+        else if(!list.contains(item)){
+            int size = list.size();
+            if(size < max){
                 list.add(item);
             }
             else{
                 List<String> temp= new ArrayList<String>();
-                int size = list.size();
                 for(int i = 0;i < max-1;i++){
                     temp.add(list.get(size-max+i+1));
                 }

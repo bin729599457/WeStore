@@ -127,8 +127,8 @@ public class ILocationTest {
     @Test
     public void testType(){
         T_B_Goods_Type t = new T_B_Goods_Type();
-        t.setGoods_type_name("励志");
-        System.out.println(goodsTypeService.insertTypes(t));
+        t.setId("1005");
+        System.out.println(goodsTypeService.deleteTypes(t));
     }
 
 }
