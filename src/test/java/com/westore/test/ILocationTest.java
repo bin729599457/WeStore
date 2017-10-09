@@ -106,7 +106,11 @@ public class ILocationTest {
 
     @Test
     public void testDisType(){
-        System.out.println(discountTypeService.getAllDiscountType("1","2"));
+        T_B_Discount_Type dt = new T_B_Discount_Type();
+        dt.setId("1834444901845042185");
+        dt.setMax_money(88);
+        dt.setDiscount(8888);
+        System.out.println(discountTypeService.updateDiscountType(dt));
     }
 
     @Test
@@ -115,6 +119,5 @@ public class ILocationTest {
         t.setIs_used(0);
         t.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
         System.out.println(discountDAO.getUserDiscount(t));
-
     }
 }

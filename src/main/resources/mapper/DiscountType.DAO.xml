@@ -10,6 +10,19 @@
         ORDER BY max_money ASC
     </select>
 
+    <select id="ifExist"  resultType="int"  parameterType="com.westore.model.T_B_Discount_Type">
+        SELECT COUNT(*)
+        FROM t_b_discount_type
+        WHERE max_money = #{max_money}
+        AND discount = #{discount}
+    </select>
 
+    <update id="updateDiscountType" parameterType="com.westore.model.T_B_Discount_Type">
+        UPDATE t_b_discount_type
+        SET
+          max_money = #{max_money},
+          discount = #{discount}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

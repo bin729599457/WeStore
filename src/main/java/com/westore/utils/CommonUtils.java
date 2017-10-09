@@ -22,6 +22,7 @@ public class CommonUtils {
 
     }
 
+
     public static String delete(Object object) {
 
         String className = object.getClass().getSimpleName();

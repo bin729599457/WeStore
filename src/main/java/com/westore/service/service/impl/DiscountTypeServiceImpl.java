@@ -3,7 +3,9 @@ package com.westore.service.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.westore.dao.CommonDAO;
+import com.westore.dao.DiscountDAO;
 import com.westore.dao.DiscountTypeDAO;
+import com.westore.model.T_B_Discount;
 import com.westore.model.T_B_Discount_Type;
 import com.westore.model.T_B_Location;
 import com.westore.service.DiscountService;
@@ -23,6 +25,9 @@ public class DiscountTypeServiceImpl implements DiscountTypeService {
     private DiscountTypeDAO discountTypeDAO;
 
     @Resource
+    private DiscountDAO discountDAO;
+
+    @Resource
     private CommonDAO commonDAO;
 
     public PageInfo<T_B_Discount_Type> getAllDiscountType(String pageNum,String pageSize) {
@@ -32,10 +37,51 @@ public class DiscountTypeServiceImpl implements DiscountTypeService {
     }
 
 
-    public Object insetyDiscountType(T_B_Discount_Type dt) {
-        dt.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-        String sql = CommonUtils.add(dt);
-        commonDAO.add(sql);
-        return dt;
+    public String insetyDiscountType(T_B_Discount_Type dt) {
+        if (dt.getDiscount()>dt.getMax_money()){
+            return "折扣金额不能大于满减金额";
+        }
+        else {
+            int count = discountTypeDAO.ifExist(dt);
+            if (count == 0) {
+                dt.setId(CustomUUID.getFlowIdWorkerInstance().generate());
+                String sql = CommonUtils.add(dt);
+                commonDAO.add(sql);
+                return "success";
+            }
+            return "已存在该类型优惠券";
+        }
+    }
+
+    public String updateDiscountType(T_B_Discount_Type dt) {
+            if (dt.getDiscount()>dt.getMax_money()){
+                return "折扣金额不能大于满减金额";
+            }
+            int count = discountTypeDAO.ifExist(dt);
+            if (count == 0){
+                discountTypeDAO.updateDiscountType(dt);
+                return "success";
+            }
+            return "已存在该类型优惠券";
+    }
+
+    public String deleteDiscountType(T_B_Discount_Type[] dts) {
+        if(dts.length==0){
+            return "error";
+        }
+        else {
+            try {
+                for(T_B_Discount_Type dt:dts) {
+                    String sql = CommonUtils.delete(dt);
+                    commonDAO.delete(sql);
+                    T_B_Discount d = new T_B_Discount();
+                    d.setDiscount_type(dt.getId());
+                    discountDAO.deleteUserDiscount(d);
+                }
+                return "success";
+            } catch (Exception e) {
+                return "error";
+            }
+        }
     }
 }

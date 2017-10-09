@@ -10,7 +10,8 @@ public interface DiscountDAO {
 
     public int ifExist(T_B_Discount d);
 
-
     public List<Map<String,Object>> getUserDiscount(T_B_Discount d);
+
+    public void deleteUserDiscount(T_B_Discount d);
 
 }
