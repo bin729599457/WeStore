@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.GoodsSecondTypeDAO">
+
+    <select id="getSecondTypes" parameterType="com.westore.model.T_B_Goods_Second_Type" resultType="com.westore.model.T_B_Goods_Second_Type">
+        SELECT id,goods_second_type_name,goods_type_id,concat('https://www.westorehere.shop/img/',img) as img
+        FROM t_b_goods_second_type
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+        <if test="id!=null  and id!=''">
+              AND  id = #{id}
+            </if>
+            <if test="goods_second_type_name!=null  and goods_second_type_name!=''">
+              AND  goods_second_type_name = #{goods_second_type_name}
+            </if>
+            <if test="goods_type_id!=null  and goods_type_id!=''">
+              AND  goods_type_id = #{goods_type_id}
+            </if>
+        </trim>
+    </select>
+
+
+    <select id="ifExist" parameterType="com.westore.model.T_B_Goods_Second_Type" resultType="int">
+        SELECT COUNT(*)
+        FROM t_b_goods_second_type
+        WHERE goods_second_type_name = #{goods_second_type_name}
+    </select>
+</mapper>

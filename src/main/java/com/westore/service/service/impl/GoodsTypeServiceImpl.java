@@ -45,9 +45,14 @@ public class GoodsTypeServiceImpl implements GoodsTypeService{
         return "已存在该类别";
     }
 
-    public String deleteTypes(T_B_Goods_Type t) {
-        String sql = CommonUtils.delete(t);
-        commonDAO.delete(sql);
-        return "success";
+    public String deleteTypes(T_B_Goods_Type[] ts) {
+        if(ts.length!=0) {
+            for (T_B_Goods_Type t:ts) {
+                String sql = CommonUtils.delete(t);
+                commonDAO.delete(sql);
+            }
+            return "success";
+        }
+        return "false";
     }
 }

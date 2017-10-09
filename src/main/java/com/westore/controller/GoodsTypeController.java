@@ -5,6 +5,7 @@ import com.westore.model.*;
 import com.westore.service.CommomService;
 import com.westore.service.GoodsTypeService;
 import com.westore.service.OrderService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -95,8 +96,8 @@ public class GoodsTypeController {
     public AjaxJSON deleteTypes(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax) {
         AjaxJSON j = new AjaxJSON();
         try {
-            T_B_Goods_Type t = (T_B_Goods_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Type.class);
-            String res = goodsTypeService.deleteTypes(t);
+            T_B_Goods_Type[] types=(T_B_Goods_Type[]) JSONArray.toArray(JSONArray.fromObject(ajax.getObj()), T_B_Goods_Type.class);
+            String res = goodsTypeService.deleteTypes(types);
             List<T_B_Goods_Type> objList = goodsTypeService.getAllTypes();
             j.setMsg(res);
             j.setSuccess(res.equals("success")?true:false);
@@ -112,25 +113,5 @@ public class GoodsTypeController {
     }
 
 
-    @RequestMapping(value = "/getSecondTypes.do")
-    @ResponseBody
-    public AjaxJSON getSecondTypes(HttpServletRequest request) {
-        AjaxJSON j = new AjaxJSON();
-
-        try {
-            List<Map<String, Object>> objList = commomService.getAll(new T_B_Goods_Second_Type());
-            j.setObj(objList);
-            j.setMsg("查询二级商品类型列表成功");
-            j.setTotal((long)objList.size());
-
-
-        } catch (Exception e) {
-            j.setMsg("查询二级商品类型列表失败" + e.getMessage());
-            j.setSuccess(false);
-            return j;
-        }
-
-        return j;
-    }
 
 }
