@@ -7,12 +7,20 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -29,35 +37,39 @@ public class ImageController {
 
     @RequestMapping(value="/uploadImg.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Object uploadImg(@RequestParam("file") CommonsMultipartFile[] files) {
-        AjaxJSON res = new AjaxJSON();
-        System.out.println(picpath);
+    public Object uploadImg(HttpServletRequest request, HttpServletResponse response) throws IllegalStateException, IOException {
+        AjaxJSON aj = new AjaxJSON();
         List<String> p_list = new ArrayList<String>();
-        for (int i = 0; i < files.length; i++) {
-            System.out.println("fileName---------->" + files[i].getOriginalFilename());
-            try {
-                String new_name = new Date().getTime() + files[i].getOriginalFilename();
-                FileOutputStream os = new FileOutputStream(picpath + new_name);
-                FileInputStream in = (FileInputStream) files[i].getInputStream();
-                int b = 0;
-                while((b=in.read()) != -1){
-                    os.write(b);
+        try {
+            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+            if (multipartResolver.isMultipart(request)) {
+                MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+                Iterator<String> iter = multiRequest.getFileNames();
+                while (iter.hasNext()) {
+                    int time = (int) System.currentTimeMillis();
+                    MultipartFile file = multiRequest.getFile(iter.next());
+                    if (file != null) {
+                        String myFileName = file.getOriginalFilename();
+                        if (myFileName.trim() != "") {
+                            //重命名上传后的文件名
+                            String fileName = String.valueOf(time) + file.getOriginalFilename();
+                            //定义上传路径
+                            String path = picpath + fileName;
+                            File localFile = new File(path);
+                            file.transferTo(localFile);
+                            p_list.add(fileName);
+                        }
+                    }
                 }
-                os.flush();
-                os.close();
-                in.close();
-                p_list.add(new_name);
-                new_name=null;
-            }catch (Exception e) {
-                e.printStackTrace();
-                res.setSuccess(false);
-                res.setMsg("上传出错");
-                return res;
             }
+            aj.setObj(p_list);
+            aj.setSuccess(true);
+            aj.setTotal((long)p_list.size());
+        }catch (Exception e){
+            aj.setMsg(e.getMessage());
+            aj.setSuccess(false);
+            return aj;
         }
-        res.setObj(p_list);
-        res.setMsg("上传成功");
-        res.setTotal((long)p_list.size());
-        return res;
+        return aj;
     }
 }

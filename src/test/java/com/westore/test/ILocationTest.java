@@ -111,7 +111,10 @@ public class ILocationTest {
 
     @Test
     public void testDis(){
-        T_B_Discount t = new T_B_Discount("oNuDy0FuszmkS6dHrk2ieWFfleMw","1");
-        System.out.println(discountDAO.ifExist(t));
+        T_B_Discount t = new T_B_Discount();
+        t.setIs_used(0);
+        t.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
+        System.out.println(discountDAO.getUserDiscount(t));
+
     }
 }

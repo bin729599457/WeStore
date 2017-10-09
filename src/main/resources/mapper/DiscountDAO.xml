@@ -12,5 +12,14 @@
     </select>
 
 
+    <select id="getUserDiscount"  parameterType="com.westore.model.T_B_Discount" resultType="java.util.Map">
+        SELECT d.id,discount_type,is_used,max_money,discount
+        FROM t_b_discount d,t_b_discount_type dt
+        WHERE user_id = #{user_id}
+        AND is_used = #{is_used}
+        AND d.discount_type = dt.id
+    </select>
+
+
 
 </mapper>
