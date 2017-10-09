@@ -58,18 +58,26 @@ public class OrderController {
             paraMap.put("order_start_date", order_start_date);
             paraMap.put("order_over_date", order_over_date);
 
+            //获得订单列表
             List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+            //拼接订单详情及商品详情列表
             List<Map<String, Object>> ordersDetailList = new ArrayList<Map<String, Object>>();
-            Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
+
             for(Map<String, Object> order:ordersList){
+
+                Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
                 orderDetaileMap.put("orderMessage",order);
+
+                //通过订单ID查询商品详情
                 Map<String, Object> detailMap=new HashMap<String, Object>();
                 detailMap.put("order_id",(String) order.get("order_id"));
                 List<Map<String, Object>> goodsDetailList=orderService.getOrdersDetail(detailMap);
+
                 for(Map<String, Object> goodsMap:goodsDetailList){
                     String str=(String) goodsMap.get("goods_images");
                     String[] imagesList= str.split(",");
                     StringBuilder stringBuilder=new StringBuilder();
+
                     for(int i=0;i<imagesList.length;i++){
 
                         if(i==imagesList.length-1){
@@ -101,26 +109,30 @@ public class OrderController {
     @RequestMapping(value = "/getAllOrders.do")
     @ResponseBody
     public AjaxJSON getAllOrders(@RequestParam Map<String,Object> params) {
+
         AjaxJSON j = new AjaxJSON();
 
         try {
 
             String id = (String) params.get("order_id");
-            String user_id= redisService.getOpenid((String) params.get("trd_session"));
             String order_start_date = (String) params.get("order_start_date");
             String order_over_date = (String) params.get("order_over_date");
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
 
             paraMap.put("id", id);
-            paraMap.put("user_id", user_id);
             paraMap.put("order_start_date", order_start_date);
             paraMap.put("order_over_date", order_over_date);
 
+            //获得订单列表
             List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+            //拼接订单及商品详情数组
             List<Map<String, Object>> ordersDetailList = new ArrayList<Map<String, Object>>();
-            Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
+
+            //遍历订单列表，拼接每个订单与商品详情
             for(Map<String, Object> order:ordersList){
+
+                Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
                 orderDetaileMap.put("orderMessage",order);
                 Map<String, Object> detailMap=new HashMap<String, Object>();
                 detailMap.put("order_id",(String) order.get("order_id"));
@@ -145,11 +157,11 @@ public class OrderController {
                 ordersDetailList.add(orderDetaileMap);
             }
             j.setObj(ordersDetailList);
-            j.setMsg("查询订单列表成功");
+            j.setMsg("管理后台查询订单列表成功");
             j.setTotal((long)ordersDetailList.size());
 
         } catch (Exception e) {
-            j.setMsg("查询订单列表失败" + e.getMessage());
+            j.setMsg("管理后台查询所有列表失败" + e.getMessage());
             j.setSuccess(false);
             return j;
         }
@@ -189,7 +201,8 @@ public class OrderController {
             //获得商品详情列表
             Map<String, Object> paraMap = new HashMap<String, Object>();
             paraMap.put("order_id",order_id);
-            List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+            List<Map<String, Object>> ordersList = orderService.getGoodsDetail(paraMap);
+
 /*
                 Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
                 Map<String,Object> goodsDetail= (Map<String, Object>) map.get("t_b_order_detail");

@@ -18,4 +18,7 @@ public interface OrderDAO {
 
     public List<Map<String, Object>> getOrdersDetail(Map<String, Object> paraMap);
 
+    public List<Map<String, Object>> getGoodsDetail(Map<String, Object> paraMap);
+
+
 }
