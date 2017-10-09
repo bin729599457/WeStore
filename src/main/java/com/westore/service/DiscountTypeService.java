@@ -9,4 +9,6 @@ public interface DiscountTypeService {
 
     public Object insetyDiscountType(T_B_Discount_Type dt);
 
+    public String deleteDiscountType(T_B_Discount_Type[] dts);
+
 }

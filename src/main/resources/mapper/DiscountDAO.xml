@@ -20,6 +20,11 @@
         AND d.discount_type = dt.id
     </select>
 
+    <delete id="deleteUserDiscount"  parameterType="com.westore.model.T_B_Discount" >
+        DELETE
+        FROM t_b_discount
+        WHERE discount_type = #{discount_type}
+    </delete>
 
 
 </mapper>
