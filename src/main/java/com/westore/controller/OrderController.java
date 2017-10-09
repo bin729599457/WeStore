@@ -69,10 +69,18 @@ public class OrderController {
                 for(Map<String, Object> goodsMap:goodsDetailList){
                     String str=(String) goodsMap.get("goods_images");
                     String[] imagesList= str.split(",");
-                    for(String s:imagesList){
-                        s=IMAGE_HOME_URL+s;
+                    StringBuilder stringBuilder=new StringBuilder();
+                    for(int i=0;i<imagesList.length;i++){
+
+                        if(i==imagesList.length-1){
+                            stringBuilder.append(IMAGE_HOME_URL+imagesList[i]);
+
+                        }else{
+                            stringBuilder.append(IMAGE_HOME_URL+imagesList[i]+",");
+
+                        }
                     }
-                    goodsMap.put("goods_images",imagesList.toString());
+                    goodsMap.put("goods_images",stringBuilder.toString());
                 }
                 orderDetaileMap.put("goodsDetail",goodsDetailList);
                 ordersDetailList.add(orderDetaileMap);
