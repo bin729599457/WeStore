@@ -270,7 +270,6 @@ public class OrderController {
             t_b_order.setTotal_money(Float.parseFloat(total_money));
             t_b_order.setLocation_id(location_id);
 
-
             //获得商品详情列表
             List t_b_order_detail_list= (List) JSONArray.fromObject(obj.getObj());
 
@@ -289,6 +288,9 @@ public class OrderController {
             commomService.add(t_b_order);
 
             Map<String,Object> paraMap=new HashMap<String,Object>();
+            //获得地址详情
+            Map<String,Object> locationMap=commomService.getLocation(new T_B_Location(),location_id);
+            paraMap.put("location",locationMap);
             paraMap.put("t_b_order",t_b_order);
             paraMap.put("t_b_order_detailList",t_b_order_detailList);
 
@@ -350,9 +352,12 @@ public class OrderController {
             }
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
-            paraMap.put("id", order_id);
+            paraMap.put("order_id", order_id);
             paraMap.put("order_state",order_state);
             orderService.updateOrder(paraMap);
+            List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
+
+            j.setObj(ordersList);
             j.setMsg("修改订单成功");
 
 

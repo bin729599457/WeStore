@@ -15,5 +15,5 @@ public interface CommomService {
 
     public Map<String,Object> get(Object object,String id);
 
-
+    public Map<String,Object> getLocation(Object object,String id);
 }

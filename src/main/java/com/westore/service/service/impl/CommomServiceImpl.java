@@ -108,4 +108,14 @@ public class CommomServiceImpl implements CommomService {
         return obj;
     }
 
+    public Map<String,Object> getLocation(Object object,String id) {
+
+        StringBuilder sql = new StringBuilder("select * from ");
+        sql.append(object.getClass().getSimpleName());
+        sql.append(" where id= ");
+        sql.append("'"+id+"'");
+        Map<String,Object> obj = commonDAO.get(sql.toString());
+
+        return obj;
+    }
 }

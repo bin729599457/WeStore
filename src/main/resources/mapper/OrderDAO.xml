@@ -44,7 +44,7 @@
             </if>
         </trim>
 
-        WHERE id=#{id}
+        WHERE id=#{order_id}
     </update>
 
     <select id="getOrdersDetail" parameterType="java.util.Map" resultType="java.util.Map">
