@@ -33,4 +33,8 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.updateOrder(paraMap);
     }
 
+    public List<Map<String, Object>> getOrdersDetail(Map<String, Object> paraMap) {
+        return orderDAO.getOrdersDetail(paraMap);
+    }
+
 }

@@ -19,6 +19,8 @@ import java.util.*;
 @RequestMapping("/OrderController")
 public class OrderController {
 
+    public static String IMAGE_HOME_URL="https://www.westorehere.shop/img/";
+
     @Resource
     private OrderService orderService;
     @Resource
@@ -32,7 +34,7 @@ public class OrderController {
 
     @RequestMapping(value = "/getOrders.do")
     @ResponseBody
-    public AjaxJSON getOrders(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON obj) {
+    public AjaxJSON getOrders(@RequestParam Map<String,Object> params) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -55,9 +57,29 @@ public class OrderController {
             paraMap.put("user_id", user_id);
             paraMap.put("order_start_date", order_start_date);
             paraMap.put("order_over_date", order_over_date);
+
             List<Map<String, Object>> ordersList = orderService.findOrders(paraMap);
-            j.setObj(ordersList);
+            List<Map<String, Object>> ordersDetailList = new ArrayList<Map<String, Object>>();
+            Map<String, Object> orderDetaileMap=new HashMap<String, Object>();
+            for(Map<String, Object> order:ordersList){
+                orderDetaileMap.put("orderMessage",order);
+                Map<String, Object> detailMap=new HashMap<String, Object>();
+                detailMap.put("order_id",(String) order.get("order_id"));
+                List<Map<String, Object>> goodsDetailList=orderService.getOrdersDetail(detailMap);
+                for(Map<String, Object> goodsMap:goodsDetailList){
+                    String str=(String) goodsMap.get("goods_images");
+                    String[] imagesList= str.split(",");
+                    for(String s:imagesList){
+                        s=IMAGE_HOME_URL+s;
+                    }
+                    goodsMap.put("goods_images",imagesList.toString());
+                }
+                orderDetaileMap.put("goodsDetail",goodsDetailList);
+                ordersDetailList.add(orderDetaileMap);
+            }
+            j.setObj(ordersDetailList);
             j.setMsg("查询订单列表成功");
+            j.setTotal((long)ordersDetailList.size());
 
         } catch (Exception e) {
             j.setMsg("查询订单列表失败" + e.getMessage());
@@ -137,6 +159,7 @@ public class OrderController {
 
             String user_id= redisService.getOpenid((String) params.get("trd_session"));
             String total_money= (String) params.get("total_money");
+            String location_id=(String) params.get("location_id");
 
             if(user_id==null&&user_id.equals("")){
                 j.setMsg("user_id为空");
@@ -150,6 +173,12 @@ public class OrderController {
                 return j;
             }
 
+            if(location_id==null&&location_id.equals("")){
+                j.setMsg("地址信息为空");
+                j.setSuccess(false);
+                return j;
+            }
+
             SimpleDateFormat ft = new SimpleDateFormat ("yyyy.MM.dd hh:mm:ss");
 
             T_B_Order t_b_order=new T_B_Order();
@@ -158,6 +187,7 @@ public class OrderController {
             t_b_order.setOrder_date(ft.format(new Date()));
             t_b_order.setOrder_state(0);
             t_b_order.setTotal_money(Float.parseFloat(total_money));
+            t_b_order.setLocation_id(location_id);
 
 
             //获得商品详情列表

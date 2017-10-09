@@ -22,6 +22,8 @@ import java.util.Map;
 @RequestMapping("/GoodsController")
 public class GoodsController {
 
+    public static String IMAGE_HOME_URL="https://www.westorehere.shop/img/";
+
     @Resource
     private GoodsService goodsService;
     @Resource
@@ -82,7 +84,6 @@ public class GoodsController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-
             T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
             t_b_goods.setId(CustomUUID.getFlowIdWorkerInstance().generate());
             t_b_goods.setGoods_sales_nums(0);

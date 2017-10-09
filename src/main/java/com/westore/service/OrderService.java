@@ -15,4 +15,6 @@ public interface OrderService {
 
     public void updateOrder(Map<String, Object> paraMap);
 
+    public List<Map<String, Object>> getOrdersDetail(Map<String, Object> paraMap);
+
 }

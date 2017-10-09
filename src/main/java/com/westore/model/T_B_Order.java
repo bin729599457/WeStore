@@ -9,16 +9,18 @@ public class T_B_Order {
     private float total_money;
     private String order_date;
     private int order_state;
+    private String location_id;
 
     public T_B_Order() {
     }
 
-    public T_B_Order(String id, String user_id, float total_money, String order_date, int order_state) {
+    public T_B_Order(String id, String user_id, float total_money, String order_date, int order_state, String location_id) {
         this.id = id;
         this.user_id = user_id;
         this.total_money = total_money;
         this.order_date = order_date;
         this.order_state = order_state;
+        this.location_id = location_id;
     }
 
     public String getId() {
@@ -61,4 +63,11 @@ public class T_B_Order {
         this.order_state = order_state;
     }
 
+    public String getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(String location_id) {
+        this.location_id = location_id;
+    }
 }

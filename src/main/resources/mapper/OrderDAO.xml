@@ -7,12 +7,10 @@
     <select id="findOrders" parameterType="java.util.Map" resultType="java.util.Map">
 
         SELECT t.id as order_id,t.user_id as user_id,t.total_money,t.order_date,t.order_state,
-        td.goods_num,tg.goods_title,tg.goods_price,
-        FROM t_b_order t,t_b_order_detail td,t_b_goods tg
+        tl.user_name,tl.user_province,tl.user_city,tl.user_area,tl.user_location,tl.user_phone
+        FROM t_b_order t,t_b_location tl
         WHERE 1=1
-        AND t.id=td.order_id
-        AND td.goods_id=tg.id
-
+        AND t.location_id=tl.id
         <if test="order_date!=null  and order_date!=''">
             AND t.order_date >=to_date(#{order_start_date},'yyyy-mm-dd')
         </if>
@@ -48,5 +46,17 @@
 
         WHERE id=#{id}
     </update>
+
+    <select id="getOrdersDetail" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT tg.goods_title,tg.goods_price,tg.goods_descript,tg.goods_images,
+        tg.is_discounted,tg.goods_author,tg.goods_publisher,
+        td.goods_id,td.goods_num
+        FROM t_b_order_detail td,t_b_goods tg
+        WHERE 1=1
+        AND td.order_id=#{order_id}
+        AND td.goods_id=tg.id
+
+    </select>
 
 </mapper>
