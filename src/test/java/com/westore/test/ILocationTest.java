@@ -107,8 +107,10 @@ public class ILocationTest {
     @Test
     public void testDisType(){
         T_B_Discount_Type dt = new T_B_Discount_Type();
-        dt.setId("1834066038283568134");
-        //System.out.println(discountTypeService.deleteDiscountType(dt));
+        dt.setId("1834444901845042185");
+        dt.setMax_money(88);
+        dt.setDiscount(8888);
+        System.out.println(discountTypeService.updateDiscountType(dt));
     }
 
     @Test

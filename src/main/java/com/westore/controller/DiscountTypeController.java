@@ -51,7 +51,12 @@ public class DiscountTypeController {
         AjaxJSON aj = new AjaxJSON();
         try{
             T_B_Discount_Type dt = (T_B_Discount_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Discount_Type.class);
-            discountTypeService.insetyDiscountType(dt);
+            String res = discountTypeService.insetyDiscountType(dt);
+            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType("1","10");
+            aj.setObj(p.getList());
+            aj.setTotal(p.getTotal());
+            aj.setSuccess(res.equals("success")?true:false);
+            aj.setMsg(res);
         }catch (Exception e){
             aj.setMsg(e.getMessage());
             aj.setSuccess(false);
@@ -73,6 +78,26 @@ public class DiscountTypeController {
             aj.setSuccess(true);
             aj.setTotal(p.getTotal());
             aj.setMsg(res.equals("success")?"删除成功":"删除失败");
+        }catch (Exception e){
+            aj.setMsg(e.getMessage());
+            aj.setSuccess(false);
+            return aj;
+        }
+        return aj;
+    }
+
+    @RequestMapping(value="/updateDiscountType.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Object updateDiscountType(@RequestParam Map<String,Object> params, @RequestBody AjaxJSON ajax){
+        AjaxJSON aj = new AjaxJSON();
+        try{
+            T_B_Discount_Type dt = (T_B_Discount_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Discount_Type.class);
+            String res = discountTypeService.updateDiscountType(dt);
+            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType("1","10");
+            aj.setObj(p.getList());
+            aj.setSuccess(res.equals("success")?true:false);
+            aj.setTotal(p.getTotal());
+            aj.setMsg(res);
         }catch (Exception e){
             aj.setMsg(e.getMessage());
             aj.setSuccess(false);

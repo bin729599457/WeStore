@@ -37,11 +37,32 @@ public class DiscountTypeServiceImpl implements DiscountTypeService {
     }
 
 
-    public Object insetyDiscountType(T_B_Discount_Type dt) {
-        dt.setId(CustomUUID.getFlowIdWorkerInstance().generate());
-        String sql = CommonUtils.add(dt);
-        commonDAO.add(sql);
-        return dt;
+    public String insetyDiscountType(T_B_Discount_Type dt) {
+        if (dt.getDiscount()>dt.getMax_money()){
+            return "折扣金额不能大于满减金额";
+        }
+        else {
+            int count = discountTypeDAO.ifExist(dt);
+            if (count == 0) {
+                dt.setId(CustomUUID.getFlowIdWorkerInstance().generate());
+                String sql = CommonUtils.add(dt);
+                commonDAO.add(sql);
+                return "success";
+            }
+            return "已存在该类型优惠券";
+        }
+    }
+
+    public String updateDiscountType(T_B_Discount_Type dt) {
+            if (dt.getDiscount()>dt.getMax_money()){
+                return "折扣金额不能大于满减金额";
+            }
+            int count = discountTypeDAO.ifExist(dt);
+            if (count == 0){
+                discountTypeDAO.updateDiscountType(dt);
+                return "success";
+            }
+            return "已存在该类型优惠券";
     }
 
     public String deleteDiscountType(T_B_Discount_Type[] dts) {
