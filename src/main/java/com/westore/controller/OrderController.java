@@ -201,23 +201,23 @@ public class OrderController {
             //获得商品详情列表
             Map<String, Object> paraMap = new HashMap<String, Object>();
             paraMap.put("order_id",order_id);
-            List<Map<String, Object>> ordersList = orderService.getGoodsDetail(paraMap);
+            List<Map<String, Object>> goodsDetailList = orderService.getGoodsDetail(paraMap);
 
-/*
-                Map<String,Object> map= (Map<String, Object>) t_b_order_detail_list.get(i);
-                Map<String,Object> goodsDetail= (Map<String, Object>) map.get("t_b_order_detail");
-                Map<String,Object> paraMap=new HashMap<String,Object>();
-                paraMap.put("id",(String) goodsDetail.get("goods_id"));
-                paraMap.put("goods_nums_change",Integer.parseInt((String) goodsDetail.get("goods_num")));
-                goodsService.updateGoods(paraMap);*/
+            for(Map<String, Object> goodsDetail:goodsDetailList){
+                Map<String, Object> goodsMap=new HashMap<String, Object>();
+                goodsMap.put("goods_nums_change",(Integer)goodsDetail.get("goods_num"));
+                goodsMap.put("id",(String)goodsDetail.get("goods_id"));
+                goodsService.updateGoods(goodsMap);
+            }
+
             //下单成功 扣除用户余额
             userService.change(trd_session,"money","-"+(String) params.get("total_money"));
 
             //修改订单状态
-            Map<String,Object> updateOrderStatus =new HashMap<String, Object>();
-            updateOrderStatus.put("order_state",1);
-            updateOrderStatus.put("id",order_id);
-            orderService.updateOrder(updateOrderStatus);
+            Map<String,Object> updateOrderStatusMap =new HashMap<String, Object>();
+            updateOrderStatusMap.put("order_state",1);
+            updateOrderStatusMap.put("id",order_id);
+            orderService.updateOrder(updateOrderStatusMap);
 
             j.setObj(null);
             j.setMsg("支付订单成功");

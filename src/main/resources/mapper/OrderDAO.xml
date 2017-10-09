@@ -35,8 +35,8 @@
       DELETE FROM t_b_order WHERE id=#{id}
     </delete>
 
-    <update id="updateGoods" parameterType="java.util.Map">
-        UPDATE t_b_goods
+    <update id="updateOrder" parameterType="java.util.Map">
+        UPDATE t_b_order
         <trim prefix="set" suffixOverrides=",">
 
             <if test="order_state!=null and order_state!=''">

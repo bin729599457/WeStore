@@ -78,8 +78,10 @@
                 goods_nums=#{goods_nums},
             </if>
             <if test="goods_nums_change!=null and goods_nums_change!=''">
-                goods_nums=goods_nums-#{goods_nums}
+                goods_nums=goods_nums-#{goods_nums_change},
+                goods_sales_nums=goods_sales_nums+#{goods_nums_change},
             </if>
+
         </trim>
 
         WHERE id=#{id}
