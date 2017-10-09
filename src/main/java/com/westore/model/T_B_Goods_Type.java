@@ -23,4 +23,12 @@ public class T_B_Goods_Type {
     public void setGoods_type_name(String goods_type_name) {
         this.goods_type_name = goods_type_name;
     }
+
+    @Override
+    public String toString() {
+        return "T_B_Goods_Type{" +
+                "id='" + id + '\'' +
+                ", goods_type_name='" + goods_type_name + '\'' +
+                '}';
+    }
 }

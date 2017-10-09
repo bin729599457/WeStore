@@ -54,6 +54,9 @@ public class ILocationTest {
     private DiscountTypeService discountTypeService;
 
     @Resource
+    private GoodsTypeService goodsTypeService;
+
+    @Resource
     private DiscountDAO discountDAO;
 
     @Test
@@ -120,4 +123,12 @@ public class ILocationTest {
         t.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
         System.out.println(discountDAO.getUserDiscount(t));
     }
+
+    @Test
+    public void testType(){
+        T_B_Goods_Type t = new T_B_Goods_Type();
+        t.setGoods_type_name("励志");
+        System.out.println(goodsTypeService.insertTypes(t));
+    }
+
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 设置为OrderDAO接口方法提供sql语句配置 -->
+<mapper namespace="com.westore.dao.GoodsTypeDAO">
+
+    <select id="getAllTypes" resultType="com.westore.model.T_B_Goods_Type">
+        SELECT *
+        FROM t_b_goods_type
+    </select>
+
+    <select id="ifExist" parameterType="com.westore.model.T_B_Goods_Type" resultType="int">
+        SELECT COUNT(*)
+        FROM t_b_goods_type
+        WHERE goods_type_name = #{goods_type_name}
+    </select>
+
+
+</mapper>
