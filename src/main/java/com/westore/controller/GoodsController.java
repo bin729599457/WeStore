@@ -42,6 +42,7 @@ public class GoodsController {
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
             T_B_Goods t_b_goods= (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()),T_B_Goods.class);
+
             String goods_price_low = (String)params.get("goods_price_low");
             String goods_price_high = (String)params.get("goods_price_high");
             if(t_b_goods.getId()!=null) {
@@ -63,7 +64,24 @@ public class GoodsController {
             paraMap.put("goods_price_high", goods_price_high);
             paraMap.put("goods_author", t_b_goods.getGoods_author());
             paraMap.put("goods_publisher", t_b_goods.getGoods_publisher());
-            List<T_B_Goods> goodsList = goodsService.selectGoods(paraMap);
+            List<Map<String, Object>> goodsList = goodsService.selectGoods(paraMap);
+
+            for(Map<String, Object> tBGoods:goodsList){
+                String str=(String) tBGoods.get("goods_images");
+                String[] imagesList= str.split(",");
+                StringBuilder stringBuilder=new StringBuilder();
+                for(int i=0;i<imagesList.length;i++){
+
+                    if(i==imagesList.length-1){
+                        stringBuilder.append(IMAGE_HOME_URL+imagesList[i]);
+
+                    }else{
+                        stringBuilder.append(IMAGE_HOME_URL+imagesList[i]+",");
+
+                    }
+                }
+                tBGoods.put("goods_images",stringBuilder.toString());
+            }
 
             j.setObj(goodsList);
             j.setTotal((long)goodsList.size());
