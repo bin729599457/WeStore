@@ -31,8 +31,23 @@ public class GoodsTypeServiceImpl implements GoodsTypeService{
             String sql = CommonUtils.add(t);
             System.out.println(sql);
             commonDAO.add(sql);
+        return "success";
+    }
+        return "已存在该类别";
+}
+
+    public String updateTypes(T_B_Goods_Type t){
+        int count = goodsTypeDAO.ifExist(t);
+        if (count == 0){
+            goodsTypeDAO.updateTypes(t);
             return "success";
         }
         return "已存在该类别";
+    }
+
+    public String deleteTypes(T_B_Goods_Type t) {
+        String sql = CommonUtils.delete(t);
+        commonDAO.delete(sql);
+        return "success";
     }
 }

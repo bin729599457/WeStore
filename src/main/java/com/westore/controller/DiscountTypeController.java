@@ -52,9 +52,6 @@ public class DiscountTypeController {
         try{
             T_B_Discount_Type dt = (T_B_Discount_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Discount_Type.class);
             String res = discountTypeService.insetyDiscountType(dt);
-            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType("1","10");
-            aj.setObj(p.getList());
-            aj.setTotal(p.getTotal());
             aj.setSuccess(res.equals("success")?true:false);
             aj.setMsg(res);
         }catch (Exception e){
@@ -73,7 +70,8 @@ public class DiscountTypeController {
         try{
             T_B_Discount_Type[] types=(T_B_Discount_Type[])JSONArray.toArray(JSONArray.fromObject(ajax.getObj()), T_B_Discount_Type.class);
             String res = discountTypeService.deleteDiscountType(types);
-            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType("1","10");
+            String pageNum = (String)params.get("pageNum");
+            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType(pageNum,"10");
             aj.setObj(p.getList());
             aj.setSuccess(true);
             aj.setTotal(p.getTotal());
@@ -93,7 +91,8 @@ public class DiscountTypeController {
         try{
             T_B_Discount_Type dt = (T_B_Discount_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Discount_Type.class);
             String res = discountTypeService.updateDiscountType(dt);
-            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType("1","10");
+            String pageNum = (String)params.get("pageNum");
+            PageInfo<T_B_Discount_Type> p = discountTypeService.getAllDiscountType(pageNum,"10");
             aj.setObj(p.getList());
             aj.setSuccess(res.equals("success")?true:false);
             aj.setTotal(p.getTotal());

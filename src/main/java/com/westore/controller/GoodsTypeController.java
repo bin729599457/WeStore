@@ -68,6 +68,50 @@ public class GoodsTypeController {
     }
 
 
+    @RequestMapping(value = "/updateTypes.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public AjaxJSON updateTypes(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax) {
+        AjaxJSON j = new AjaxJSON();
+        try {
+            T_B_Goods_Type t = (T_B_Goods_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Type.class);
+            String res = goodsTypeService.updateTypes(t);
+            List<T_B_Goods_Type> objList = goodsTypeService.getAllTypes();
+            j.setMsg(res);
+            j.setSuccess(res.equals("success")?true:false);
+            j.setObj(objList);
+            j.setTotal((long)objList.size());
+        } catch (Exception e) {
+            j.setMsg("修改一级分类失败" + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
+
+    @RequestMapping(value = "/deleteTypes.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public AjaxJSON deleteTypes(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax) {
+        AjaxJSON j = new AjaxJSON();
+        try {
+            T_B_Goods_Type t = (T_B_Goods_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Type.class);
+            String res = goodsTypeService.deleteTypes(t);
+            List<T_B_Goods_Type> objList = goodsTypeService.getAllTypes();
+            j.setMsg(res);
+            j.setSuccess(res.equals("success")?true:false);
+            j.setObj(objList);
+            j.setTotal((long)objList.size());
+        } catch (Exception e) {
+            j.setMsg("修改一级分类失败" + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
+
+
     @RequestMapping(value = "/getSecondTypes.do")
     @ResponseBody
     public AjaxJSON getSecondTypes(HttpServletRequest request) {
