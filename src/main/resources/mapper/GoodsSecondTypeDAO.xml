@@ -4,20 +4,19 @@
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.GoodsSecondTypeDAO">
 
-    <select id="getSecondTypes" parameterType="com.westore.model.T_B_Goods_Second_Type" resultType="com.westore.model.T_B_Goods_Second_Type">
-        SELECT id,goods_second_type_name,goods_type_id,concat('https://www.westorehere.shop/img/',img) as img
-        FROM t_b_goods_second_type
-        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+    <select id="getSecondTypes" parameterType="com.westore.model.T_B_Goods_Second_Type" resultType="java.util.Map">
+        SELECT gst.id,goods_second_type_name,goods_type_id,concat('https://www.westorehere.shop/img/',img) as img ,t.goods_type_name
+        FROM t_b_goods_second_type gst ,t_b_goods_type t
+        WHERE gst.goods_type_id = t.id
         <if test="id!=null  and id!=''">
               AND  id = #{id}
-            </if>
-            <if test="goods_second_type_name!=null  and goods_second_type_name!=''">
+        </if>
+        <if test="goods_second_type_name!=null  and goods_second_type_name!=''">
               AND  goods_second_type_name = #{goods_second_type_name}
-            </if>
-            <if test="goods_type_id!=null  and goods_type_id!=''">
+        </if>
+        <if test="goods_type_id!=null  and goods_type_id!=''">
               AND  goods_type_id = #{goods_type_id}
-            </if>
-        </trim>
+        </if>
     </select>
 
 

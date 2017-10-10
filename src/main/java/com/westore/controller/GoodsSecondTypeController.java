@@ -5,6 +5,7 @@ import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Goods_Second_Type;
 import com.westore.model.T_B_Goods_Type;
 import com.westore.service.GoodsSecondTypeService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class GoodsSecondTypeController {
             T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
             String pageNum = (String)params.get("pageNum");
             String pageSize = (String)params.get("pageSize");
-            PageInfo<T_B_Goods_Second_Type> gst_list = goodsSecondTypeService.getGoodsSecondType(gst,pageNum,pageSize);
+            PageInfo<Map<String,Object>> gst_list = goodsSecondTypeService.getGoodsSecondType(gst,pageNum,pageSize);
             aj.setObj(gst_list.getList());
             aj.setSuccess(true);
             aj.setTotal((long)gst_list.getTotal());
@@ -68,7 +69,7 @@ public class GoodsSecondTypeController {
             T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
             String res = goodsSecondTypeService.updateGoodsSecondType(gst);
             String pageNum = (String)params.get("pageNum");
-            PageInfo<T_B_Goods_Second_Type> gst_list = goodsSecondTypeService.getGoodsSecondType(new T_B_Goods_Second_Type(),pageNum,"10");
+            PageInfo<Map<String,Object>> gst_list = goodsSecondTypeService.getGoodsSecondType(new T_B_Goods_Second_Type(),pageNum,"10");
             aj.setObj(gst_list.getList());
             aj.setTotal((long)gst_list.getTotal());
             aj.setSuccess(res.equals("success")?true:false);
@@ -87,8 +88,12 @@ public class GoodsSecondTypeController {
     public Object deleteGoodsSecondType(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
         AjaxJSON aj = new AjaxJSON();
         try {
-            T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
-            String res = goodsSecondTypeService.updateGoodsSecondType(gst);
+            T_B_Goods_Second_Type[] types=(T_B_Goods_Second_Type[]) JSONArray.toArray(JSONArray.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
+            String res = goodsSecondTypeService.deleteGoodsSecondType(types);
+            String pageNum = (String)params.get("pageNum");
+            PageInfo<Map<String,Object>> gst_list = goodsSecondTypeService.getGoodsSecondType(new T_B_Goods_Second_Type(),pageNum,"10");
+            aj.setObj(gst_list.getList());
+            aj.setTotal((long)gst_list.getTotal());
             aj.setSuccess(res.equals("success")?true:false);
             aj.setMsg(res);
         }catch (Exception e){

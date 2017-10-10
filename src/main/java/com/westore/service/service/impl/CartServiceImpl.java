@@ -19,8 +19,7 @@ import java.util.List;
 @Service("cartService")
 public class CartServiceImpl implements CartService {
 
-    @Value("${application.IMAGE_HOME_URL}")
-    private String IMAGE_HOME_URL;
+    private String IMAGE_HOME_URL = "https://www.westorehere.shop/img/";
 
 
     @Resource

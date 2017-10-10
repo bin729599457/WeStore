@@ -55,7 +55,7 @@ public class IUserDAOTest {
     @Test
     public void testFindComment(){
 
-        System.out.println(userService.checkUserPassword("45f0453f45d3f1cdffd81260e1c5162be130e09c","123456"));
+        System.out.println(userService.checkUserPassword("6d60793ff434a8c75c40b54082722315ddfa8943","111111"));
     }
 
 

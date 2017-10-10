@@ -6,6 +6,7 @@ import com.westore.dao.CommonDAO;
 import com.westore.dao.GoodsSecondTypeDAO;
 import com.westore.model.T_B_Discount_Type;
 import com.westore.model.T_B_Goods_Second_Type;
+import com.westore.model.T_B_Goods_Type;
 import com.westore.service.GoodsSecondTypeService;
 import com.westore.utils.CommonUtils;
 import com.westore.utils.CustomUUID;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service("goodSecondTypeService")
 public class GoodsSecondTypeServiceImpl implements GoodsSecondTypeService{
@@ -24,9 +26,9 @@ public class GoodsSecondTypeServiceImpl implements GoodsSecondTypeService{
     private CommonDAO commonDAO;
 
 
-    public PageInfo<T_B_Goods_Second_Type> getGoodsSecondType(T_B_Goods_Second_Type gst,String pageNum,String pageSize) {
+    public PageInfo<Map<String,Object>> getGoodsSecondType(T_B_Goods_Second_Type gst, String pageNum, String pageSize) {
         PageHelper.startPage(Integer.parseInt(pageNum),Integer.parseInt(pageSize));
-        PageInfo<T_B_Goods_Second_Type> p_list = new PageInfo<T_B_Goods_Second_Type>(goodsSecondTypeDAO.getSecondTypes(gst));
+        PageInfo<Map<String,Object>> p_list = new PageInfo<Map<String,Object>>(goodsSecondTypeDAO.getSecondTypes(gst));
         return p_list;
     }
 
@@ -57,4 +59,18 @@ public class GoodsSecondTypeServiceImpl implements GoodsSecondTypeService{
             return "error";
         }
     }
+
+    public String deleteGoodsSecondType(T_B_Goods_Second_Type[] gsts){
+        if(gsts.length!=0) {
+            for (T_B_Goods_Second_Type t:gsts) {
+                if(!t.getId().equals("0")) {
+                    String sql = CommonUtils.delete(t);
+                    commonDAO.delete(sql);
+                }
+            }
+            return "success";
+        }
+        return "false";
+    }
+
 }
