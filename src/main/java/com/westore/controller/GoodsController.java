@@ -342,6 +342,29 @@ public class GoodsController {
                 return j;
             }
 
+            //若无输入筛选条件，则为综合排序
+            List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
+            for (Map<String, Object> tBGoods : goodsList) {
+                String str = (String) tBGoods.get("goods_images");
+                String[] imagesList = str.split(",");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < imagesList.length; i++) {
+
+                    if (i == imagesList.length - 1) {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                    } else {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                    }
+                }
+                tBGoods.put("goods_images", stringBuilder.toString());
+            }
+            j.setObj(goodsList);
+            j.setMsg("商品排序成功");
+            j.setTotal((long) goodsList.size());
+            return j;
+
 
         } catch (Exception e) {
             j.setMsg("商品排序失败 " + e.getMessage());
@@ -349,7 +372,6 @@ public class GoodsController {
             return j;
         }
 
-        return j;
     }
 
     @RequestMapping(value = "/updateGoodsWeights.do")
