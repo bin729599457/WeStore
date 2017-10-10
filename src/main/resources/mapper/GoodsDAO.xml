@@ -5,8 +5,8 @@
 <mapper namespace="com.westore.dao.GoodsDAO">
 
     <select id="findAll" parameterType="java.util.Map" resultType="java.util.Map">
-        SELECT t.id,t.goods_title,t.goods_descript,
-        t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,
+        SELECT t.id,t.goods_title,t.goods_descript,t.goods_type_id,t.goods_second_type_id,
+        t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,t.is_discounted,
         t.goods_point,t.goods_author,t.goods_publisher,
         tp.goods_type_name,tsp.goods_second_type_name
         FROM t_b_goods t,t_b_goods_type tp,t_b_goods_second_type tsp
