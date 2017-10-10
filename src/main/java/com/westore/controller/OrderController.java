@@ -359,6 +359,7 @@ public class OrderController {
 
             j.setObj(ordersList);
             j.setMsg("修改订单成功");
+            j.setTotal((long)ordersList.size());
 
 
         }catch (Exception e){
