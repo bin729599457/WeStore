@@ -56,8 +56,8 @@
             <if test="goods_title!=null and goods_title!=''">
                 goods_title=#{goods_title},
             </if>
-            <if test="goods_type_id!=null and goods_type_id!=''">
-                goods_type_id=#{goods_type_id},
+            <if test="goods_sales_nums!=null and goods_sales_nums!=''">
+                goods_sales_nums=#{goods_sales_nums},
             </if>
             <if test="goods_type_id!=null and goods_type_id!=''">
                 goods_type_id=#{goods_type_id},
@@ -92,10 +92,7 @@
             <if test="goods_weights!=null and goods_weights!=''">
                 goods_weights=#{goods_weights},
             </if>
-            <if test="goods_nums!=null and goods_nums!=''">
-                goods_nums=#{goods_nums},
-            </if>
-            <if test="goods_nums_change!=null and goods_nums_change!=''">
+            <if test="goods_num s_change!=null and goods_nums_change!=''">
                 goods_nums=goods_nums-#{goods_nums_change},
                 goods_sales_nums=goods_sales_nums+#{goods_nums_change},
             </if>

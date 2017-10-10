@@ -61,4 +61,20 @@ public class DiscountController {
         }
         return aj;
     }
+
+
+    @RequestMapping(value="/updateUserDiscount.do" ,produces="application/json" ,method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public Object updateUserDiscount(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
+        AjaxJSON aj = new AjaxJSON();
+        try{
+            String trd_session = (String)params.get("trd_session");
+            String id = (String)params.get("id");
+        }catch (Exception e){
+            aj.setMsg(e.getMessage());
+            aj.setSuccess(false);
+            return aj;
+        }
+        return aj;
+    }
 }
