@@ -11,4 +11,6 @@ public interface GoodsSecondTypeDAO {
 
     public int ifExist(T_B_Goods_Second_Type gst);
 
+    public void updateSecondTypes(T_B_Goods_Second_Type gst);
+
 }

@@ -26,4 +26,14 @@
         FROM t_b_goods_second_type
         WHERE goods_second_type_name = #{goods_second_type_name}
     </select>
+
+
+    <update id="updateSecondTypes" parameterType="com.westore.model.T_B_Goods_Second_Type">
+        UPDATE t_b_goods_second_type
+        SET
+          goods_second_type_name = #{goods_second_type_name},
+          goods_type_id = #{goods_type_id},
+          img = #{img}
+        WHERE id = #{id}
+    </update>
 </mapper>

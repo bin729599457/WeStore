@@ -1,5 +1,6 @@
 package com.westore.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.westore.model.AjaxJSON;
 import com.westore.model.T_B_Goods_Second_Type;
 import com.westore.model.T_B_Goods_Type;
@@ -26,10 +27,12 @@ public class GoodsSecondTypeController {
         AjaxJSON aj = new AjaxJSON();
         try {
             T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
-            List<T_B_Goods_Second_Type> gst_list = goodsSecondTypeService.getGoodsSecondType(gst);
-            aj.setObj(gst_list);
+            String pageNum = (String)params.get("pageNum");
+            String pageSize = (String)params.get("pageSize");
+            PageInfo<T_B_Goods_Second_Type> gst_list = goodsSecondTypeService.getGoodsSecondType(gst,pageNum,pageSize);
+            aj.setObj(gst_list.getList());
             aj.setSuccess(true);
-            aj.setTotal((long)gst_list.size());
+            aj.setTotal((long)gst_list.getTotal());
         }catch (Exception e){
             aj.setMsg(e.getMessage());
             aj.setSuccess(false);
@@ -46,6 +49,46 @@ public class GoodsSecondTypeController {
         try {
             T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
             String res = goodsSecondTypeService.insertGoodsSecondType(gst);
+            aj.setSuccess(res.equals("success")?true:false);
+            aj.setMsg(res);
+        }catch (Exception e){
+            aj.setMsg(e.getMessage());
+            aj.setSuccess(false);
+            return aj;
+        }
+        return aj;
+    }
+
+
+    @RequestMapping(value = "/updateGoodsSecondType.do" ,produces="application/json" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public Object updateGoodsSecondType(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
+        AjaxJSON aj = new AjaxJSON();
+        try {
+            T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
+            String res = goodsSecondTypeService.updateGoodsSecondType(gst);
+            String pageNum = (String)params.get("pageNum");
+            PageInfo<T_B_Goods_Second_Type> gst_list = goodsSecondTypeService.getGoodsSecondType(new T_B_Goods_Second_Type(),pageNum,"10");
+            aj.setObj(gst_list.getList());
+            aj.setTotal((long)gst_list.getTotal());
+            aj.setSuccess(res.equals("success")?true:false);
+            aj.setMsg(res);
+        }catch (Exception e){
+            aj.setMsg(e.getMessage());
+            aj.setSuccess(false);
+            return aj;
+        }
+        return aj;
+    }
+
+
+    @RequestMapping(value = "/deleteGoodsSecondType.do" ,produces="application/json" ,method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public Object deleteGoodsSecondType(@RequestParam Map<String,Object> params,@RequestBody AjaxJSON ajax){
+        AjaxJSON aj = new AjaxJSON();
+        try {
+            T_B_Goods_Second_Type gst = (T_B_Goods_Second_Type) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Goods_Second_Type.class);
+            String res = goodsSecondTypeService.updateGoodsSecondType(gst);
             aj.setSuccess(res.equals("success")?true:false);
             aj.setMsg(res);
         }catch (Exception e){
