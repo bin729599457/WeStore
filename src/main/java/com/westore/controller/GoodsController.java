@@ -153,6 +153,7 @@ public class GoodsController {
 
             j.setObj(goodsList);
             j.setMsg("删除商品成功");
+            j.setTotal((long)goodsList.size());
 
         } catch (Exception e) {
             j.setMsg("删除商品失败 " + e.getMessage());
