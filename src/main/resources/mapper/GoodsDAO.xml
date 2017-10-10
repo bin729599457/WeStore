@@ -56,26 +56,23 @@
             <if test="goods_title!=null and goods_title!=''">
                 goods_title=#{goods_title},
             </if>
-            <if test="goods_sales_nums!=null and goods_sales_nums!=''">
-                goods_sales_nums=#{goods_sales_nums},
-            </if>
             <if test="goods_type_id!=null and goods_type_id!=''">
                 goods_type_id=#{goods_type_id},
             </if>
             <if test="goods_descript!=null and goods_descript!=''">
                 goods_descript=#{goods_descript},
             </if>
-            <if test="goods_second_type_id!=null and goods_second_type_id!=''">
-                goods_second_type_id=#{goods_second_type_id},
-            </if>
-            <if test="goods_nums!=null and goods_nums!=''">
-                goods_nums=#{goods_nums},
-            </if>
             <if test="goods_price!=null and goods_price!=''">
                 goods_price=#{goods_price},
             </if>
             <if test="goods_images!=null and goods_images!=''">
                 goods_images=#{goods_images},
+            </if>
+            <if test="goods_nums!=null and goods_nums!=''">
+                goods_nums=#{goods_nums},
+            </if>
+            <if test="goods_sales_nums!=null and goods_sales_nums!=''">
+                goods_sales_nums=#{goods_sales_nums},
             </if>
             <if test="goods_point!=null and goods_point!=''">
                 goods_point=#{goods_point},
@@ -86,19 +83,21 @@
             <if test="goods_publisher!=null and goods_publisher!=''">
                 goods_publisher=#{goods_publisher},
             </if>
+            <if test="goods_second_type_id!=null and goods_second_type_id!=''">
+                goods_second_type_id=#{goods_second_type_id},
+            </if>
             <if test="is_discounted!=null and is_discounted!=''">
                 is_discounted=#{is_discounted},
             </if>
             <if test="goods_weights!=null and goods_weights!=''">
                 goods_weights=#{goods_weights},
             </if>
-            <if test="goods_num s_change!=null and goods_nums_change!=''">
+            <if test="goods_nums_change!=null and goods_nums_change!=''">
                 goods_nums=goods_nums-#{goods_nums_change},
                 goods_sales_nums=goods_sales_nums+#{goods_nums_change},
             </if>
 
         </trim>
-
         WHERE id=#{id}
     </update>
 
