@@ -37,7 +37,7 @@ public class GoodsServiceImpl implements GoodsService {
         return count/commontList.size();
     }*/
 
-    public List<T_B_Goods> softGoods(Map<String, Object> paraMap) {
+    public List<Map<String, Object>> softGoods(Map<String, Object> paraMap) {
         return goodsDAO.softGoods(paraMap);
     }
 

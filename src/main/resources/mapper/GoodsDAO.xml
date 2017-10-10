@@ -45,7 +45,7 @@
             AND t.is_discounted =#{is_discounted}
         </if>
 /*优化功能增加字段 goods_Weights权重 作为默认排序依据*/
-        GROUP BY t.id
+        ORDER BY t.goods_weights ASC
     </select>
 
 
@@ -101,28 +101,40 @@
       </if>
     </select>
 
-    <select id="softGoods" parameterType="java.util.Map" resultType="com.westore.model.T_B_Goods">
-        SELECT t.id as goods_id,t.goods_title as goods_title,t.goods_type_id,t.goods_descript,t.goods_price,t.goods_images,
-        t.goods_nums,t.goods_sales_nums,t.goods_point,t.goods_author,t.goods_publisher,tp.goods_type_name
-        FROM t_b_goods t,t_b_goods_type tp
+    <select id="softGoods" parameterType="java.util.Map" resultType="java.util.Map">
+
+        SELECT t.id,t.goods_title,t.goods_descript,
+        t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,
+        t.goods_point,t.goods_author,t.goods_publisher,
+        tp.goods_type_name,tsp.goods_second_type_name
+        FROM t_b_goods t,t_b_goods_type tp,t_b_goods_second_type tsp
         WHERE t.goods_type_id=tp.id
-        <if test="goods_price!='asc'">
-            GROUP BY goods_price ASC
+        AND t.goods_second_type_id=tsp.id
+        AND tsp.goods_type_id=tp.id
+
+        <if test="goods_price=='asc'">
+            ORDER BY goods_price ASC
         </if>
-        <if test="goods_price!='desc'">
-            GROUP BY goods_price DESC
+        <if test="goods_price=='desc'">
+            ORDER BY goods_price DESC
         </if>
-        <if test="goods_sales_nums='asc'">
-            GROUP BY goods_sales_nums ASC
+        <if test="goods_sales_nums=='asc'">
+            ORDER BY goods_sales_nums ASC
         </if>
-        <if test="goods_sales_nums='desc'">
-            GROUP BY goods_sales_nums DESC
+        <if test="goods_sales_nums=='desc'">
+            ORDER BY goods_sales_nums DESC
         </if>
-        <if test="goods_point='asc">
-            GROUP BY goods_point ASC
+        <if test="goods_point=='asc'">
+            ORDER BY goods_point ASC
         </if>
-        <if test="goods_point='desc">
-            GROUP BY goods_point DESC
+        <if test="goods_point=='desc'">
+            ORDER BY goods_point DESC
+        </if>
+        <if test="goods_weights=='asc'">
+            ORDER BY goods_weights ASC
+        </if>
+        <if test="goods_weights=='desc'">
+            ORDER BY goods_weights DESC
         </if>
 
     </select>

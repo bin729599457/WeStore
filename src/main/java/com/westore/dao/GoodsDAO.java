@@ -16,5 +16,5 @@ public interface GoodsDAO {
 
     public List<Integer> selectGoodsPoint(Map<String, Object> paraMap);
 
-    public List<T_B_Goods> softGoods(Map<String, Object> paraMap);
+    public List<Map<String, Object>> softGoods(Map<String, Object> paraMap);
 }

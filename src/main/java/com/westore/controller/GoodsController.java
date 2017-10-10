@@ -218,10 +218,11 @@ public class GoodsController {
             paraMap.put("goods_point", goods_point);
 
             //排序条件只可以提供一个
+
             if (goods_price != null && !goods_price.equals("")) {
                 goods_sales_nums = "";
                 goods_point = "";
-                List<T_B_Goods> goodsList = goodsService.softGoods(paraMap);
+                List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
                 j.setObj(goodsList);
                 j.setMsg("商品排序成功");
                 j.setTotal((long) goodsList.size());
@@ -230,7 +231,7 @@ public class GoodsController {
             if (goods_sales_nums != null && !goods_sales_nums.equals("")) {
                 goods_price = "";
                 goods_point = "";
-                List<T_B_Goods> goodsList = goodsService.softGoods(paraMap);
+                List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
                 j.setObj(goodsList);
                 j.setTotal((long) goodsList.size());
                 j.setMsg("商品排序成功");
@@ -239,7 +240,7 @@ public class GoodsController {
             if (goods_point != null && !goods_point.equals("")) {
                 goods_price = "";
                 goods_sales_nums = "";
-                List<T_B_Goods> goodsList = goodsService.softGoods(paraMap);
+                List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
                 j.setObj(goodsList);
                 j.setTotal((long) goodsList.size());
                 j.setMsg("商品排序成功");
