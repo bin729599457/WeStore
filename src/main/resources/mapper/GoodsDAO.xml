@@ -41,6 +41,9 @@
         <if test="goods_publisher!=null and goods_publisher!=''">
             AND t.goods_publisher =#{goods_publisher}
         </if>
+        <if test="is_discounted!=null and is_discounted!=''">
+            AND t.is_discounted =#{is_discounted}
+        </if>
 /*优化功能增加字段 goods_Weights权重 作为默认排序依据*/
         GROUP BY t.id
     </select>
@@ -73,6 +76,9 @@
             </if>
             <if test="goods_publisher!=null and goods_publisher!=''">
                 goods_publisher=#{goods_publisher},
+            </if>
+            <if test="is_discounted!=null and is_discounted!=''">
+                is_discounted=#{is_discounted},
             </if>
             <if test="goods_nums!=null and goods_nums!=''">
                 goods_nums=#{goods_nums},

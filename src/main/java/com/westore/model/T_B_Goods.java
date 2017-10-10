@@ -14,6 +14,26 @@ public class T_B_Goods {
     private String goods_author;
     private String goods_publisher;
     private String goods_second_type_id;
+    private String is_discounted;
+
+    @Override
+    public String toString() {
+        return "T_B_Goods{" +
+                "id='" + id + '\'' +
+                ", goods_title='" + goods_title + '\'' +
+                ", goods_type_id='" + goods_type_id + '\'' +
+                ", goods_descript='" + goods_descript + '\'' +
+                ", goods_price='" + goods_price + '\'' +
+                ", goods_images='" + goods_images + '\'' +
+                ", goods_nums=" + goods_nums +
+                ", goods_sales_nums=" + goods_sales_nums +
+                ",goods_point="+goods_point+
+                ",goods_author="+goods_author+
+                ",goods_publisher="+goods_publisher+
+                ",goods_second_type_id="+goods_second_type_id+
+                ",is_discounted="+is_discounted+
+                '}';
+    }
 
     public T_B_Goods() {
     }
@@ -82,20 +102,6 @@ public class T_B_Goods {
         this.goods_type_id = goods_type_id;
     }
 
-    @Override
-    public String toString() {
-        return "T_B_Goods{" +
-                "id='" + id + '\'' +
-                ", goods_title='" + goods_title + '\'' +
-                ", goods_type_id='" + goods_type_id + '\'' +
-                ", goods_descript='" + goods_descript + '\'' +
-                ", goods_price='" + goods_price + '\'' +
-                ", goods_images='" + goods_images + '\'' +
-                ", goods_nums=" + goods_nums +
-                ", goods_sales_nums=" + goods_sales_nums +
-                '}';
-    }
-
     public float getGoods_point() {
         return goods_point;
     }
@@ -126,5 +132,13 @@ public class T_B_Goods {
 
     public void setGoods_second_type_id(String goods_second_type_id) {
         this.goods_second_type_id = goods_second_type_id;
+    }
+
+    public String getIs_discounted() {
+        return is_discounted;
+    }
+
+    public void setIs_discounted(String is_discounted) {
+        this.is_discounted = is_discounted;
     }
 }
