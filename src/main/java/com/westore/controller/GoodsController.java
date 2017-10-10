@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/GoodsController")
 public class GoodsController {
 
-    public static String IMAGE_HOME_URL = "https://www.westorehere.shop/img/";
+    public static final String IMAGE_HOME_URL = "https://www.westorehere.shop/img/";
 
     @Resource
     private GoodsService goodsService;

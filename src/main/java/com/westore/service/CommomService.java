@@ -15,5 +15,7 @@ public interface CommomService {
 
     public Map<String,Object> get(Object object,String id);
 
-    public Map<String,Object> getLocation(Object object,String id);
+    public Map<String,Object> getObject(Object object,String id);
+
+    public void goods_weight_Calculate(float new_point,String goods_id);
 }

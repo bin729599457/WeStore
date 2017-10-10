@@ -1,6 +1,7 @@
 package com.westore.service.service.impl;
 
 import com.westore.dao.CommonDAO;
+import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Goods_Type;
 import com.westore.service.CommomService;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.Map;
 
 @Service("CommomService")
 public class CommomServiceImpl implements CommomService {
+
+    public static final float BASE_POINT=3;
 
     @Resource
     private CommonDAO commonDAO;
@@ -108,7 +111,7 @@ public class CommomServiceImpl implements CommomService {
         return obj;
     }
 
-    public Map<String,Object> getLocation(Object object,String id) {
+    public Map<String,Object> getObject(Object object,String id) {
 
         StringBuilder sql = new StringBuilder("select * from ");
         sql.append(object.getClass().getSimpleName());
@@ -117,5 +120,15 @@ public class CommomServiceImpl implements CommomService {
         Map<String,Object> obj = commonDAO.get(sql.toString());
 
         return obj;
+    }
+
+    public void goods_weight_Calculate(float new_point,String goods_id) {
+
+        Map<String,Object> obj = getObject(new T_B_Goods(),goods_id);
+        obj.get("is_discounted");
+        obj.get("goods_weights");
+        obj.get("goods_point");
+
+
     }
 }

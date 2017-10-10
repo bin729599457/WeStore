@@ -185,7 +185,7 @@ public class OrderController {
             Map<String,Object> userMap=commomService.get(new T_B_User(),user_id);
 
             //判断用户密码是否输入正确
-            if(userService.checkUserPassword(trd_session,password)){
+            if(!userService.checkUserPassword(trd_session,password)){
                 j.setSuccess(false);
                 j.setMsg("用户密码输入不正确!");
                 return j;
@@ -289,7 +289,7 @@ public class OrderController {
 
             Map<String,Object> paraMap=new HashMap<String,Object>();
             //获得地址详情
-            Map<String,Object> locationMap=commomService.getLocation(new T_B_Location(),location_id);
+            Map<String,Object> locationMap=commomService.getObject(new T_B_Location(),location_id);
             paraMap.put("location",locationMap);
             paraMap.put("t_b_order",t_b_order);
             paraMap.put("t_b_order_detailList",t_b_order_detailList);
