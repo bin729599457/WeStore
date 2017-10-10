@@ -69,7 +69,10 @@ public class DiscountController {
         AjaxJSON aj = new AjaxJSON();
         try{
             String trd_session = (String)params.get("trd_session");
-            String id = (String)params.get("id");
+            T_B_Discount d = (T_B_Discount) JSONObject.toBean(JSONObject.fromObject(ajax.getObj()), T_B_Discount.class);
+            String res = discountService.updateUserDiscount(trd_session,d);
+            aj.setTotal((long)1);
+            aj.setSuccess(res.equals("success")?true:false);
         }catch (Exception e){
             aj.setMsg(e.getMessage());
             aj.setSuccess(false);

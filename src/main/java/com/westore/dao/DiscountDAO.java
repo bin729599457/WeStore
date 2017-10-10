@@ -14,4 +14,6 @@ public interface DiscountDAO {
 
     public void deleteUserDiscount(T_B_Discount d);
 
+    public void updateUserDiscount(T_B_Discount d);
+
 }

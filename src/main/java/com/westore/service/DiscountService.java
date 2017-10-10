@@ -11,4 +11,6 @@ public interface DiscountService {
 
     public List<Map<String,Object>> getUserDiscount(String trd_session, T_B_Discount t);
 
+    public String updateUserDiscount(String trd_session, T_B_Discount t);
+
 }

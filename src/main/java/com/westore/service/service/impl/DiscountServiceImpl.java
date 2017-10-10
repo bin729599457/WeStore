@@ -61,4 +61,15 @@ public class DiscountServiceImpl implements DiscountService{
         }
     }
 
+    public String updateUserDiscount(String trd_session, T_B_Discount t) {
+        String openid = redisService.getOpenid(trd_session);
+        if(openid == null){
+            return null;
+        }
+        else {
+            t.setUser_id(openid);
+            discountDAO.updateUserDiscount(t);
+            return "success";
+        }
+    }
 }
