@@ -120,29 +120,34 @@
         AND t.goods_second_type_id=tsp.id
         AND tsp.goods_type_id=tp.id
 
+        <if test="Keywords!=null and Keywords!=''">
+            AND t.goods_descript LIKE #{Keywords}
+            OR t.goods_title LIKE #{Keywords}
+            GROUP BY t.id
+        </if>
         <if test="goods_price=='asc'">
-            ORDER BY goods_price ASC
+            ORDER BY t.goods_price ASC
         </if>
         <if test="goods_price=='desc'">
-            ORDER BY goods_price DESC
+            ORDER BY t.goods_price DESC
         </if>
         <if test="goods_sales_nums=='asc'">
-            ORDER BY goods_sales_nums ASC
+            ORDER BY t.goods_sales_nums ASC
         </if>
         <if test="goods_sales_nums=='desc'">
-            ORDER BY goods_sales_nums DESC
+            ORDER BY t.goods_sales_nums DESC
         </if>
         <if test="goods_point=='asc'">
-            ORDER BY goods_point ASC
+            ORDER BY t.goods_point ASC
         </if>
         <if test="goods_point=='desc'">
-            ORDER BY goods_point DESC
+            ORDER BY t.goods_point DESC
         </if>
         <if test="goods_weights=='asc'">
-            ORDER BY goods_weights ASC
+            ORDER BY t.goods_weights ASC
         </if>
         <if test="goods_weights=='desc'">
-            ORDER BY goods_weights DESC
+            ORDER BY t.goods_weights DESC
         </if>
 
     </select>

@@ -151,6 +151,23 @@ public class GoodsController {
             commomService.delete(t_b_goods);
             List<Map<String, Object>> goodsList = goodsService.selectGoods(paraMap);
 
+            for (Map<String, Object> tBGoods : goodsList) {
+                String str = (String) tBGoods.get("goods_images");
+                String[] imagesList = str.split(",");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < imagesList.length; i++) {
+
+                    if (i == imagesList.length - 1) {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                    } else {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                    }
+                }
+                tBGoods.put("goods_images", stringBuilder.toString());
+            }
+
             j.setObj(goodsList);
             j.setMsg("删除商品成功");
             j.setTotal((long)goodsList.size());
@@ -199,6 +216,22 @@ public class GoodsController {
             goodsService.updateGoods(paraMap);
             List<Map<String, Object>> goodsList = goodsService.selectGoods(goodsMap);
 
+            for (Map<String, Object> tBGoods : goodsList) {
+                String str = (String) tBGoods.get("goods_images");
+                String[] imagesList = str.split(",");
+                StringBuilder stringBuilder = new StringBuilder();
+                for (int i = 0; i < imagesList.length; i++) {
+
+                    if (i == imagesList.length - 1) {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                    } else {
+                        stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                    }
+                }
+                tBGoods.put("goods_images", stringBuilder.toString());
+            }
 
             j.setObj(goodsList);
             j.setMsg("更新商品成功");
@@ -223,11 +256,13 @@ public class GoodsController {
             String goods_price = request.getParameter("goods_price") == null ? "" : request.getParameter("goods_price");
             String goods_sales_nums = request.getParameter("goods_sales_nums") == null ? "" : request.getParameter("goods_sales_nums");
             String goods_point = request.getParameter("goods_point") == null ? "" : request.getParameter("goods_point");
+            String Keywords = request.getParameter("Keywords") == null ? "" : request.getParameter("Keywords");
 
             Map<String, Object> paraMap = new HashMap<String, Object>();
             paraMap.put("goods_price", goods_price);
             paraMap.put("goods_sales_nums", goods_sales_nums);
             paraMap.put("goods_point", goods_point);
+            paraMap.put("Keywords",'%' +Keywords+'%' );
 
             //排序条件只可以提供一个
 
@@ -235,6 +270,22 @@ public class GoodsController {
                 goods_sales_nums = "";
                 goods_point = "";
                 List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
+                for (Map<String, Object> tBGoods : goodsList) {
+                    String str = (String) tBGoods.get("goods_images");
+                    String[] imagesList = str.split(",");
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < imagesList.length; i++) {
+
+                        if (i == imagesList.length - 1) {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                        } else {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                        }
+                    }
+                    tBGoods.put("goods_images", stringBuilder.toString());
+                }
                 j.setObj(goodsList);
                 j.setMsg("商品排序成功");
                 j.setTotal((long) goodsList.size());
@@ -244,6 +295,22 @@ public class GoodsController {
                 goods_price = "";
                 goods_point = "";
                 List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
+                for (Map<String, Object> tBGoods : goodsList) {
+                    String str = (String) tBGoods.get("goods_images");
+                    String[] imagesList = str.split(",");
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < imagesList.length; i++) {
+
+                        if (i == imagesList.length - 1) {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                        } else {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                        }
+                    }
+                    tBGoods.put("goods_images", stringBuilder.toString());
+                }
                 j.setObj(goodsList);
                 j.setTotal((long) goodsList.size());
                 j.setMsg("商品排序成功");
@@ -253,6 +320,22 @@ public class GoodsController {
                 goods_price = "";
                 goods_sales_nums = "";
                 List<Map<String, Object>> goodsList = goodsService.softGoods(paraMap);
+                for (Map<String, Object> tBGoods : goodsList) {
+                    String str = (String) tBGoods.get("goods_images");
+                    String[] imagesList = str.split(",");
+                    StringBuilder stringBuilder = new StringBuilder();
+                    for (int i = 0; i < imagesList.length; i++) {
+
+                        if (i == imagesList.length - 1) {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i]);
+
+                        } else {
+                            stringBuilder.append(IMAGE_HOME_URL + imagesList[i] + ",");
+
+                        }
+                    }
+                    tBGoods.put("goods_images", stringBuilder.toString());
+                }
                 j.setObj(goodsList);
                 j.setTotal((long) goodsList.size());
                 j.setMsg("商品排序成功");
