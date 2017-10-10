@@ -270,7 +270,7 @@ public class GoodsController {
 
         try {
 
-            commomService.goods_weight_Calculate(4,"1834466086519571465");
+            commomService.goods_weight_Calculate(2,"1834466086519571465");
 
             j.setObj(null);
             j.setMsg("更新商品权重成功");

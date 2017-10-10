@@ -89,6 +89,9 @@
             <if test="is_discounted!=null and is_discounted!=''">
                 is_discounted=#{is_discounted},
             </if>
+            <if test="goods_weights!=null and goods_weights!=''">
+                goods_weights=#{goods_weights},
+            </if>
             <if test="goods_nums!=null and goods_nums!=''">
                 goods_nums=#{goods_nums},
             </if>

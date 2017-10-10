@@ -136,8 +136,9 @@ public class CommomServiceImpl implements CommomService {
             return_weights_points=((new_point-(Float)obj.get("goods_point"))*1/5);
         }
 
-        float goods_point=(Float)obj.get("goods_point")+return_weights_points;
-        paraMap.put("goods_point",goods_point);
+        float goods_weights=(Float)obj.get("goods_weights")+return_weights_points;
+        paraMap.put("goods_weights",goods_weights);
+        paraMap.put("id",goods_id);
         goodsService.updateGoods(paraMap);
 
 
