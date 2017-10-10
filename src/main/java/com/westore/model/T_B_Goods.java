@@ -15,6 +15,7 @@ public class T_B_Goods {
     private String goods_publisher;
     private String goods_second_type_id;
     private String is_discounted;
+    private float goods_weights;
 
     @Override
     public String toString() {
@@ -140,5 +141,13 @@ public class T_B_Goods {
 
     public void setIs_discounted(String is_discounted) {
         this.is_discounted = is_discounted;
+    }
+
+    public float getGoods_weights() {
+        return goods_weights;
+    }
+
+    public void setGoods_weights(float goods_weights) {
+        this.goods_weights = goods_weights;
     }
 }

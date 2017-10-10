@@ -106,8 +106,11 @@ public class GoodsController {
         try {
             T_B_Goods t_b_goods = (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()), T_B_Goods.class);
             t_b_goods.setId(CustomUUID.getFlowIdWorkerInstance().generate());
+
+            //设置上商品默认销量为0，评分为3,权重为3
             t_b_goods.setGoods_sales_nums(0);
-            t_b_goods.setGoods_point(0);
+            t_b_goods.setGoods_point(3);
+            t_b_goods.setGoods_weights(3);
             //判断商品是否设置为秒杀商品， 若不是把商品is_discounted字段设为0，若是把is_discounted字段设为1
             if (t_b_goods.getIs_discounted() != null && !t_b_goods.getIs_discounted().equals("")) {
                 if (t_b_goods.getIs_discounted().equals("0")) {
