@@ -15,7 +15,8 @@
         AND tsp.goods_type_id=tp.id
 
         <if test="goods_title!=null  and goods_title!=''">
-            AND t.goods_title LIKE #{goods_title}
+            AND t.goods_title LIKE #{goods_title} OR t.goods_descript LIKE '%书%'
+            GROUP BY t.id
         </if>
         <if test="id!=null  and id!=''">
             AND t.id = #{id}
@@ -27,7 +28,8 @@
             AND t.goods_second_type_id = #{goods_second_type_id}
         </if>
         <if test="goods_descript!=null and goods_descript!=''">
-            AND t.goods_descript LIKE #{goods_descript}
+            AND t.goods_descript LIKE #{goods_descript} OR t.goods_descript LIKE '%书%'
+            GROUP BY t.id
         </if>
         <if test="goods_price_low!=null and goods_price_low!=''">
             AND t.goods_price >= #{goods_price_low}
