@@ -4,6 +4,7 @@ import com.westore.dao.CommonDAO;
 import com.westore.model.T_B_Goods;
 import com.westore.model.T_B_Goods_Type;
 import com.westore.service.CommomService;
+import com.westore.service.GoodsService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,6 +20,8 @@ public class CommomServiceImpl implements CommomService {
 
     @Resource
     private CommonDAO commonDAO;
+    @Resource
+    private GoodsService goodsService;
 
     public void add(Object object) {
 
@@ -125,10 +128,16 @@ public class CommomServiceImpl implements CommomService {
     public void goods_weight_Calculate(float new_point,String goods_id) {
 
         Map<String,Object> obj = getObject(new T_B_Goods(),goods_id);
-        obj.get("is_discounted");
-        obj.get("goods_weights");
-        obj.get("goods_point");
+        Map<String,Object> paraMap=new HashMap<String,Object>();
+        float return_weights_points=(Float)obj.get("goods_weights");
+        if(obj.get("is_discounted").toString().equals("1"))
+            return_weights_points= (float) (((new_point-(Float)obj.get("goods_point"))*1/5)+0.05);
+        else{
+            return_weights_points=((new_point-(Float)obj.get("goods_point"))*1/5);
+        }
 
-
+        float goods_point=(Float)obj.get("goods_point")+return_weights_points;
+        paraMap.put("goods_point",goods_point);
+        goodsService.updateGoods(paraMap);
     }
 }

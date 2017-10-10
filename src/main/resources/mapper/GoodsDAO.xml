@@ -59,8 +59,17 @@
             <if test="goods_type_id!=null and goods_type_id!=''">
                 goods_type_id=#{goods_type_id},
             </if>
+            <if test="goods_type_id!=null and goods_type_id!=''">
+                goods_type_id=#{goods_type_id},
+            </if>
             <if test="goods_descript!=null and goods_descript!=''">
                 goods_descript=#{goods_descript},
+            </if>
+            <if test="goods_second_type_id!=null and goods_second_type_id!=''">
+                goods_second_type_id=#{goods_second_type_id},
+            </if>
+            <if test="goods_nums!=null and goods_nums!=''">
+                goods_nums=#{goods_nums},
             </if>
             <if test="goods_price!=null and goods_price!=''">
                 goods_price=#{goods_price},

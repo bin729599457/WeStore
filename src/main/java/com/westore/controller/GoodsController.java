@@ -184,6 +184,7 @@ public class GoodsController {
             paraMap.put("goods_descript", t_b_goods.getGoods_descript());
             paraMap.put("goods_price", t_b_goods.getGoods_price());
             paraMap.put("goods_images", t_b_goods.getGoods_images());
+            paraMap.put("goods_sales_nums", t_b_goods.getGoods_sales_nums());
             paraMap.put("goods_nums", t_b_goods.getGoods_nums());
             paraMap.put("goods_point", t_b_goods.getGoods_point());
             paraMap.put("goods_author", t_b_goods.getGoods_author());
@@ -260,4 +261,23 @@ public class GoodsController {
         return j;
     }
 
+    @RequestMapping(value = "/updateGoodsWeights.do")
+    @ResponseBody
+    public AjaxJSON updateGoodsWeights(HttpServletRequest request) {
+        AjaxJSON j = new AjaxJSON();
+
+        try {
+
+
+            j.setObj(null);
+            j.setMsg("更新商品权重成功");
+
+        } catch (Exception e) {
+            j.setMsg("更新商品权重失败 " + e.getMessage());
+            j.setSuccess(false);
+            return j;
+        }
+
+        return j;
+    }
 }
