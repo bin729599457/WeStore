@@ -61,6 +61,9 @@ public class ILocationTest {
     private DiscountDAO discountDAO;
 
     @Resource
+    private DiscountService discountService;
+
+    @Resource
     private GoodsSecondTypeDAO goodsSecondTypeDAO;
 
     @Resource
@@ -119,9 +122,9 @@ public class ILocationTest {
     @Test
     public void testDis(){
         T_B_Discount t = new T_B_Discount();
-        t.setIs_used(0);
-        t.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
-        System.out.println(discountDAO.getUserDiscount(t));
+        t.setIs_used(1);
+        t.setId("1835126128570795012");
+        System.out.println(discountService.updateUserDiscount("77400a57486374ff40d0b3937cd3f547d6a85ea5",t));
     }
 
     @Test

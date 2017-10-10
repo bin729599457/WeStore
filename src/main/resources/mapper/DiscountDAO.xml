@@ -27,4 +27,12 @@
     </delete>
 
 
+    <update id="updateUserDiscount" parameterType="com.westore.model.T_B_Discount">
+        UPDATE t_b_discount
+        SET is_used = 1
+        WHERE id = #{id}
+        AND user_id = #{user_id}
+    </update>
+
+
 </mapper>

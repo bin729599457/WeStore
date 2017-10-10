@@ -56,7 +56,8 @@ public class CartController {
         res.setSuccess(result==0?false:true);
         res.setMsg(result==0?"error":"success");
         System.out.println(result);
-        res.setTotal((long)result);
+        int resultNum = cartService.getTotal(trd_session);
+        res.setTotal((long)resultNum);
         return res;
     }
 

@@ -101,9 +101,6 @@ public class UserServiceImpl implements UserService {
         }
         else {
             String res = userDAO.getUserPassword(openid);
-            if(res!=null){
-                redisTemplate.opsForHash().put(trd_session, "password", res);
-            }
             return (res == null || res.equals("")?0:1);
         }
     }
@@ -115,10 +112,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
         else {
-            String user_password_Des = (String) redisTemplate.opsForHash().get(trd_session,"password");
-            if(user_password_Des==null){
-                user_password_Des = userDAO.getUserPassword(openid);
-            }
+            String user_password_Des = userDAO.getUserPassword(openid);
             return user_password_Des == null?false:DesUtil.decrypt(user_password_Des).equals(input_password);
         }
 
