@@ -262,7 +262,9 @@ public class GoodsController {
             paraMap.put("goods_price", goods_price);
             paraMap.put("goods_sales_nums", goods_sales_nums);
             paraMap.put("goods_point", goods_point);
-            paraMap.put("Keywords",'%' +Keywords+'%' );
+            if(Keywords!=null&&!Keywords.equals("")){
+                paraMap.put("Keywords",'%' +Keywords+'%' );
+            }
 
             //排序条件只可以提供一个
 

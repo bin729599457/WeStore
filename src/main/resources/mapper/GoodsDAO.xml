@@ -124,7 +124,6 @@
             AND t.goods_descript LIKE #{Keywords}
             OR t.goods_title LIKE #{Keywords}
             GROUP BY t.id
-            ORDER BY t.goods_weights
         </if>
         <if test="goods_price=='asc'">
             ORDER BY t.goods_price ASC

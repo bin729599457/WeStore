@@ -216,7 +216,7 @@ public class OrderController {
             //修改订单状态
             Map<String,Object> updateOrderStatusMap =new HashMap<String, Object>();
             updateOrderStatusMap.put("order_state",1);
-            updateOrderStatusMap.put("id",order_id);
+            updateOrderStatusMap.put("order_id",order_id);
             orderService.updateOrder(updateOrderStatusMap);
 
             j.setObj(null);
