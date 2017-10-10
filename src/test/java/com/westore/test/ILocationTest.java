@@ -9,6 +9,7 @@ import com.westore.service.*;
 import com.westore.service.service.impl.DiscountTypeServiceImpl;
 import com.westore.utils.CommonUtils;
 import com.westore.utils.CustomUUID;
+import net.sf.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +102,9 @@ public class ILocationTest {
 
     @Test
     public void testFloat(){
-        System.out.println(Float.parseFloat("-123"));
+        JSONObject jo = new JSONObject();
+        jo.put("code","103");
+        System.out.println(jo.get("codes").equals("200"));
     }
 
     @Test
