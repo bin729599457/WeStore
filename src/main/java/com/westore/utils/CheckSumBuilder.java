@@ -6,8 +6,8 @@ public class CheckSumBuilder {
 
 
 
-    public static String getCheckSum(String openid, String session_key) {
-        return encode("SHA", openid + session_key );
+    public static String getCheckSum(String openid, String nonce,String curTime) {
+        return encode("SHA", openid + nonce + curTime);
     }
 
     private static String encode(String algorithm, String value) {

@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,8 @@ public class UserServiceImpl implements UserService {
         else {
             String openid = resultJSON.getString("openid");
             String session_key = resultJSON.getString("session_key");
-            String trd_sessionid = CheckSumBuilder.getCheckSum(openid,session_key);
+            String curTime=String.valueOf((new Date().getTime()/1000L));
+            String trd_sessionid = CheckSumBuilder.getCheckSum(openid,session_key,curTime);
             Map<String,String> map = new HashMap<String, String>();
             map.put("openid",openid);
             map.put("session_key",session_key);
