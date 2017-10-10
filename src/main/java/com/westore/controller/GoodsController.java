@@ -194,15 +194,10 @@ public class GoodsController {
             paraMap.put("goods_publisher", t_b_goods.getGoods_publisher());
             paraMap.put("is_discounted", t_b_goods.getIs_discounted());
 
-            Map<String, Object> goodsMap = new HashMap<String, Object>();
-
             goodsService.updateGoods(paraMap);
-            List<Map<String, Object>> goodsList = goodsService.selectGoods(goodsMap);
 
-
-            j.setObj(goodsList);
+            j.setObj(paraMap);
             j.setMsg("更新商品成功");
-            j.setTotal((long)goodsList.size());
 
         } catch (Exception e) {
             j.setMsg("更新商品失败 " + e.getMessage());
