@@ -5,16 +5,23 @@ import com.github.pagehelper.PageInfo;
 import com.westore.dao.CartDAO;
 import com.westore.dao.CommonDAO;
 import com.westore.model.T_B_Cart;
+import com.westore.model.T_B_Goods;
 import com.westore.service.CartService;
 import com.westore.service.RedisService;
 import com.westore.utils.CommonUtils;
 import com.westore.utils.CustomUUID;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service("cartService")
 public class CartServiceImpl implements CartService {
+
+    @Value("${application.IMAGE_HOME_URL}")
+    private String IMAGE_HOME_URL;
+
 
     @Resource
     private RedisService redisService;
@@ -33,6 +40,11 @@ public class CartServiceImpl implements CartService {
         else {
             PageHelper.startPage(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
             PageInfo<T_B_Cart> p_list = new PageInfo<T_B_Cart>(cartDAO.findUserCart(openid));
+            List<T_B_Cart> list= p_list.getList();
+            for(T_B_Cart cart:list){
+                T_B_Goods g = cart.getGoods();
+                g.setGoods_images(CommonUtils.covertToUrlList(g.getGoods_images(),IMAGE_HOME_URL));
+            }
             return p_list;
         }
     }

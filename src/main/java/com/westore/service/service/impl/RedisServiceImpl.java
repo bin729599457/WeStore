@@ -48,7 +48,11 @@ public class RedisServiceImpl  implements RedisService {
             return null;
         }
         else {
-            return  (String) redisTemplate.opsForHash().get(trd_session, "search");
+            String search = (String) redisTemplate.opsForHash().get(trd_session, "search");
+            QueueList ql = new QueueList();
+            ql.setList(search);
+            Collections.reverse(ql.getList());
+            return (ql.toString());
         }
     }
 

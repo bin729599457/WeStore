@@ -79,21 +79,12 @@ public class ILocationTest {
 
     @Test
     public void testCommonDAO(){
-//        T_B_Comment comment = new T_B_Comment();
-//        comment.setId("12312");
-//        comment.setUser_id("oNuDy0FuszmkS6dHrk2ieWFfleMw");
-//        comment.setGoods_id("1824704943563473927");
-//        comment.setComment_info("okokok");
-//        comment.setComment_point(4);
-        T_B_Discount_Type dt = new T_B_Discount_Type();
-        dt.setDiscount(400);
-        dt.setMax_money(2000);
-        discountTypeService.insetyDiscountType(dt);
+        System.out.println(CommonUtils.covertToUrlList("book1.jpg,book2.jpg","https://www.westorehere.shop/img/"));
     }
 
     @Test
     public void testgetOpenid(){
-       System.out.println(redisService.insertHistory("1fbbabf684bc0ff3df822a67e04f9e0ef4259fff","牛肉河粉"));
+       System.out.println(redisService.insertHistory("77400a57486374ff40d0b3937cd3f547d6a85ea5","芝士"));
 //        List<String> search_queue = new ArrayList<String>();
 //        search_queue.add("goods1");
 //        search_queue.add("goods2");
