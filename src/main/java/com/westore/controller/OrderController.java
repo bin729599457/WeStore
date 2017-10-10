@@ -328,7 +328,6 @@ public class OrderController {
             orderService.delOrder(paraMap);
             j.setMsg("删除订单成功");
 
-
         }catch (Exception e){
             j.setMsg(e.getMessage());
         }
@@ -359,6 +358,7 @@ public class OrderController {
 
             j.setObj(ordersList);
             j.setMsg("修改订单成功");
+            j.setTotal((long)ordersList.size());
 
 
         }catch (Exception e){

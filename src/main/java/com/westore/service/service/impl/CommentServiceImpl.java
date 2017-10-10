@@ -7,6 +7,7 @@ import com.westore.dao.CommonDAO;
 import com.westore.model.T_B_Comment;
 import com.westore.model.T_B_Location;
 import com.westore.service.CommentService;
+import com.westore.service.CommomService;
 import com.westore.service.RedisService;
 import com.westore.utils.CommonUtils;
 import com.westore.utils.CustomUUID;
@@ -28,6 +29,9 @@ public class CommentServiceImpl implements CommentService{
     @Resource
     private CommonDAO commonDAO;
 
+
+    @Resource
+    private CommomService commomService;
 
     public PageInfo<T_B_Comment> getBookComment(String goods_id, String pageNum, String pageSize) {
             PageHelper.startPage(Integer.parseInt(pageNum), Integer.parseInt(pageSize));
@@ -55,6 +59,7 @@ public class CommentServiceImpl implements CommentService{
             comment.setId(CustomUUID.getFlowIdWorkerInstance().generate());
             String sql = CommonUtils.add(comment);
             commonDAO.add(sql);
+            commomService.goods_weight_Calculate(comment.getComment_point(),comment.getGoods_id());
             return  1;
         }
     }
