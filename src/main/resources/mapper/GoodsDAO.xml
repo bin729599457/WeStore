@@ -23,6 +23,9 @@
         <if test="goods_type_id !=null  and goods_type_id !=''">
             AND t.goods_type_id = #{goods_type_id}
         </if>
+        <if test="goods_second_type_id !=null  and goods_second_type_id !=''">
+            AND t.goods_second_type_id = #{goods_second_type_id}
+        </if>
         <if test="goods_descript!=null and goods_descript!=''">
             AND t.goods_descript LIKE #{goods_descript}
         </if>
