@@ -146,10 +146,12 @@ public class GoodsController {
             String goods_id = request.getParameter("goods_id") == null ? "" : request.getParameter("goods_id");
             T_B_Goods t_b_goods = new T_B_Goods();
             t_b_goods.setId(goods_id);
+            Map<String, Object> paraMap = new HashMap<String, Object>();
 
-            String sql = commomService.delete(t_b_goods);
+            commomService.delete(t_b_goods);
+            List<Map<String, Object>> goodsList = goodsService.selectGoods(paraMap);
 
-            j.setObj(sql);
+            j.setObj(goodsList);
             j.setMsg("删除商品成功");
 
         } catch (Exception e) {
@@ -268,6 +270,7 @@ public class GoodsController {
 
         try {
 
+            commomService.goods_weight_Calculate(4,"1834466086519571465");
 
             j.setObj(null);
             j.setMsg("更新商品权重成功");

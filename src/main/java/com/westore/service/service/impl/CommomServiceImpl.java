@@ -139,5 +139,7 @@ public class CommomServiceImpl implements CommomService {
         float goods_point=(Float)obj.get("goods_point")+return_weights_points;
         paraMap.put("goods_point",goods_point);
         goodsService.updateGoods(paraMap);
+
+
     }
 }
