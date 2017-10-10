@@ -59,6 +59,12 @@ public class ILocationTest {
     @Resource
     private DiscountDAO discountDAO;
 
+    @Resource
+    private GoodsSecondTypeDAO goodsSecondTypeDAO;
+
+    @Resource
+    private GoodsSecondTypeService goodsSecondTypeService;
+
     @Test
     public void findUserLocation(){
 //        PageHelper.startPage(0, 0);
@@ -126,9 +132,11 @@ public class ILocationTest {
 
     @Test
     public void testType(){
-        T_B_Goods_Type t = new T_B_Goods_Type();
-        t.setId("1005");
-        System.out.println(goodsTypeService.deleteTypes(t));
+        T_B_Goods_Second_Type gst = new T_B_Goods_Second_Type();
+        gst.setGoods_type_id("1834757824798786568");
+        gst.setGoods_second_type_name("大数据");
+        gst.setImg("bigdata.png");
+        System.out.println(goodsSecondTypeService.insertGoodsSecondType(gst));
     }
 
 }

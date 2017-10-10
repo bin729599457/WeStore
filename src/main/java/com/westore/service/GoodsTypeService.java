@@ -13,5 +13,5 @@ public interface GoodsTypeService {
 
     public String updateTypes(T_B_Goods_Type t);
 
-    public String deleteTypes(T_B_Goods_Type t);
+    public String deleteTypes(T_B_Goods_Type[] t);
 }
