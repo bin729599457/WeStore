@@ -21,7 +21,7 @@ public class Test {
         stringList.add("141");
         stringList.add("141");
 
-        Iterator iterator=stringList.iterator();
+        Iterator<String> iterator=stringList.iterator();
         while (iterator.hasNext()){
             System.out.println(iterator.next());
         }
