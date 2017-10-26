@@ -16,7 +16,6 @@ public class Test {
         stringList.add("141");
         stringList.add("141");
         stringList.add("141");
-
         Iterator<String> iterator=stringList.iterator();
         while (iterator.hasNext()){
             if(iterator.next().equals("11")){
@@ -24,6 +23,7 @@ public class Test {
             }
         }
         System.out.println(stringList);
+
 /*        Map<String, Object> paraMap = new HashMap<String, Object>();
         //HashMap的Key可以为空值
         paraMap.put(null,null);//null
