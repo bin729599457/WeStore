@@ -9,7 +9,11 @@ import java.util.*;
 
 public class Test {
 
+    private int testNum=0;
+    private String testStr="hello";
+
     public static void main(String[] args) {
+/*
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put(null, 0);
         map.put("java", 1);
@@ -21,7 +25,15 @@ public class Test {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         System.out.println("php".hashCode() == "c++".hashCode());
-
+*/
+        Test t=new Test();
+        System.out.println(t.toString());
     }
 
+    @Override
+    public String toString() {
+
+        return super.getClass().getSimpleName();
+//        return "num:"+this.testNum+"str:"+this.testStr;
+    }
 }
