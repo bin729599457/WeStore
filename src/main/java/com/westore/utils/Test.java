@@ -10,25 +10,10 @@ import java.util.*;
 public class Test {
 
     public static void main(String[] args) {
-        List<String> stringList = new ArrayList<String>();
-        stringList.add("141");
-        stringList.add("11");
-        stringList.add("141");
-        stringList.add("141");
-        stringList.add("141");
-        Iterator<String> iterator=stringList.iterator();
-        while (iterator.hasNext()){
-            if(iterator.next().equals("11")){
-                iterator.remove();
-            }
-        }
-        System.out.println(stringList);
-
-/*        Map<String, Object> paraMap = new HashMap<String, Object>();
-        //HashMap的Key可以为空值
-        paraMap.put(null,null);//null
-        paraMap.put(null,"null2");//null2
-        System.out.println(paraMap.get(null));*/
+        Map map = new HashMap();
+        map.put(1l, "abc");
+        System.out.println(map.get(1));
+        System.out.println(map.get(1l));
 
     }
 
