@@ -26,14 +26,25 @@ public class Test {
         }
         System.out.println("php".hashCode() == "c++".hashCode());
 */
-        Test t=new Test();
-        System.out.println(t.toString());
+
+        List list=new ArrayList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        Iterator iterator=list.iterator();
+        while (iterator.hasNext()){
+            if(iterator.next()!=4){
+
+                System.out.println(iterator.next());
+            }else {
+                System.out.println("NO");
+            }
+        }
+
     }
 
-    @Override
-    public String toString() {
 
-        return super.getClass().getSimpleName();
-//        return "num:"+this.testNum+"str:"+this.testStr;
-    }
 }
