@@ -13,7 +13,6 @@ public class Test {
     private String testStr="hello";
 
     public static void main(String[] args) {
-/*
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put(null, 0);
         map.put("java", 1);
@@ -25,7 +24,6 @@ public class Test {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         System.out.println("php".hashCode() == "c++".hashCode());
-*/
 
         List list=new ArrayList();
         list.add(1);
