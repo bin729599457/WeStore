@@ -14,13 +14,16 @@ public class Test {
 
     public static void main(String[] args) {
 
-        int[] ints={5,3,8,6,2,5,12,63};
-        selectSort(ints);
-
-        for(int i:ints){
-            System.out.println(i);
+        Map map=new HashMap();
+        Set entries = map.entrySet( );
+        if(entries != null) {
+            Iterator iterator = entries.iterator();
+            while (iterator.hasNext()) {
+                Map.Entry entry = (Map.Entry) iterator.next();
+                Object key = entry.getKey();
+                Object value = entry.getValue();
+            }
         }
-
     }
 
     public static void selectSort(int[] arr) {
