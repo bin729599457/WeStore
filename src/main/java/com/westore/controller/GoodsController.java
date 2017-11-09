@@ -84,7 +84,7 @@ public class GoodsController {
                 }
                 tBGoods.put("goods_images", stringBuilder.toString());
             }
-
+            j.setMsg("查询成功");
             j.setObj(goodsList);
             j.setTotal((long) goodsList.size());
             j.setMsg("查询商品列表成功");
