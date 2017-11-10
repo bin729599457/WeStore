@@ -40,7 +40,8 @@ public class GoodsController {
         AjaxJSON j = new AjaxJSON();
 
         try {
-
+            int pages=dataRequest.getPage();
+            int rows=dataRequest.getRows();
             Map<String, Object> paraMap = new HashMap<String, Object>();
             T_B_Goods t_b_goods = (T_B_Goods) JSONObject.toBean(JSONObject.fromObject(obj.getObj()), T_B_Goods.class);
 
