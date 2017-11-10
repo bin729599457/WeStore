@@ -7,6 +7,7 @@ import com.westore.service.CommomService;
 import com.westore.service.GoodsService;
 import com.westore.service.RedisService;
 import com.westore.utils.CustomUUID;
+import com.westore.utils.DataRequest;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/selectGoods.do")
     @ResponseBody
-    public AjaxJSON selectGoods(@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
+    public AjaxJSON selectGoods(DataRequest dataRequest,@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -100,7 +101,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/addGoods.do")
     @ResponseBody
-    public AjaxJSON addGoods(@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
+    public AjaxJSON addGoods(DataRequest dataRequest,@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -138,7 +139,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/delGoods.do")
     @ResponseBody
-    public AjaxJSON delGoods(HttpServletRequest request) {
+    public AjaxJSON delGoods(DataRequest dataRequest,HttpServletRequest request) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -183,7 +184,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/UpdateGoods.do")
     @ResponseBody
-    public AjaxJSON UpdateGoods(@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
+    public AjaxJSON UpdateGoods(DataRequest dataRequest,@RequestParam Map<String, Object> params, @RequestBody AjaxJSON obj) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -248,7 +249,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/softGoods.do")
     @ResponseBody
-    public AjaxJSON softGoods(HttpServletRequest request) {
+    public AjaxJSON softGoods(DataRequest dataRequest,HttpServletRequest request) {
         AjaxJSON j = new AjaxJSON();
 
         try {
@@ -378,7 +379,7 @@ public class GoodsController {
 
     @RequestMapping(value = "/updateGoodsWeights.do")
     @ResponseBody
-    public AjaxJSON updateGoodsWeights(HttpServletRequest request) {
+    public AjaxJSON updateGoodsWeights(DataRequest dataRequest,HttpServletRequest request) {
         AjaxJSON j = new AjaxJSON();
 
         try {
