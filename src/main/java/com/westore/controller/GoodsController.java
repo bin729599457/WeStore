@@ -40,6 +40,7 @@ public class GoodsController {
         AjaxJSON j = new AjaxJSON();
 
         try {
+            //通过序列化参数， 简化参数的获得方式
             int pages=dataRequest.getPage();
             int rows=dataRequest.getRows();
             Map<String, Object> paraMap = new HashMap<String, Object>();

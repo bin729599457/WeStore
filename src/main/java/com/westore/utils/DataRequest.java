@@ -1,5 +1,8 @@
 package com.westore.utils;
 
+/**
+ * 序列化分页类
+ */
 public class DataRequest implements java.io.Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -15,6 +18,7 @@ public class DataRequest implements java.io.Serializable{
     private boolean search;
     //已经发送的请求的次数
     private String nd;
+
     public int getPage() {
         return page;
     }
