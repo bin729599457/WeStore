@@ -68,5 +68,21 @@ public class Test {
         }
     }
 
+    public void insertSort(int[] nums){
+        for(int i = 1; i < nums.length; i++){
+            if(nums[i] < nums[i - 1]){
+                for(int j = i; j >= 1; j--){  //从当前位置开始向前寻找
+                    if(nums[j] < nums[j - 1]){  //顺序出问题就交换
+                        int temp = nums[j];
+                        nums[j] = nums[j - 1];
+                        nums[j - 1] = temp;
+                    }else{  //因为之前的数组元素已排序，无需再进行比较
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 
 }
