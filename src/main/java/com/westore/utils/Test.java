@@ -51,6 +51,22 @@ public class Test {
         arr[j] = temp;
     }
 
+    public void chooseSort(int[] nums){
+        int min;  //升序排序，记录每趟最小值的下标
+        for(int i = 0; i < nums.length; i++){
+            min = i;  //初始化为本次排序的第一个数
+            for(int j = i + 1; j < nums.length; j++){
+                if(nums[min] > nums[j]){  //顺序有问题，更新min即可
+                    min = j;
+                }
+            }
+            if(min != i){  //发现更新，交换操作
+                int temp = nums[min];
+                nums[min] = nums[i];
+                nums[i] = temp;
+            }
+        }
+    }
 
 
 }
