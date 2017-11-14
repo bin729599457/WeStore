@@ -17,14 +17,32 @@ public class T_B_Goods {
 
     @Column(name = "GOODS_PRICE")
     private String goods_price;
+
+    @Column(name = "GOODS_IMAGES")
     private String goods_images;
+
+    @Column(name = "GOODS_PRICE")
     private int goods_nums;
+
+    @Column(name = "GOODS_NUMS")
     private int goods_sales_nums;
+
+    @Column(name = "GOODS_POINT")
     private float goods_point;
+
+    @Column(name = "GOODS_AUTHOR")
     private String goods_author;
+
+    @Column(name = "GOODS_PULISHER")
     private String goods_publisher;
+
+    @Column(name = "GOODS_SECOND_TYPE_ID")
     private String goods_second_type_id;
+
+    @Column(name = "IS_DISCOUNTED")
     private String is_discounted;
+
+    @Column(name = "GOODS_WEIGHTS")
     private float goods_weights;
 
     @Override
