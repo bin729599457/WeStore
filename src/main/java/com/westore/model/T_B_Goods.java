@@ -1,11 +1,21 @@
 package com.westore.model;
 
+import javax.persistence.Column;
+
 public class T_B_Goods {
 
     private String id;
+
+    @Column(name = "GOODS_TITLE")
     private String goods_title;
+
+    @Column(name = "GOODS_TYPE_ID")
     private String goods_type_id;
+
+    @Column(name = "GOODS_DESCRIPT")
     private String goods_descript;
+
+    @Column(name = "GOODS_PRICE")
     private String goods_price;
     private String goods_images;
     private int goods_nums;
