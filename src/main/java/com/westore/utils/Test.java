@@ -15,6 +15,14 @@ public class Test {
     public static void main(String[] args) {
 
         Map map=new HashMap();
+        map.put(1, "a");
+        map.put(2, "b");
+        map.put(3, "c");
+        map.put(4, "d");
+        Set keys1 = map.keySet();
+        Set keys2 = map.keySet();
+        Set keys3 = map.keySet();
+
         Set entries = map.entrySet( );
         if(entries != null) {
             Iterator iterator = entries.iterator();
@@ -22,6 +30,7 @@ public class Test {
                 Map.Entry entry = (Map.Entry) iterator.next();
                 Object key = entry.getKey();
                 Object value = entry.getValue();
+                System.out.println(key.toString()+""+value.toString());
             }
         }
     }
