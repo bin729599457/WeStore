@@ -24,13 +24,14 @@ public class Test {
         Set keys3 = map.keySet();
 
         Set entries = map.entrySet( );
+        System.out.println(entries);
         if(entries != null) {
             Iterator iterator = entries.iterator();
             while (iterator.hasNext()) {
                 Map.Entry entry = (Map.Entry) iterator.next();
                 Object key = entry.getKey();
                 Object value = entry.getValue();
-                System.out.println(key.toString()+""+value.toString());
+//                System.out.println(key.toString()+""+value.toString());
             }
         }
     }
