@@ -14,11 +14,15 @@ public class Test {
 
     public static void main(String[] args) {
 
-        Map map=new HashMap();
+        Map map=new TreeMap();
         map.put(1, "a");
-        map.put(2, "b");
-        map.put(3, "c");
-        map.put(4, "d");
+        map.put(6, "b");
+        map.put(2, "c");
+        map.put(5, "d");
+
+
+        System.out.println(map);
+
         Set entries = map.entrySet( );
         if(entries != null) {
             Iterator iterator = entries.iterator();
