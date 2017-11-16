@@ -19,12 +19,7 @@ public class Test {
         map.put(2, "b");
         map.put(3, "c");
         map.put(4, "d");
-        Set keys1 = map.keySet();
-        Set keys2 = map.keySet();
-        Set keys3 = map.keySet();
-
         Set entries = map.entrySet( );
-        System.out.println(entries);
         if(entries != null) {
             Iterator iterator = entries.iterator();
             while (iterator.hasNext()) {
