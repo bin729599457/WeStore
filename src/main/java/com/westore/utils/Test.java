@@ -20,7 +20,8 @@ public class Test {
         map.put(2, "c");
         map.put(5, "d");
         map.put(6,"f");
-        System.out.println(map);
+
+
 
         Set entries = map.entrySet( );
         if(entries != null) {
@@ -87,6 +88,20 @@ public class Test {
                     }else{  //因为之前的数组元素已排序，无需再进行比较
                         break;
                     }
+                }
+            }
+        }
+    }
+
+    public void bubbleSort(int[] a){
+
+        int temp=0;
+        for(int i=0;i<a.length-1;i++){
+            for(int j=0;j<a.length-1-i;j++){
+                if(a[j]>a[j+1]){
+                    temp=a[j];
+                    a[j]=a[j+1];
+                    a[j+1]=temp;
                 }
             }
         }
