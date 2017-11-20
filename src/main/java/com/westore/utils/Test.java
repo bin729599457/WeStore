@@ -19,8 +19,7 @@ public class Test {
         map.put(6, "b");
         map.put(2, "c");
         map.put(5, "d");
-
-
+        map.put(6,"f");
         System.out.println(map);
 
         Set entries = map.entrySet( );
