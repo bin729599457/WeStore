@@ -2,6 +2,7 @@ package com.westore.utils;
 
 public class MyLink {
     Node head = null; // 头节点
+    public Node current;
 
     /**
      * 链表中的节点，data代表节点的值，next是指向下一个节点的引用
@@ -118,4 +119,6 @@ public class MyLink {
         System.out.println("After deleteNode(4):");
         list.printList();
     }
+
+
 }
