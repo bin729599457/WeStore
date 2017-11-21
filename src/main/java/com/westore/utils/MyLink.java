@@ -120,5 +120,16 @@ public class MyLink {
         list.printList();
     }
 
+//方法：遍历链表（打印输出链表。方法的参数表示从节点node开始进行遍历
+    public void print(Node node) {
+         if (node == null) {
+             return;
+         }
 
+        current = node;
+        while (current != null) {
+            System.out.println(current.data);
+            current = current.next;
+            }
+         }
 }
