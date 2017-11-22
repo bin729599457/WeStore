@@ -3,6 +3,7 @@ package com.westore.utils;
 public class MyLink {
     Node head = null; // 头节点
     public Node current;
+    int size;
 
     /**
      * 链表中的节点，data代表节点的值，next是指向下一个节点的引用
@@ -122,6 +123,7 @@ public class MyLink {
 
 //方法：遍历链表（打印输出链表。方法的参数表示从节点node开始进行遍历
     public void print(Node node) {
+
          if (node == null) {
              return;
          }
@@ -147,5 +149,26 @@ public class MyLink {
         }
 
         return length;
+    }
+    public int findLastNode(int index) {  //index代表的是倒数第index的那个结点
+
+        //第一次遍历，得到链表的长度size
+        if (head == null) {
+            return -1;
+        }
+
+        current = head;
+        while (current != null) {
+            size++;
+            current = current.next;
+        }
+
+        //第二次遍历，输出倒数第index个结点的数据
+        current = head;
+        for (int i = 0; i < size - index; i++) {
+            current = current.next;
+        }
+
+        return current.data;
     }
 }
