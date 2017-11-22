@@ -171,4 +171,22 @@ public class MyLink {
 
         return current.data;
     }
+    //方法：查找链表的中间结点
+    public Node findMidNode(Node head) {
+
+        if (head == null) {
+            return null;
+        }
+
+        Node first = head;
+        Node second = head;
+        //每次移动时，让second结点移动两位，first结点移动一位
+        while (second != null && second.next != null) {
+            first = first.next;
+            second = second.next.next;
+        }
+
+        //直到second结点移动到null时，此时first指针指向的位置就是中间结点的位置
+        return first;
+    }
 }
