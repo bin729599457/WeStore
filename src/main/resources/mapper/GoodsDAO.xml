@@ -17,6 +17,8 @@
 
     <select id="findAll" parameterType="java.util.Map" resultType="java.util.Map">
 
+        <include refid="startPageSql" />
+
         SELECT t.id,t.goods_title,t.goods_descript,t.goods_type_id,t.goods_second_type_id,
         t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,t.is_discounted,
         t.goods_point,t.goods_author,t.goods_publisher,
@@ -63,6 +65,8 @@
         </if>
 /*优化功能增加字段 goods_Weights权重 作为默认排序依据*/
         ORDER BY t.goods_weights ASC
+        <include refid="endPageSql"/>
+
     </select>
 
 
