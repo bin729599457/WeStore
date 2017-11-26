@@ -4,7 +4,19 @@
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.GoodsDAO">
 
+    <sql id="startPageSql">
+        <if test='firstResult!=null'>
+            select * from (select ROWNUM rnum,a.* from (
+        </if>
+    </sql>
+    <sql id="endPageSql">
+        <if test='firstResult!=null'>
+            ) a where ROWNUM &lt;= #{maxResults}) where rnum &gt;= #{firstResult}
+        </if>
+    </sql>
+
     <select id="findAll" parameterType="java.util.Map" resultType="java.util.Map">
+
         SELECT t.id,t.goods_title,t.goods_descript,t.goods_type_id,t.goods_second_type_id,
         t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,t.is_discounted,
         t.goods_point,t.goods_author,t.goods_publisher,
