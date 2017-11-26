@@ -2,6 +2,7 @@ package com.westore.model;
 import java.util.Map;
 
 public class AjaxJSON {
+
     private boolean success = true;
     private String msg = "";
     private Object obj = null;

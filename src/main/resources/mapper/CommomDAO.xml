@@ -3,7 +3,16 @@
 
 <!-- 设置为CommomUtils接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.CommonDAO">
-
+    <sql id="startPageSql">
+        <if test='firstResult!=null'>
+            select * from (select ROWNUM rnum,a.* from (
+        </if>
+    </sql>
+    <sql id="endPageSql">
+        <if test='firstResult!=null'>
+            ) a where ROWNUM &lt;= #{maxResults}) where rnum &gt;= #{firstResult}
+        </if>
+    </sql>
     <insert id="add" parameterType="String">
         ${_parameter}
     </insert>
