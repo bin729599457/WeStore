@@ -123,14 +123,19 @@
     </update>
 
     <select id="selectGoodsPoint" parameterType="java.util.Map" resultType="int">
-      SELECT c.comment_point FROM `t_b_comment` c,t_b_goods g,t_b_user u
+        <include refid="startPageSql" />
+
+        SELECT c.comment_point FROM `t_b_comment` c,t_b_goods g,t_b_user u
       WHERE c.goods_id =g.id AND c.user_id=u.id
       <if test="goods_id!=null and goods_id!=''">
           c.goods_id=#{goods_id}
       </if>
+        <include refid="endPageSql"/>
+
     </select>
 
     <select id="softGoods" parameterType="java.util.Map" resultType="java.util.Map">
+        <include refid="startPageSql" />
 
         SELECT t.id,t.goods_title,t.goods_descript,
         t.goods_price,t.goods_images,t.goods_nums,t.goods_sales_nums,
@@ -170,6 +175,7 @@
         <if test="goods_weights=='desc'">
             ORDER BY t.goods_weights DESC
         </if>
+        <include refid="endPageSql"/>
 
     </select>
 </mapper>
