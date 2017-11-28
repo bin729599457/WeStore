@@ -3,9 +3,19 @@
 
 <!-- 设置为OrderDAO接口方法提供sql语句配置 -->
 <mapper namespace="com.westore.dao.OrderDAO">
-
+    <sql id="startPageSql">
+        <if test='firstResult!=null'>
+            select * from (select ROWNUM rnum,a.* from (
+        </if>
+    </sql>
+    <sql id="endPageSql">
+        <if test='firstResult!=null'>
+            ) a where ROWNUM &lt;= #{maxResults}) where rnum &gt;= #{firstResult}
+        </if>
+    </sql>
     <select id="findOrders" parameterType="java.util.Map" resultType="java.util.Map">
 
+        <include refid="startPageSql" />
         SELECT t.id as order_id,t.user_id as user_id,t.total_money,t.order_date,t.order_state,
         tl.user_name,tl.user_province,tl.user_city,tl.user_area,tl.user_location,tl.user_phone
         FROM t_b_order t,t_b_location tl
@@ -23,6 +33,7 @@
         <if test="user_id!=null and user_id!=''">
             AND t.user_id=#{user_id}
         </if>
+        <include refid="endPageSql"/>
 
     </select>
 
