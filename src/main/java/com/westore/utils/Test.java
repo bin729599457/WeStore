@@ -13,7 +13,7 @@ public class Test {
     private String testStr="hello";
 
     public static void main(String[] args) {
-
+/*
         Map map=new TreeMap();
         map.put(1, "a");
         map.put(6, "b");
@@ -31,8 +31,23 @@ public class Test {
                 Object value = entry.getValue();
 //                System.out.println(key.toString()+""+value.toString());
             }
-        }
+        }*/
+
+
+        System.out.println(fun(30));
     }
+
+
+   public static int fun(int i){
+
+     if(i<=0)
+       return 0;
+    else if(i<=2)
+        return 1;
+    else
+      return fun(i-1)+fun(i-2);
+   }
+
 
     public static void selectSort(int[] arr) {
         if(arr == null || arr.length == 0)
