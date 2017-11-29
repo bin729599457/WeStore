@@ -22,7 +22,6 @@ public class Test {
         map.put(6,"f");
 
 
-
         Set entries = map.entrySet( );
         if(entries != null) {
             Iterator iterator = entries.iterator();
@@ -59,7 +58,7 @@ public class Test {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-
+    //选择排序
     public void chooseSort(int[] nums){
         int min;  //升序排序，记录每趟最小值的下标
         for(int i = 0; i < nums.length; i++){
@@ -76,7 +75,7 @@ public class Test {
             }
         }
     }
-
+    //插入排序
     public void insertSort(int[] nums){
         for(int i = 1; i < nums.length; i++){
             if(nums[i] < nums[i - 1]){
@@ -92,7 +91,7 @@ public class Test {
             }
         }
     }
-
+    //冒泡排序
     public void bubbleSort(int[] a){
 
         int temp=0;
@@ -106,7 +105,7 @@ public class Test {
             }
         }
     }
-
+    //快速排序
     public static void quickSort(int[] arr){
         qsort(arr, 0, arr.length-1);
     }
