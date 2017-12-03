@@ -24,9 +24,13 @@
     </select>
 
     <select id="findUserLocation" parameterType="java.lang.String" resultType="com.westore.model.T_B_Location">
+        <include refid="startPageSql" />
+
        SELECT id,user_name,user_province,user_city,user_area,user_location,user_phone,is_default
        FROM t_b_location
        where user_id = '${_parameter}'
+        <include refid="endPageSql"/>
+
     </select>
 
 
