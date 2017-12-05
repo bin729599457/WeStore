@@ -12,6 +12,12 @@ import java.util.*;
     abstract class Animal
     {
         public abstract void cry();
+
+        public void eat(){
+            System.out.println("Animal eat");
+        }
+
+        public abstract void run();
     }
 
     // 子类Dog继承的抽象类Animal，必须实现其抽象方法cry
@@ -21,6 +27,11 @@ import java.util.*;
         {
             System.out.println("Dog cry");
         }
+
+        @Override
+        public void run() {
+            System.out.println("Dog run");
+        }
     }
     // 同样，子类Cat继承的抽象类Animal，必须实现其抽象方法cry
     class Cat extends Animal
@@ -28,6 +39,11 @@ import java.util.*;
         public void cry()
         {
             System.out.println("Cat cry");
+        }
+
+        @Override
+        public void run() {
+            System.out.println("Cat run");
         }
     }
 
