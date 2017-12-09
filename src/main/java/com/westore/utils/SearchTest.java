@@ -72,6 +72,61 @@ public class SearchTest {
         return -1;
 
     }
+
+
+    /**
+     * 斐波那契查找
+     * @param table
+     * @param keyWord
+     * @return
+     */
+
+    public boolean fibonacciSearch(int[] table,int keyWord){
+        //确定需要的斐波那契数
+        int i = 0;
+        while(getFibonacci(i)-1 == table.length){
+            i++;
+        }
+        //开始查找
+        int low = 0;
+        int height = table.length-1;
+        while(low<=height){
+            int mid = low + getFibonacci(i-1);
+            if(table[mid] == keyWord){
+                return true;
+            }else if(table[mid]>keyWord){
+                height = mid-1;
+                i--;
+            }else if(table[mid]<keyWord){
+                low = mid+1;
+                i-=2;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 得到第n个斐波那契数
+     * @return
+     */
+    public static int getFibonacci(int n){
+        int res = 0;
+        if(n == 0){
+            res = 0;
+        }else if(n == 1){
+            res = 1;
+        }else{
+            int first = 0;
+            int second = 1;
+            for(int i = 2;i<=n;i++){
+                res = first+second;
+                first = second;
+                second = res;
+            }
+        }
+        return res;
+    }
+
 }
 
 
