@@ -1,11 +1,5 @@
 package com.westore.utils;
 
-import com.westore.model.T_B_Goods;
-import com.westore.model.T_B_Goods_Type;
-import com.westore.service.CommomService;
-
-import javax.annotation.Resource;
-import java.util.*;
 
 
     // 抽象类Animal，包含了一个抽象方法cry
@@ -48,14 +42,16 @@ import java.util.*;
         }
     }
 
-    public class Test
+    public class AbstractClassTest
     {
         public static void main(String[] args) {
-            Animal a1 = new Dog();  // 抽象类引用指向子类实例
-            Animal a2 = new Cat();
+            com.westore.utils.Animal a1 = new com.westore.utils.Dog();  // 抽象类引用指向子类实例
+            com.westore.utils.Animal a2 = new com.westore.utils.Cat();
 
             a1.cry();
             a2.cry();
         }
     }
+
+
 
