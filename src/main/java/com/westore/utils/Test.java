@@ -32,6 +32,7 @@ import java.util.*;
         public void run() {
             System.out.println("Dog run");
         }
+
     }
     // 同样，子类Cat继承的抽象类Animal，必须实现其抽象方法cry
     class Cat extends Animal
