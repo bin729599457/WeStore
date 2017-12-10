@@ -1,6 +1,11 @@
 package com.westore.utils;
 
 public class SearchTest {
+
+    public static void main(String[] args) {
+
+    }
+
     /**
      * 二分查找普通实现。
      * @param srcArray 有序数组
