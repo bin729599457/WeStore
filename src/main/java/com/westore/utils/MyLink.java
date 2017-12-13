@@ -1,6 +1,7 @@
 package com.westore.utils;
 
 public class MyLink {
+
     Node head = null; // 头节点
     public Node current;
     int size;
@@ -121,6 +122,8 @@ public class MyLink {
         list.printList();
     }
 
+
+
 //方法：遍历链表（打印输出链表。方法的参数表示从节点node开始进行遍历
     public void print(Node node) {
 
@@ -134,6 +137,7 @@ public class MyLink {
             current = current.next;
             }
          }
+
 
     //方法：获取单链表的长度
     public int getLength(Node head) {
@@ -171,6 +175,8 @@ public class MyLink {
 
         return current.data;
     }
+
+
     //方法：查找链表的中间结点
     public Node findMidNode(Node head) {
 
