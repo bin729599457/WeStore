@@ -13,9 +13,9 @@ public class T_B_Order {
     private float total_money;
     @Column(name = "ORDER_DATE")
     private String order_date;
-    @Column(name = "ORDER_DATE")
+    @Column(name = "ORDER_STATE")
     private int order_state;
-    @Column(name = "ORDER_DATE")
+    @Column(name = "LOCATION_ID")
     private String location_id;
 
     public T_B_Order() {
