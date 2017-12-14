@@ -7,11 +7,11 @@ public class T_B_Order {
 
     @Column(name = "ID")
     private String id;
-    @Column(name = "ID")
+    @Column(name = "USER_ID")
     private String user_id;
-    @Column(name = "ID")
+    @Column(name = "TOTAL_MONEY")
     private float total_money;
-    @Column(name = "ID")
+    @Column(name = "ORDER_DATE")
     private String order_date;
     private int order_state;
     private String location_id;
