@@ -1,12 +1,17 @@
 package com.westore.model;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 public class T_B_Order {
 
+    @Column(name = "ID")
     private String id;
+    @Column(name = "ID")
     private String user_id;
+    @Column(name = "ID")
     private float total_money;
+    @Column(name = "ID")
     private String order_date;
     private int order_state;
     private String location_id;
