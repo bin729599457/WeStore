@@ -1,8 +1,14 @@
 package com.westore.model;
 
+import javax.persistence.Column;
+
 public class T_B_User {
+
+    @Column(name = "ID")
     private String id;
+    @Column(name = "USER_ID")
     private String user_id;
+    @Column(name = "USER_IMG")
     private String user_img;
     private String user_name;
     private String user_phone;
