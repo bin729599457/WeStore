@@ -9,6 +9,11 @@ public class Node{
         this.nextNode = nextNode;
     }
 
+    public static void main(String[] args) {
+        Node head = init(10);
+        out(head);
+    }
+
     /**
      * 初始化单链表
      * @param num 数量
