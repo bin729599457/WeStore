@@ -29,4 +29,16 @@ public class Node{
         }
         return node;
     }
+
+    /**
+     * 打印节点值
+     * @param head
+     */
+    private static void out(Node head) {
+        Node tempNode = head;
+        while(tempNode != null){
+            System.err.println(tempNode.value);
+            tempNode = tempNode.nextNode;
+        }
+    }
 }
