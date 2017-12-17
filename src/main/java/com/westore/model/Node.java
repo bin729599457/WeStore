@@ -10,8 +10,13 @@ public class Node{
     }
 
     public static void main(String[] args) {
+        //普通遍历
         Node head = init(10);
         out(head);
+
+        //单链表反转遍历
+        Node reverseHead = reverseHead(head);
+        out(reverseHead);
     }
 
     /**
