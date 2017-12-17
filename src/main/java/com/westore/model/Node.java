@@ -46,4 +46,29 @@ public class Node{
             tempNode = tempNode.nextNode;
         }
     }
+
+    /**
+     * 反转单链表
+     * @param head
+     * @return
+     */
+    private static Node reverseHead(Node head) {
+        if (head == null) {
+            return head;
+        }
+
+        Node pre = head;
+        Node cur = head.nextNode;
+        Node next = null;
+        while(cur != null){
+            next = cur.nextNode;
+            cur.nextNode = pre;
+
+            pre = cur;
+            cur = next;
+        }
+        head.nextNode = null;
+        head = pre;
+        return head;
+    }
 }
