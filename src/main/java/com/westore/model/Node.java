@@ -76,4 +76,26 @@ public class Node{
         head = pre;
         return head;
     }
+
+    /**
+     * 非递归方式反转单链表
+     * @param current
+     * @return
+     */
+    public Node reverse(Node current) {
+        //initialization
+        Node previousNode = null;
+        Node nextNode = null;
+
+        while (current != null) {
+            //save the next node
+            nextNode = current.nextNode;
+            //update the value of "next"
+            current.nextNode = previousNode;
+            //shift the pointers
+            previousNode = current;
+            current = nextNode;
+        }
+        return previousNode;
+    }
 }
