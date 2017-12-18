@@ -98,4 +98,19 @@ public class Node{
         }
         return previousNode;
     }
+
+    /**
+     * 递归方式反转单链表
+     * @param current
+     * @return
+     */
+    public Node reverse2(Node current)
+    {
+        if (current == null || current.nextNode == null) return current;
+        Node nextNode = current.nextNode;
+        current.nextNode = null;
+        Node reverseRest = reverse(nextNode);
+        nextNode.nextNode = current;
+        return reverseRest;
+    }
 }
