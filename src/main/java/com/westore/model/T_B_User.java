@@ -10,9 +10,13 @@ public class T_B_User {
     private String user_id;
     @Column(name = "USER_IMG")
     private String user_img;
+    @Column(name = "USER_NAME")
     private String user_name;
+    @Column(name = "USER_PHONE")
     private String user_phone;
+    @Column(name = "USER_PASSWORD")
     private String user_password;
+    @Column(name = "USER_MONEY")
     private float user_money;
 
     public T_B_User() {
