@@ -43,6 +43,10 @@
         </if>
         <if test="goods_descript!=null and goods_descript!=''">
             AND t.goods_descript LIKE #{goods_descript} OR t.goods_descript LIKE '%书%'
+            /*
+            模糊查询另一种写法:
+            instr(title,'手册')>0  相当于  title like '%手册%'
+            */
             GROUP BY t.id
         </if>
         <if test="goods_price_low!=null and goods_price_low!=''">
