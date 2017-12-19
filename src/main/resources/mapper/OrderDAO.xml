@@ -15,6 +15,12 @@
     </sql>
     <select id="findOrders" parameterType="java.util.Map" resultType="java.util.Map">
 
+        /*
+        模糊查询另一种写法:
+        instr(title,'手册')>0  相当于  title like '%手册%'
+        instr(title,'手册')=1  相当于  title like '手册%'
+        instr(title,'手册')=0  相当于  title not like '%手册%'
+        */
         <include refid="startPageSql" />
         SELECT t.id as order_id,t.user_id as user_id,t.total_money,t.order_date,t.order_state,
         tl.user_name,tl.user_province,tl.user_city,tl.user_area,tl.user_location,tl.user_phone
