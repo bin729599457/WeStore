@@ -46,6 +46,7 @@
             /*
             模糊查询另一种写法:
             instr(title,'手册')>0  相当于  title like '%手册%'
+            instr(title,'手册')=1  相当于  title like '手册%'
             */
             GROUP BY t.id
         </if>
