@@ -1,8 +1,12 @@
 package com.westore.model;
 
+import javax.persistence.Column;
+
 public class T_B_Goods_Type {
 
+    @Column(name = "iD")
     private String id;
+    @Column(name = "GOODS_TYPE_NAME")
     private String goods_type_name;
 
     public T_B_Goods_Type() {
