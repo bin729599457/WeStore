@@ -25,5 +25,16 @@ public class Test {
                     System.out.println("string /"+""+toDelete+"/"+" not found");
             }
         System.out.println(str);
+
+        /**
+         * 联系substring
+         */
+        String Str = new String("www.runoob.com");
+
+        System.out.print("返回值 :" );
+        System.out.println(Str.substring(4) );
+
+        System.out.print("返回值 :" );
+        System.out.println(Str.substring(4, 10) );
     }
 }
